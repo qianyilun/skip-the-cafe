@@ -1,4 +1,5 @@
 ## Instructions
+0. run `composer install` in the project root, since the master branch does not automatically include all dependencies 
 1. make sure `php artisan` is working on your dev envrionment
 2. run `php artisan migrate:fresh --seed` to clean the database, applies all migrations and then seeds the database
     * Related directories: 
