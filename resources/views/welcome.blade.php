@@ -78,7 +78,7 @@
 
         <div class="content">
             <div class="title m-b-md">
-                Laravel
+                Laravel made one change in master, this change will be in production server
             </div>
 
             <div class="Orders">
