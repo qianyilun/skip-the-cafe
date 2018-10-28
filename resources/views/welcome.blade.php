@@ -78,17 +78,7 @@
 
         <div class="content">
             <div class="title m-b-md">
-                Laravel made one change in master, this change will be in production server
-            </div>
-
-            <div class="Orders">
-                @foreach ($orders as $order)
-                    <span>Title: {{$order->title}}, </span>
-                    <span>Owner: {{$order->owner}}, </span>
-                    <span>Taker: {{$order->taker}}, </span>
-                    <span>Time: {{$order->time}}</span>
-                    <br>
-                @endforeach
+                Skip the Cafe
             </div>
         </div>
     </div>
