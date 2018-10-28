@@ -12,21 +12,25 @@ class AuthController extends Controller
     /**
      * Redirect the user to the GitHub authentication page.
      *
+     * @param string $provider: GitHub | Facebook | Twitter
+     *
      * @return Response
      */
-    public function redirectToProvider()
+    public function redirectToProvider($provider)
     {
-        return Socialite::driver('github')->redirect();
+        return Socialite::driver($provider)->redirect();
     }
 
     /**
      * Obtain the user information from GitHub.
      *
+     * @param string $provider: GitHub | Facebook | Twitter
+     *
      * @return Response
      */
-    public function handleProviderCallback()
+    public function handleProviderCallback($provider)
     {
-        $user = Socialite::driver('github')->user();
+        $user = Socialite::driver($provider)->user();
         $authUser = User::firstOrNew(['provider_id' => $user->id]);
 
         $authUser->name = $user->name;
