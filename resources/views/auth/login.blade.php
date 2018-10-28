@@ -62,6 +62,19 @@
                                 </a>
                             </div>
                         </div>
+                        <div class="form-group row mb-0">
+                            <div class="col-md-8 offset-md-4">
+                                <a class="btn btn-sm" href="{{ url('auth/github') }}">
+                                    <i class="fa fa-github fa-3x"></i>
+                                </a>
+                                <a class="btn btn-sm" href="{{ url('auth/facebook') }}">
+                                    <i class="fa fa-facebook fa-3x"></i>
+                                </a>
+                                <a class="btn btn-sm" href="{{ url('auth/twitter') }}">
+                                    <i class="fa fa-twitter fa-3x"></i>
+                                </a>
+                            </div>
+                        </div>
                     </form>
                 </div>
             </div>

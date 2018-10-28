@@ -113,3 +113,6 @@
 12. Start server `php artisan serve` 
 
 13. Open up browser, visit [skipthecafe.test](skipthecafe.test)
+
+
+
