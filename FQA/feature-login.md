@@ -14,3 +14,13 @@ This instuction is for answering some frequent questions that you may have.
 
 * If you have any questions, you may need to re-watch the [tutorial](https://www.youtube.com/watch?v=Idgc3ICEOSI), or look at the [sample code](https://github.com/webdevmatics/SocialAuth)
 
+
+
+###Note
+
+Run the following command in mySQL to add a column.
+
+```sql
+ALTER TABLE users ADD COLUMN provider_id INTEGER UNIQUE;
+```
+
