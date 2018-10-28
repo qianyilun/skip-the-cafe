@@ -58,6 +58,25 @@
                 text-transform: uppercase;
             }
 
+            .slogan {
+                color: #636b6f;
+                padding: 0 0 0 150px;
+                font-size: 13px;
+                font-weight: 600;
+                letter-spacing: .1rem;
+                text-decoration: none;
+                text-transform: uppercase;
+            }
+
+            .question {
+                color: #636b6f;
+                padding: 10px 50px;
+                font-size: 17px;
+                font-weight: 600;
+                letter-spacing: .1rem;
+                text-decoration: none;
+            }
+
             .m-b-md {
                 margin-bottom: 30px;
             }
@@ -77,8 +96,14 @@
         @endif
 
         <div class="content">
+            <div style="text-align: left;" class="question">
+                Time is cheap?
+            </div>
             <div class="title m-b-md">
                 Skip the Cafe
+            </div>
+            <div style="text-align: right;" class="slogan">
+               Switch "Delivery" | "Receiver" anytime, anywhere.
             </div>
         </div>
     </div>
