@@ -21,3 +21,21 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('auth/{provider}', 'Auth\AuthController@redirectToProvider');
 Route::get('auth/{provider}/callback', 'Auth\AuthController@handleProviderCallback');
+
+Route::resource('orders', 'OrdersController');
+
+
+/*
+|--------------------------------------------------------------------------
+| Testing Routes
+|--------------------------------------------------------------------------
+|
+| DO NOT enable it for deployment, for testing only
+|
+*/
+
+//use App\Order;
+//Route::get('/allorders', function() {
+//    $orders = Order::all();
+//    return $orders;
+//});
