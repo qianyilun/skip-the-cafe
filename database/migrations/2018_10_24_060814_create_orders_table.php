@@ -15,10 +15,14 @@ class CreateOrdersTable extends Migration
     {
         Schema::create('orders', function (Blueprint $table) {
             $table->increments('id');
+            $table->string('item')->nullable();
             $table->string('title');
-            $table->string('owner');
-            $table->string('taker');
-            $table->string('time');
+            $table->text('description')->nullable();
+            $table->double('price', 15, 2)->default(0);
+            $table->string('owner')->nullable();
+            $table->string('taker')->nullable();
+            $table->boolean('confirmed')->default(false);
+            $table->boolean('completed')->default(false);
             $table->timestamps();
         });
     }

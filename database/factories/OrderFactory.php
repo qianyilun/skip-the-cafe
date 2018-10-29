@@ -6,8 +6,9 @@ use Faker\Generator as Faker;
 $factory->define(App\Order::class, function (Faker $faker) {
     return [
         'title' => 'Need a coffee to Bunraby Libaray',
+        'description' => 'Thanks Amigo!',
+        'item' => 'Stackbucks Coffee',
         'owner' => 'Andrew Yang',
         'taker' => 'Jacky Liu',
-        'time' => '2018-10-23 23:00:00',
     ];
 });
