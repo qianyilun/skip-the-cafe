@@ -38,9 +38,11 @@
       @if (count($orders) > 0)
         <ul>
             @foreach($orders as $order)
-              <li>
-                <a href="{{route('orders.show', $order->id)}}">{{$order->title}}</a>
-              </li>
+              @if ($order->owner === $user->name)
+                <li>
+                  <a href="{{route('orders.show', $order->id)}}">{{$order->title}}</a>
+                </li>
+              @endif
             @endforeach
         </ul>
       @else
