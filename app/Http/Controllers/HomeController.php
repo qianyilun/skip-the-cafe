@@ -27,7 +27,6 @@ class HomeController extends Controller
     {
         $user_id = auth()->user()->id;
         $user = User::find($user_id);
-        Log::info('Showing user#!!!!!: '.$user);
         return view('home')->with(['orders' => $user->orders, 'user' => $user]);
     }
 }

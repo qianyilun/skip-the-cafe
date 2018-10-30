@@ -15,8 +15,11 @@ class OrdersController extends Controller
     public function index()
     {
         $orders = Order::all();
-
-        return view('orders.index', compact('orders'));
+        $user = null;
+        if(auth()->user() !== null) {
+          $user = auth()->user();
+        }
+        return view('orders.index')->with(['user'=>$user, 'orders' => $orders]);
     }
 
     /**
