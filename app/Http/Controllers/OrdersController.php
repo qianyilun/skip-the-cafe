@@ -40,6 +40,12 @@ class OrdersController extends Controller
 //        Order::create($request->all());
 
         // we also need to all current user's id and address here (address can be taken from form as well)
+        $request->validate([
+          'title' => 'required',
+          'item' => 'required',
+          'address' => 'required',
+          'price' => 'required',
+      ]);
         $order = new Order;
         $order->title = $request->title;
         $order->item = $request->item;
