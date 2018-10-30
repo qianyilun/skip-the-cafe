@@ -148,6 +148,7 @@
 
         <main class="py-4">
           <div class="container">
+            @include('layouts.messages')
             @yield('content')
           </div>
         </main>
