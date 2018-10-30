@@ -42,6 +42,10 @@ class OrdersController extends Controller
         // we also need to all current user's id and address here (address can be taken from form as well)
         $order = new Order;
         $order->title = $request->title;
+        $order->item = $request->item;
+        $order->description = $request->description;
+        $order->address = $request->address;
+        $order->price = $request->price;
         $order->save();
 
         return redirect('/orders');
