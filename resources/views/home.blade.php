@@ -2,6 +2,13 @@
 
 @section('content')
 <div class="container">
+  <h1>Hi {{$user->name}}</h1>
+<h1>You have placed theseoOrders: </h1>
+<ul>
+  @foreach ($orders as $order)
+    <li>id: {{$order->id}},title: {{$order->title}}, description: {{$order->description}}</li>
+  @endforeach
+</ul>
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
