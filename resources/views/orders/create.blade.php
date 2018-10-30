@@ -1,10 +1,10 @@
 @extends('layouts.app')
 
 @section('content')
-<div style="text-align: center;">
+<div>
     <h1>New Order</h1>
     <div class="row">
-      <div class="col-md-12">
+      <div class="col-md-6">
         <form method="post" action="/orders">
           <div class="form-group">
             <input type="text" name="title" placeholder="Title">
@@ -12,9 +12,7 @@
           <div class="form-group">
             <input type="text" name="item" placeholder="item">
           </div>
-          <div class="form-group">
-            <input type="textarea" name="description" placeholder="description">
-          </div>
+          <textarea class="form-control" name="description" id="" cols="30" rows="10"  placeholder="description"></textarea>
           <div class="form-group">
               <input type="textarea" name="address" placeholder="address(be specific)">
           </div>
