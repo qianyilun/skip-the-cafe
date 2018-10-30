@@ -2,23 +2,39 @@
 
 @section('content')
 <div class="row">
-  <div class="col-md-6">
-    <h3>All Orders</h3>
-    <h4>TODO: This Page should display all orders submitted by the current user</h4>
-    <ul>
-        @foreach($orders as $order)
-          <li>
-            <a href="{{route('orders.show', $order->id)}}">{{$order->title}}</a>
-          </li>
-        @endforeach
-    </ul>
-    <a href="{{route('orders.create')}}"><button class="btn btn-primary"> New Order</button></a>
+  <div class="col-md-8">
+    <div class="row">
+      <div class="col-md-12">
+        Area reserved for google map api
+        <br>
+        <br>
+        <br>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+          
+          <a href="{{route('orders.create')}}">
+            <button class="btn btn-primary btn-block"> New Order</button>
+          </a>
+      </div>
+    </div>
+    
   </div>
-  <div class="col-md-6">
-    <h3>Orders you have posted</h3>
-    <br>
+  <div class="col-md-4">
     @if ($user !== null)
-      <h3>You logged in as <span style="color: red;">{{$user->name}}</span></h3>  
+      <h3>All available orders</h3>
+          <h6>TODO: This Page should display all orders submitted by the current user</h6>
+          <ul>
+              @foreach($orders as $order)
+                <li>
+                  <a href="{{route('orders.show', $order->id)}}">{{$order->title}}</a>
+                <span>Order owner: {{$order->owner}}</span>
+                </li>
+              @endforeach
+          </ul>
+      <hr style="border-top: 3px solid rgba(0,0,0,.1);">  
+      <h3>Orders you have posted</h3>
       @if (count($orders) > 0)
         <ul>
             @foreach($orders as $order)

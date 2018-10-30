@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log; // this is for writting logging messages to storage/logs
+
 use App\Order;
 
 class OrdersController extends Controller
@@ -48,8 +50,16 @@ class OrdersController extends Controller
           'item' => 'required',
           'address' => 'required',
           'price' => 'required',
-      ]);
+        ]);
+        
         $order = new Order;
+        // store the current logged in user as owner of the order
+        if(auth()->user() !== null) {
+          $user = auth()->user();
+          $order->owner = $user->name;
+        } else {
+          return redirect('/orders')->with('error', 'You need to login in order to create order'); 
+        }
         $order->title = $request->title;
         $order->item = $request->item;
         $order->description = $request->description;
