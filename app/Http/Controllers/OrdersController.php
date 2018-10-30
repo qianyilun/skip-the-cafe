@@ -52,6 +52,7 @@ class OrdersController extends Controller
         $order->description = $request->description;
         $order->address = $request->address;
         $order->price = $request->price;
+        $order->user_id = auth()->user()->id; // this is how you access logged in user's id
         $order->save();
 
         return redirect('/orders');
