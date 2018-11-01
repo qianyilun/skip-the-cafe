@@ -7,22 +7,24 @@
       <div class="col-md-6">
         <form method="post" action="/orders">
           <div class="form-group">
-            <input type="text" name="title" placeholder="Title">
+            <input class="form-control" type="text" name="title" placeholder="Title">
           </div>
           <div class="form-group">
-            <input type="text" name="item" placeholder="item">
-          </div>
-          <textarea class="form-control" name="description" id="" cols="30" rows="10"  placeholder="description"></textarea>
-          <div class="form-group">
-              <input type="textarea" name="address" placeholder="your location(be specific)">
+            <input class="form-control" type="text" name="Item" placeholder="Item (e.g. a coffee)">
           </div>
           <div class="form-group">
-              <input type="number" name="price" placeholder="price" step="0.01">
+              <textarea  class="form-control" name="description" id="" rows="5"  placeholder="Order Description"></textarea>
+          </div>
+          <div class="form-group">
+              <input class="form-control" type="textarea" name="address" placeholder="Address (e.g. SFU Burnaby campus library first floor)">
+          </div>
+          <div class="form-group">
+              <input class="form-control" type="number" name="price" placeholder="Price" step="0.01">
           </div>
           <input type="hidden" id="hiddenLongitude" value="" name="longitude" />
           <input type="hidden" id="hiddenLatitude" value="" name="latitude" />
           {{csrf_field()}}
-          <input type="submit" name="submit">
+          <input class="btn btn-primary" type="submit" name="submit">
         </form>
       </div>
     </div>

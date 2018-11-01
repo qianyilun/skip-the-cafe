@@ -15,7 +15,7 @@
       <div class="col-md-12">
           
           <a href="{{route('orders.create')}}">
-            <button class="btn btn-primary btn-block"> New Order</button>
+            <button class="btn btn-primary btn-lg btn-block"> New Order</button>
           </a>
       </div>
     </div>
