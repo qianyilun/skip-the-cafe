@@ -27,6 +27,8 @@ class OrdersController extends Controller
       if(auth()->user() !== null) {
         $user = auth()->user();
       }
+
+      // availableOrders contain the orders that do not belong to currently logged in user, also it is sored by longtitude and latitude
       $availableOrders = Order::where('owner', '!=' , $user->name)->whereNull('taker')->get();
       $ordersFromCurrentUsers = Order::where('owner', $user->name)->get();
       return view('orders.index')->with(['user'=>$user, 'availableOrders'=> $availableOrders,'ordersFromCurrentUsers' => $ordersFromCurrentUsers, 'orders' => $orders]);
@@ -55,7 +57,9 @@ class OrdersController extends Controller
           'title' => 'required',
           'item' => 'required',
           'address' => 'required',
-          'price' => 'required'
+          'price' => 'required',
+          'longitude' => 'required',
+          'latitude' => 'required'
         ]);
         
         $order = new Order;
@@ -71,7 +75,10 @@ class OrdersController extends Controller
         $order->description = $request->description;
         $order->address = $request->address;
         $order->price = $request->price;
+        $order->longitude = $request->longitude;
+        $order->latitude = $request->latitude;
         $order->user_id = auth()->user()->id; // this is how you access logged in user's id
+
         $order->save();
 
         return redirect('/orders');
