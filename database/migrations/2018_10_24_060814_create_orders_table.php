@@ -22,6 +22,8 @@ class CreateOrdersTable extends Migration
             $table->double('price', 15, 2)->default(0);
             $table->string('owner')->nullable();
             $table->string('taker')->nullable();
+            $table->decimal('longitude', 10, 7)->nullable();
+            $table->decimal('latitude', 10, 7)->nullable();
             $table->boolean('confirmed')->default(false);
             $table->boolean('completed')->default(false);
             $table->timestamps();
