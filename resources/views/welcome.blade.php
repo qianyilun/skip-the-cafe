@@ -10,12 +10,12 @@
                 <div class="title m-b-md">
                     Skip the Cafe
                 </div>
-                <div style="text-align: right;" class="slogan">
-                    Switch "Delivery" | "Receiver" anytime, anywhere.
+                <div class="slogan">
+                    <p>Switch "Delivery" | "Receiver" anytime, anywhere.</p>
                     <br>
-                    <a href="{{route('orders.index')}}">View All Orders</a>
+                    <a class="btn btn-primary btn-lg btn-block" href="{{route('orders.index')}}">View All Orders</a>
                     <br>
-                    <a href="{{route('orders.create')}}">New Order</a>
+                    <a class="btn btn-primary btn-lg btn-block" href="{{route('orders.create')}}">New Order</a>
                 </div>
             </div>
         </div>
