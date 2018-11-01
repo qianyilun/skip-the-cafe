@@ -7,23 +7,18 @@
       <div class="col-md-8">
         <form method="post" action="/orders">
           <div class="form-group">
-              <label for="title">You can leave empty for title... if you don't want anyone to take your order</label>
             <input class="form-control" type="text" name="title" placeholder="Title">
           </div>
           <div class="form-group">
-              <label for="item">What is the thing you've been waiting for so long? A coffee?</label>
             <input class="form-control" type="text" name="item" placeholder="Item (e.g. a coffee)">
           </div>
           <div class="form-group">
-              <label for="description">Description is the soul of your order, please be nice</label>
               <textarea  class="form-control" name="description" id="" rows="5"  placeholder="Order Description"></textarea>
           </div>
           <div class="form-group">
-              <label for="address">Let's hope your address is not at Mars</label>
               <input class="form-control" type="textarea" name="address" placeholder="Address (Please be specific, e.g. SFU Burnaby campus library first floor)">
           </div>
           <div class="form-group">
-              <label for="price">People always say friendship is priceless, what do you think?</label>
               <input class="form-control" type="number" name="price" placeholder="Price" step="0.01">
           </div>
           <input type="hidden" id="hiddenLongitude" value="" name="longitude" />
