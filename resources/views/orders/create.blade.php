@@ -14,7 +14,7 @@
           </div>
           <textarea class="form-control" name="description" id="" cols="30" rows="10"  placeholder="description"></textarea>
           <div class="form-group">
-              <input type="textarea" name="address" placeholder="address(be specific)">
+              <input type="textarea" name="address" placeholder="your location(be specific)">
           </div>
           <div class="form-group">
               <input type="number" name="price" placeholder="price" step="0.01">
@@ -47,9 +47,6 @@ $(document).ready(function(){
         url: 'http://api.ipstack.com/' + userIp + '?access_key=' + access_key,   
         dataType: 'jsonp',
         success: function(json) {
-          // output the "capital" object inside "location"
-          console.log('longitude', json.longitude);
-          console.log('latitude', json.latitude);
           let longitude = json.longitude;
           let latitude = json.latitude;
           $('#hiddenLongitude').val(longitude);
