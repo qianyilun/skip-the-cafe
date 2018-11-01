@@ -10,7 +10,7 @@
             <input class="form-control" type="text" name="title" placeholder="Title">
           </div>
           <div class="form-group">
-            <input class="form-control" type="text" name="Item" placeholder="Item (e.g. a coffee)">
+            <input class="form-control" type="text" name="item" placeholder="Item (e.g. a coffee)">
           </div>
           <div class="form-group">
               <textarea  class="form-control" name="description" id="" rows="5"  placeholder="Order Description"></textarea>
