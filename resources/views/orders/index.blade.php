@@ -13,7 +13,6 @@
     </div>
     <div class="row">
       <div class="col-md-12">
-          
           <a href="{{route('orders.create')}}">
             <button class="btn btn-primary btn-lg btn-block"> New Order</button>
           </a>
@@ -26,9 +25,9 @@
       <h3>All available orders</h3>
         {{-- <h6>TODO: This Page should display all orders submitted by the current user</h6> --}}
         @if (count($availableOrders) > 0)
-          <ul id="listOfTakeButtons">
+          <ul class="list-group list-group-flush" id="listOfTakeButtons">
             @foreach($availableOrders as $availableOrder)
-              <li>
+              <li class="list-group-item list-group-item-action">
                 {{-- <a href="{{route('orders.show', $order->id)}}">{{$order->title}}</a>
                 <span>Order owner: {{$order->owner}}</span>
                 @if ($order->owner !== $user->name)
@@ -51,11 +50,11 @@
       <hr style="border-top: 3px solid rgba(0,0,0,.1);">  
       <h3>Orders you have posted</h3>
       @if (count($ordersFromCurrentUsers) > 0)
-        <ul>
+        <ul class="list-group list-group-flush">
             {{-- this is for displaying the orders that are created by the currently logged in user --}}
             @foreach($ordersFromCurrentUsers as $ordersFromCurrentUser)
               @if ($ordersFromCurrentUser->owner === $user->name)
-                <li>
+                <li class="list-group-item list-group-item-action">
                   <a href="{{route('orders.show', $ordersFromCurrentUser->id)}}">{{$ordersFromCurrentUser->title}}</a>
                 </li>
               @endif
@@ -85,7 +84,7 @@
       </tr>
       @foreach ($orders as $order)
       <tr>
-        <td style="margin-right: 5px;">{{$order->id}}</tds>
+        <td style="margin-right: 5px;">{{$order->id}}</td>
         <td>{{$order->title}}</td>
         <td style="margin-right: 5px;">{{$order->item}}</td>
         <td style="margin-right: 5px;">{{$order->owner}}</td>
