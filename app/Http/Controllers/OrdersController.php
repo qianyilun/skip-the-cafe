@@ -36,7 +36,7 @@ class OrdersController extends Controller
       $userIp = \Request::ip();
       // $userIp = ''; // this is only for testing, removed it when deployed
       $access_key = "a7d887b9bdaae171366d6b2b284ffa4c";
-      Log::info('user ip '.$userIp);
+      //Log::info('user ip '.$userIp);
       // use GuzzleHttp( a package to make HTTP request in server) to make api call
       $client = new GuzzleHttp\Client();
       $response = $client->get( 'http://api.ipstack.com/'.$userIp . '?access_key=' . $access_key);
