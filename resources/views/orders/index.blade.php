@@ -5,7 +5,7 @@
   <div class="col-md-7">
     <div class="row">
       <div class="col-md-12">
-        Area reserved for google map api
+        <div id="map" style="height:300px; width:100%;"></div>
         <br>
         <br>
         <br>
@@ -105,7 +105,46 @@
   integrity="sha256-3edrmyuQ0w65f8gfBsqowzjJe2iM6n0nKciPUp8y+7E="
   crossorigin="anonymous">
 </script>
+
 <script>
+  
+  function initMap() {
+    var options = {
+      zoom: 13,
+      center: {
+        lat: {{$currentUserlatitude}},
+        lng: {{$currentUserlongitude}}
+        }
+    };
+    var map = new google.maps.Map(document.getElementById('map'), options);
+
+    var markers = [];
+    @foreach ($orders as $order)
+      markers.push({
+        coords: {lat: {{$order->latitude}},lng: {{$order->longitude}}},
+        iconImage: 'http://maps.google.com/mapfiles/ms/micons/dollar.png'
+        // content: '<h5>test marker</h5>'
+      })
+    @endforeach
+
+    for(var i = 0; i<markers.length; i++) {
+      addMarker(markers[i]);
+    }
+    
+    function addMarker(props) {
+      var marker = new google.maps.Marker({
+        position: props.coords,
+        map: map,
+        icon: props.iconImage
+      });
+      if(props.iconImage){
+          // Set marker icon image
+          marker.setIcon(props.iconImage);
+        }
+    }
+
+  
+  }
   $(document).ready(function(){
     $("#listOfTakeButtons button").click(function(e){
       e.preventDefault(); 
@@ -132,3 +171,5 @@
     });
 });
 </script>
+<script async defer src="https://maps.googleapis.com/maps/api/js?key={{env('GOOGLE_API_KEY')}}&callback=initMap"
+type="text/javascript"></script>
