@@ -81,6 +81,8 @@
         <th>item</th>
         <th>owner</th>
         <th>taker</th>
+        <th>latitude</th>
+        <th>longtitude</th>
       </tr>
       @foreach ($orders as $order)
       <tr>
@@ -89,6 +91,8 @@
         <td style="margin-right: 5px;">{{$order->item}}</td>
         <td style="margin-right: 5px;">{{$order->owner}}</td>
         <td style="margin-right: 5px;">{{$order->taker}}</td>
+        <td style="margin-right: 5px;">{{$order->latitude}}</td>
+        <td style="margin-right: 5px;">{{$order->longitude}}</td>
       </tr>
       @endforeach
     </table>
