@@ -7,6 +7,7 @@
 <h3>show direction page orderLatitude: {{$orderLatitude}}</h3>
 <h3>show direction page currentUserlongitude: {{$currentUserlongitude}}</h3>
 <h3>show direction page currentUserlatitude: {{$currentUserlatitude}}</h3>
+<button class="btn btn-primary">Complete order, notify the order owner</button>
 <div id='map' style="height: 500px; width: 100%;"></div>
 @endsection
 <script
