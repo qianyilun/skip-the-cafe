@@ -114,7 +114,7 @@
       center: {
         lat: {{$currentUserlatitude}},
         lng: {{$currentUserlongitude}}
-        }
+      }
     };
     var map = new google.maps.Map(document.getElementById('map'), options);
 
@@ -122,15 +122,15 @@
     @foreach ($orders as $order)
       markers.push({
         coords: {lat: {{$order->latitude}},lng: {{$order->longitude}}},
-        iconImage: 'http://maps.google.com/mapfiles/ms/micons/dollar.png'
-        // content: '<h5>test marker</h5>'
+        iconImage: 'http://maps.google.com/mapfiles/ms/micons/dollar.png',
+        content: '<h5>{{$order->title}}</h5> <a href="{{ url("orders/" . $order->id)}}">click to view this order</a>'
       })
     @endforeach
 
     for(var i = 0; i<markers.length; i++) {
       addMarker(markers[i]);
     }
-    
+
     function addMarker(props) {
       var marker = new google.maps.Marker({
         position: props.coords,
@@ -138,9 +138,18 @@
         icon: props.iconImage
       });
       if(props.iconImage){
-          // Set marker icon image
-          marker.setIcon(props.iconImage);
-        }
+        // Set marker icon image
+        marker.setIcon(props.iconImage);
+      }
+      if(props.content){
+        var infoWindow = new google.maps.InfoWindow({
+          content:props.content
+        });
+
+        marker.addListener('click', function(){
+          infoWindow.open(map, marker);
+        });
+      }
     }
 
   
