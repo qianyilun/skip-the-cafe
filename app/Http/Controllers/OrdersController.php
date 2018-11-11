@@ -36,7 +36,7 @@ class OrdersController extends Controller
 
       // get user's ip
       if(env('APP_ENV') == 'local') {
-        $userIp = '75.157.228.85'; // fill in your public IP for development
+        $userIp = env('MY_IP'); // fill in your public IP for development in .env
       } else {
         // this is for production
         $userIp = \Request::ip();
