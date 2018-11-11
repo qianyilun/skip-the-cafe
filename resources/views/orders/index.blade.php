@@ -98,7 +98,7 @@
     </table>
   </div>
 </div>
-    
+
 @endsection
 <script
   src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
@@ -167,12 +167,11 @@
           type: 'post',
           url: `orders/take/${orderId}`,
           success: function(msg) {
-            console.log('ajax take order success'); 
-            alert('You have taken the order successfully');
-            window.location.reload(true); 
+            console.log(msg);
+            location.href = `/showDirection/${orderId}`
           },
           error: function(msg) {
-            alert('Fail to take the order successfully');
+            alert('Fail to take the order');
             console.log('ajax call to takeOrder action in order controller error ', msg);
             window.location.reload(true); 
           }

@@ -10,7 +10,7 @@ use App\Order;
 use Response;
 use function GuzzleHttp\json_decode;
 // define constants
-define("ACCESS_KEY", "a7d887b9bdaae171366d6b2b284ffa4c");
+define("ACCESS_KEY", "a7d887b9bdaae171366d6b2b284ffa4c"); // this is access key for ipStack api, which is used to get current user's geo location
 
 class OrdersController extends Controller
 {
@@ -181,9 +181,17 @@ class OrdersController extends Controller
      */
     public function takeOrder($id)
     {
+      try{
         $user = auth()->user();
         $order = Order::where('id', $id)->update(['taker'=> $user->name]);
-        return \Response::json(['msg' => 'taken'], 200);
+        if(!$order || $order == null) {
+          return \Response::json(['msg' => 'failed to take order, failed in updating DB record'], 400);
+        }
+      } catch ( \Exception $e ) {
+        return \Response::json(['msg' => 'failed to take order, unknown error'], 500);
+      }
+      return \Response::json(['msg' => 'successfully taken', 'takenId' => $id], 200);
     }
+
 
 }
