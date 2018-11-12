@@ -67,12 +67,6 @@
                                 <a class="btn btn-sm" href="{{ url('auth/github') }}">
                                     <i class="fa fa-github fa-3x"></i>
                                 </a>
-                                <a class="btn btn-sm" href="{{ url('auth/facebook') }}">
-                                    <i class="fa fa-facebook fa-3x"></i>
-                                </a>
-                                <a class="btn btn-sm" href="{{ url('auth/twitter') }}">
-                                    <i class="fa fa-twitter fa-3x"></i>
-                                </a>
                             </div>
                         </div>
                     </form>
