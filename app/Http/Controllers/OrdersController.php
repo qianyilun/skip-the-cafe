@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Email;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log; // this is for writting logging messages to storage/logs. use it like Log::alert('goes through takeOrder action in orderController');
 use Illuminate\Support\Facades\DB;
@@ -114,6 +115,10 @@ class OrdersController extends Controller
         $order->user_id = auth()->user()->id; // this is how you access logged in user's id
 
         $order->save();
+
+        // send emails to poster to notify their order has been posted
+        $mailController = new mailController();
+        $mailController->sendEmailWhenCreateNewOrder($order->title);
 
         return redirect('/orders');
     }
