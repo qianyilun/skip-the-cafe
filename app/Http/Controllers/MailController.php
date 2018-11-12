@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
 
-class mailController extends Controller
+class MailController extends Controller
 {
     /**
      * @param $orderTitle
@@ -39,6 +39,22 @@ class mailController extends Controller
         ];
         Mail::send('emails.test', $data, function($message) {
             $message->to('qianyiluntemp@gmail.com', 'yilun qian TEST')->subject('hey tester');
+        });
+    }
+
+    public function sendEmailToNotifyOrderOwner($ownerId, $orderTitle) {
+        $owner = DB::table('users')->where('id', "$ownerId")->first();
+        $takerName = auth()->user()->name;
+
+        $sendTo = $owner->email;
+        $userName = $owner->name;
+        $data = [
+            'userName' => $userName,
+            'orderTitle' => $orderTitle,
+        ];
+
+        Mail::send('emails.take_order', $data, function($message) use ($sendTo, $userName, $takerName){
+            $message->to($sendTo, $userName)->subject("You order has been taken by $takerName");
         });
     }
 }
