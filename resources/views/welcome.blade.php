@@ -12,6 +12,8 @@
                 </div>
                 <div class="slogan">
                     <p>Switch "Delivery" | "Receiver" anytime, anywhere.</p>
+                </div>
+                <div>
                     <br>
                     <a class="btn btn-primary btn-lg btn-block" href="{{route('orders.index')}}">View All Orders</a>
                     <br>
