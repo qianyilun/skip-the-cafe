@@ -173,7 +173,7 @@
           error: function(msg) {
             alert('Fail to take the order');
             console.log('ajax call to takeOrder action in order controller error ', msg);
-            window.location.reload(true); 
+            // window.location.reload(true);
           }
       });
     });

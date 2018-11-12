@@ -117,7 +117,7 @@ class OrdersController extends Controller
         $order->save();
 
         // send emails to poster to notify their order has been posted
-        $mailController = new mailController();
+        $mailController = new MailController();
         $mailController->sendEmailWhenCreateNewOrder($order->title);
 
         return redirect('/orders');
@@ -187,13 +187,19 @@ class OrdersController extends Controller
     public function takeOrder($id)
     {
       try{
-        $user = auth()->user();
-        $order = Order::where('id', $id)->update(['taker'=> $user->name]);
+        $takerId = auth()->user()->id;
+        $order = Order::where('id', $id)->update(['taker'=> $takerId]);
         if(!$order || $order == null) {
           return \Response::json(['msg' => 'failed to take order, failed in updating DB record'], 400);
         }
+
+        $ownerId = Order::where('id', $id)->first()->user_id;
+        $orderTitle = Order::where('id', $id)->first()->title;
+        $mailController = new MailController();
+        $mailController->sendEmailToNotifyOrderOwner($ownerId, $orderTitle);
+
       } catch ( \Exception $e ) {
-        return \Response::json(['msg' => 'failed to take order, unknown error'], 500);
+        return \Response::json(['msg' => "failed to take order, unknown error: $e"], 500);
       }
       return \Response::json(['msg' => 'successfully taken', 'takenId' => $id], 200);
     }
