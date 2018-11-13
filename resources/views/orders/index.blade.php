@@ -5,7 +5,7 @@
   <div class="col-md-7">
     <div class="row">
       <div class="col-md-12">
-        Area reserved for google map api
+        <div id="map" style="height:300px; width:100%;"></div>
         <br>
         <br>
         <br>
@@ -81,6 +81,8 @@
         <th>item</th>
         <th>owner</th>
         <th>taker</th>
+        <th>latitude</th>
+        <th>longtitude</th>
       </tr>
       @foreach ($orders as $order)
       <tr>
@@ -89,19 +91,69 @@
         <td style="margin-right: 5px;">{{$order->item}}</td>
         <td style="margin-right: 5px;">{{$order->owner}}</td>
         <td style="margin-right: 5px;">{{$order->taker}}</td>
+        <td style="margin-right: 5px;">{{$order->latitude}}</td>
+        <td style="margin-right: 5px;">{{$order->longitude}}</td>
       </tr>
       @endforeach
     </table>
   </div>
 </div>
-    
+
 @endsection
 <script
   src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
   integrity="sha256-3edrmyuQ0w65f8gfBsqowzjJe2iM6n0nKciPUp8y+7E="
   crossorigin="anonymous">
 </script>
+
 <script>
+  
+  function initMap() {
+    var options = {
+      zoom: 13,
+      center: {
+        lat: {{$currentUserlatitude}},
+        lng: {{$currentUserlongitude}}
+      }
+    };
+    var map = new google.maps.Map(document.getElementById('map'), options);
+
+    var markers = [];
+    @foreach ($orders as $order)
+      markers.push({
+        coords: {lat: {{$order->latitude}},lng: {{$order->longitude}}},
+        iconImage: 'http://maps.google.com/mapfiles/ms/micons/dollar.png',
+        content: '<h5>{{$order->title}}</h5> <a href="{{ url("orders/" . $order->id)}}">click to view this order</a>'
+      })
+    @endforeach
+
+    for(var i = 0; i<markers.length; i++) {
+      addMarker(markers[i]);
+    }
+
+    function addMarker(props) {
+      var marker = new google.maps.Marker({
+        position: props.coords,
+        map: map,
+        icon: props.iconImage
+      });
+      if(props.iconImage){
+        // Set marker icon image
+        marker.setIcon(props.iconImage);
+      }
+      if(props.content){
+        var infoWindow = new google.maps.InfoWindow({
+          content:props.content
+        });
+
+        marker.addListener('click', function(){
+          infoWindow.open(map, marker);
+        });
+      }
+    }
+
+  
+  }
   $(document).ready(function(){
     $("#listOfTakeButtons button").click(function(e){
       e.preventDefault(); 
@@ -115,12 +167,11 @@
           type: 'post',
           url: `orders/take/${orderId}`,
           success: function(msg) {
-            console.log('ajax take order success'); 
-            alert('You have taken the order successfully');
-            window.location.reload(true); 
+            console.log(msg);
+            location.href = `/showDirection/${orderId}`
           },
           error: function(msg) {
-            alert('Fail to take the order successfully');
+            alert('Fail to take the order');
             console.log('ajax call to takeOrder action in order controller error ', msg);
             window.location.reload(true); 
           }
@@ -128,3 +179,5 @@
     });
 });
 </script>
+<script async defer src="https://maps.googleapis.com/maps/api/js?key={{env('GOOGLE_API_KEY')}}&callback=initMap"
+type="text/javascript"></script>

@@ -1,0 +1,1 @@
+Change your own public ip in .env file to allow google map api and mapbox api works

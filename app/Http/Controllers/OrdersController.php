@@ -9,6 +9,8 @@ use GuzzleHttp; // this package is used to make HTTP request to external api
 use App\Order;
 use Response;
 use function GuzzleHttp\json_decode;
+// define constants
+define("ACCESS_KEY", "a7d887b9bdaae171366d6b2b284ffa4c"); // this is access key for ipStack api, which is used to get current user's geo location
 
 class OrdersController extends Controller
 {
@@ -33,13 +35,19 @@ class OrdersController extends Controller
       // availableOrders contain the orders that do not belong to currently logged in user, also it is sored by longtitude and latitude
 
       // get user's ip
-      $userIp = \Request::ip();
-      // $userIp = ''; // this is only for testing, removed it when deployed
-      $access_key = "a7d887b9bdaae171366d6b2b284ffa4c";
-      //Log::info('user ip '.$userIp);
+      if(env('APP_ENV') == 'local') {
+        $userIp = env('MY_IP'); // fill in your public IP for development in .env
+      } else {
+        // this is for production
+        $userIp = \Request::ip();
+        if(!$userIp || $userIp == null) {
+          return redirect('/orders')->with('error', 'There is a problem with your public IP, we are not able to retrieve your public IP. Are you browsing our site through VPN? If yes, turn it off and try visiting again.');
+        }
+      }
+
       // use GuzzleHttp( a package to make HTTP request in server) to make api call
       $client = new GuzzleHttp\Client();
-      $response = $client->get( 'http://api.ipstack.com/'.$userIp . '?access_key=' . $access_key);
+      $response = $client->get( 'http://api.ipstack.com/'.$userIp . '?access_key=' . ACCESS_KEY);
 
       $responseBody = $response->getBody();// the response is an PSR-7 object so that we need to call an instance method to get the response body, checkout GuzzleHttp documentation for details
       // convert json to array of strings
@@ -57,7 +65,7 @@ class OrdersController extends Controller
       
       // $availableOrders = Order::where('owner', '!=' , $user->name)->whereNull('taker')->get();
       $ordersFromCurrentUsers = Order::where('owner', $user->name)->get();
-      return view('orders.index')->with(['user'=>$user, 'availableOrders'=> $availableOrders,'ordersFromCurrentUsers' => $ordersFromCurrentUsers, 'orders' => $orders]);
+      return view('orders.index')->with(['user'=>$user, 'availableOrders'=> $availableOrders,'ordersFromCurrentUsers' => $ordersFromCurrentUsers, 'orders' => $orders, 'currentUserlongitude' => $currentUserlongitude, 'currentUserlatitude' => $currentUserlatitude]);
     }
 
     /**
@@ -173,9 +181,17 @@ class OrdersController extends Controller
      */
     public function takeOrder($id)
     {
+      try{
         $user = auth()->user();
         $order = Order::where('id', $id)->update(['taker'=> $user->name]);
-        return \Response::json(['msg' => 'taken'], 200);
+        if(!$order || $order == null) {
+          return \Response::json(['msg' => 'failed to take order, failed in updating DB record'], 400);
+        }
+      } catch ( \Exception $e ) {
+        return \Response::json(['msg' => 'failed to take order, unknown error'], 500);
+      }
+      return \Response::json(['msg' => 'successfully taken', 'takenId' => $id], 200);
     }
+
 
 }
