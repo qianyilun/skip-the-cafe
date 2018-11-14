@@ -22,7 +22,9 @@
 <h3>orderLatitude: {{$orderLatitude}}</h3>
 <h3>currentUserlongitude: {{$currentUserlongitude}}</h3>
 <h3>currentUserlatitude: {{$currentUserlatitude}}</h3>
-<button class="btn btn-primary">Complete order, notify the order owner</button>
+<a href="{{route('notifyOwner', ['id' => $id])}}">
+  <button class="btn btn-primary">Complete order, notify the order owner</button>
+</a>
 <div class="row">
   <div class="col-md-3">
     <div id="overlay">
