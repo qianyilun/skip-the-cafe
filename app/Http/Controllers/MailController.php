@@ -7,6 +7,7 @@ use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
+use App\Order;
 
 class MailController extends Controller
 {
@@ -56,5 +57,25 @@ class MailController extends Controller
         Mail::send('emails.take_order', $data, function($message) use ($sendTo, $userName, $takerName){
             $message->to($sendTo, $userName)->subject("You order has been taken by $takerName");
         });
+    }
+
+    public function sendEmailToNotifyOwnerOrderCompleted($id) {
+        $order = Order::findOrFail($id);
+
+        $owner = DB::table('users')->where('id', "$order->user_id")->first();
+        $takerName = auth()->user()->name;
+        $orderTitle = $order->title;
+        $sendTo = $owner->email;
+        $userName = $owner->name;
+        $data = [
+            'userName' => $userName,
+            'orderTitle' => $orderTitle,
+        ];
+
+        Mail::send('emails.delivery_order', $data, function($message) use ($sendTo, $userName, $takerName){
+            $message->to($sendTo, $userName)->subject("You order has been delivered by $takerName");
+        });
+
+        return redirect('/orders');
     }
 }
