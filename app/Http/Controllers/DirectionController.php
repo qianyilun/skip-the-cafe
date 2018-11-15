@@ -35,6 +35,9 @@ class DirectionController extends Controller
     public function showDirection($id) {
       // Log::alert('get in showDirection action');
       $order = Order::findOrFail($id);
+      $orderAddress = $order->address;
+      $orderItem = $order->item;
+      $orderOwner = $order->owner;
       $orderLatitude = $order->latitude;
       $orderLongitude = $order->longitude;
 
@@ -62,7 +65,7 @@ class DirectionController extends Controller
       $distance = $this->distance($currentUserlatitude, $currentUserlongitude ,$orderLatitude,$orderLongitude, "K");
       $distance = preg_replace('/(\.\d\d).*/', '$1', $distance); // reserve last two digits of the decimals
       Order::where('id', $id)->update(['distance' => $distance]);
-      return view('directions.showDirection', compact('id', 'orderLongitude', 'orderLatitude', 'currentUserlongitude', 'currentUserlatitude'));
+      return view('directions.showDirection', compact('id', 'orderLongitude', 'orderLatitude', 'currentUserlongitude', 'currentUserlatitude', 'orderAddress', 'orderItem', 'orderOwner'));
     }
 
     

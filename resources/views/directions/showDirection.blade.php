@@ -17,11 +17,11 @@
 </style>
 
 @section('content')
-<h3>order ID: {{$id}}</h3>
-<h3>orderLongitude: {{$orderLongitude}}</h3>
-<h3>orderLatitude: {{$orderLatitude}}</h3>
-<h3>currentUserlongitude: {{$currentUserlongitude}}</h3>
-<h3>currentUserlatitude: {{$currentUserlatitude}}</h3>
+<h3>Order ID: {{$id}}</h3>
+<h3>Order owner's name: {{$orderOwner}}</h3>
+<h3>Ordered item: {{$orderItem}}</h3>
+<h3>Address: {{$orderAddress}}</h3>
+<h3 id="arriveTime">Estimated arriving time:</h3>
 <a href="{{route('notifyOwner', ['id' => $id])}}">
   <button class="btn btn-primary">Complete order, notify the order owner</button>
 </a>
@@ -119,9 +119,16 @@
         // added slightly modified version of routes instructions
         var instructions = document.getElementById('instructions');
         var steps = data.routes[0].legs[0].steps;
+        var counter = 0;
         steps.forEach(function(step) {
-          instructions.insertAdjacentHTML('beforeend', '<p>' + step.maneuver.instruction + '</p>');
+          instructions.insertAdjacentHTML('beforeend', '<p>' + counter + '. ' + step.maneuver.instruction + '</p>');
+          counter++;
         });
+        // display Estimated arrival time
+        var arriveTimeNode = document.getElementById('arriveTime');
+        var arriveTimeInSec = data.routes[0].legs[0].duration;
+        var arriveTimeInMinutes = Math.floor(arriveTimeInSec / 60);
+        arriveTimeNode.insertAdjacentHTML('beforeend', '<span> '+ arriveTimeInMinutes +'minutes</span>');
       });
       
     });
