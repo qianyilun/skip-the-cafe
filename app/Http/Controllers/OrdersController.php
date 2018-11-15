@@ -62,6 +62,7 @@ class OrdersController extends Controller
         ->where('owner', '!=' , $user->name)->whereNull('taker')
         ->having('distance', '<', 10000)
         ->orderBy('distance')
+        ->take(5)
         ->get();
       
       // $availableOrders = Order::where('owner', '!=' , $user->name)->whereNull('taker')->get();

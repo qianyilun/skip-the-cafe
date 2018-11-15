@@ -14,7 +14,7 @@ class AddOrderDistanceColumn extends Migration
     public function up()
     {
         Schema::table('orders', function($table) {
-          $table->decimal('distance',3, 2)->nullable();
+          $table->decimal('distance',6, 2)->nullable();
         });
     }
 
