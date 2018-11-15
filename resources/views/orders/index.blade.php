@@ -36,6 +36,8 @@
                 </a>
                 @endif --}}
                 <span>Order title: <b>{{$availableOrder->title}}</b> </span><br>
+                <span>Order item: <b>{{$availableOrder->item}}</b> </span><br>
+                <span>Address: <b>{{$availableOrder->address}}</b> </span><br>
                 <span>Order owner: <b>{{$availableOrder->owner}}</b> </span>
                 <a class="btn btn-default">
                   <button class="btn btn-primary" id="{{$availableOrder->id}}">Take</button>
@@ -137,7 +139,7 @@
     };
     var map = new google.maps.Map(document.getElementById('map'), options);
     var markers = [];
-    @foreach ($orders as $order)
+    @foreach ($availableOrders as $order)
       @if ($order->taker == null && $order->owner != $user->name)
         markers.push({
           coords: {lat: {{$order->latitude}},lng: {{$order->longitude}}},
