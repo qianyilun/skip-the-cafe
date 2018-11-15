@@ -107,7 +107,26 @@
 </script>
 
 <script>
-  
+  function myFunction(orderId) {
+    $.ajaxSetup({
+        headers: {
+          'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+      });
+      $.ajax({
+          type: 'post',
+          url: `orders/take/${orderId}`,
+          success: function(msg) {
+            console.log(msg);
+            location.href = `/showDirection/${orderId}`
+          },
+          error: function(msg) {
+            alert('Fail to take the order');
+            console.log('ajax call to takeOrder action in order controller error ', msg);
+            // window.location.reload(true);
+          }
+      });
+  }
   function initMap() {
     var options = {
       zoom: 13,
@@ -117,16 +136,17 @@
       }
     };
     var map = new google.maps.Map(document.getElementById('map'), options);
-
     var markers = [];
     @foreach ($orders as $order)
-      markers.push({
-        coords: {lat: {{$order->latitude}},lng: {{$order->longitude}}},
-        iconImage: 'http://maps.google.com/mapfiles/ms/micons/dollar.png',
-        content: '<h5>{{$order->title}}</h5> <a href="{{ url("orders/" . $order->id)}}">click to view this order</a>'
-      })
+      @if ($order->taker == null && $order->owner != $user->name)
+        markers.push({
+          coords: {lat: {{$order->latitude}},lng: {{$order->longitude}}},
+          iconImage: 'http://maps.google.com/mapfiles/ms/micons/dollar.png',
+          content: '<p>Title: {{$order->title}}</p> <p>Item: {{$order->item}}</p> <p>Price: ${{$order->price}}</p><button onclick="myFunction({{$order->id}})" class="btn btn-primary" id="{{$order->id}}">take this order</button>'
+        })
+      @endif
     @endforeach
-
+    
     for(var i = 0; i<markers.length; i++) {
       addMarker(markers[i]);
     }
@@ -177,6 +197,7 @@
           }
       });
     });
+    
 });
 </script>
 <script async defer src="https://maps.googleapis.com/maps/api/js?key={{env('GOOGLE_API_KEY')}}&callback=initMap"
