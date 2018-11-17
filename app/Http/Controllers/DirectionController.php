@@ -13,10 +13,33 @@ define("ACCESS_KEY", "a7d887b9bdaae171366d6b2b284ffa4c");
 
 class DirectionController extends Controller
 {
+    // helper function to calculate the distance between two coordinates
+    // refer to :stackoverflow.com/questions/10053358/measuring-the-distance-between-two-coordinates-in-php
+    private function distance($lat1, $lon1, $lat2, $lon2, $unit) {
+      $theta = $lon1 - $lon2;
+      $dist = sin(deg2rad($lat1)) * sin(deg2rad($lat2)) +  cos(deg2rad($lat1)) * cos(deg2rad($lat2)) * cos(deg2rad($theta));
+      $dist = acos($dist);
+      $dist = rad2deg($dist);
+      $miles = $dist * 60 * 1.1515;
+      $unit = strtoupper($unit);
+    
+      if ($unit == "K") {
+          return ($miles * 1.609344);
+      } else if ($unit == "N") {
+          return ($miles * 0.8684);
+      } else {
+          return $miles;
+      }
+    }
     
     public function showDirection($id) {
       // Log::alert('get in showDirection action');
       $order = Order::findOrFail($id);
+      $orderAddress = $order->address;
+      $orderItem = $order->item;
+      $orderOwner = $order->owner;
+      $orderPrice = $order->price;
+      $orderDescription = $order->description;
       $orderLatitude = $order->latitude;
       $orderLongitude = $order->longitude;
 
@@ -39,6 +62,13 @@ class DirectionController extends Controller
       // get user's latitude longtitude
       $currentUserlongitude = $response['longitude'];
       $currentUserlatitude = $response['latitude'];
-      return view('directions.showDirection', compact('id', 'orderLongitude', 'orderLatitude', 'currentUserlongitude', 'currentUserlatitude'));
+
+      // calculate distance and store it because dashboard needs distance to calculate calorie
+      $distance = $this->distance($currentUserlatitude, $currentUserlongitude ,$orderLatitude,$orderLongitude, "K");
+      $distance = preg_replace('/(\.\d\d).*/', '$1', $distance); // reserve last two digits of the decimals
+      Order::where('id', $id)->update(['distance' => $distance]);
+      return view('directions.showDirection', compact('id', 'orderLongitude', 'orderLatitude', 'currentUserlongitude', 'currentUserlatitude', 'orderAddress', 'orderItem', 'orderOwner', 'orderPrice','orderDescription'));
     }
+
+    
 }

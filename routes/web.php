@@ -11,6 +11,9 @@
 |
 */
 
+use App\Http\Controllers\MailController;
+use Illuminate\Support\Facades\Mail;
+
 Route::get('/', function () {
     return view('welcome');
 });
@@ -23,8 +26,25 @@ Route::get('auth/{provider}/callback', 'Auth\AuthController@handleProviderCallba
 Route::resource('orders', 'OrdersController');
 Route::post('orders/take/{id}', 'OrdersController@takeOrder'); // this route is for receiving ajax call from orders.index view
 Route::get('showDirection/{id}', 'DirectionController@showDirection')->name('showDirection');
+Route::get('/sendTestEmails', 'MailController@sendEmailWhenCreateNewOrder');
+Route::get('notifyOwner/{id}', 'MailController@sendEmailToNotifyOwnerOrderCompleted')->name('notifyOwner');
 
 
+/**
+ * A test router for sending emails, also with an anonymous function
+ */
+Route::get('/sendTestEmails', function () {
+   $data = [
+       'title' => 'Order submitted and posted',
+       'content' => 'This is content'
+   ];
+
+   Mail::send('emails.test', $data, function($message) {
+       $message->to('qianyiluntemp@gmail.com', 'yilun qian')->subject('hey');
+   });
+});
+
+//Route::get('/sendNewOrderEmail', 'MailController@send');
 /*
 |--------------------------------------------------------------------------
 | Testing Routes
