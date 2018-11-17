@@ -104,6 +104,11 @@ class OrdersController extends Controller
         } else {
           return redirect('/orders')->with('error', 'You need to login in order to create order'); 
         }
+         // randomly choose a number from 1 to n ( n = total number of records in Order table)
+        // for demo purpose
+        $bingoNumber = 2;
+        $randomNumber = random_int(1,2);
+
         $order->title = $request->title;
         $order->item = $request->item;
         $order->description = $request->description;
@@ -115,6 +120,10 @@ class OrdersController extends Controller
 
         $order->save();
 
+        // if a random free order is the order we just saved, display a pop up window to ask users to share this news with their friends to promopt our site
+        if($bingoNumber == $randomNumber) {
+          return redirect('/orders')->with('modal', true);
+        }
         return redirect('/orders');
     }
 
