@@ -109,7 +109,8 @@ class OrdersController extends Controller
          // randomly choose a number from 1 to n ( n = total number of records in Order table)
         // for demo purpose
         $bingoNumber = 2;
-        $randomNumber = random_int(1,2);
+        // $randomNumber = random_int(1,2);
+        $randomNumber = 2; // for testing, 
 
         $order->title = $request->title;
         $order->item = $request->item;
