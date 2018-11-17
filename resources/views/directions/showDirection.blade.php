@@ -17,14 +17,40 @@
 </style>
 
 @section('content')
-<h3>Order ID: {{$id}}</h3>
-<h3>Order owner's name: {{$orderOwner}}</h3>
-<h3>Ordered item: {{$orderItem}}</h3>
-<h3>Address: {{$orderAddress}}</h3>
-<h3 id="arriveTime">Estimated arriving time:</h3>
-<a href="{{route('notifyOwner', ['id' => $id])}}">
-  <button class="btn btn-primary">Complete order, notify the order owner</button>
-</a>
+
+<div class="row">
+  <div class="col-sm-6 mb-3 mb-md-0">
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">Routes and direction info</h5>
+        <p class="card-text" id="arriveTimeWithLocalTime">Estimated arrival time</p>
+        <p id="arriveTime" class="card-text"></p>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-sm-6">
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">Order details</h5>
+        <p class="card-text">Order owner's name: {{$orderOwner}}</p>
+        <p class="card-text">Price: {{$orderPrice}}</p>
+        <p class="card-text">Ordered item: {{$orderItem}}</p>
+        <p class="card-text">Description: {{$orderDescription}}</p>
+        <p class="card-text">Address: {{$orderAddress}}</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-sm-12" style="width: 100%;">
+    <a href="{{route('notifyOwner', ['id' => $id])}}">
+      <button style="width: 100%; margin-bottom: 20px;" class="btn btn-primary">Complete order, notify the order owner</button>
+    </a>
+  </div>
+</div>
+
 <div class="row">
   <div class="col-md-3">
     <div id="overlay">
@@ -128,7 +154,13 @@
         var arriveTimeNode = document.getElementById('arriveTime');
         var arriveTimeInSec = data.routes[0].legs[0].duration;
         var arriveTimeInMinutes = Math.floor(arriveTimeInSec / 60);
-        arriveTimeNode.insertAdjacentHTML('beforeend', '<span> '+ arriveTimeInMinutes +'minutes</span>');
+        arriveTimeNode.insertAdjacentHTML('beforeend', '<span> Duration: '+ arriveTimeInMinutes +' minutes</span>');
+        
+        // calculate arrival time, this is not for showing how long it takes.
+        var now = new Date();
+        now.setMinutes(now.getMinutes() + arriveTimeInMinutes);    
+        var arrivalTimeNode = document.getElementById('arriveTimeWithLocalTime');
+        arrivalTimeNode.insertAdjacentHTML('beforeend', '<span><time> '+ now.getHours() + ' : ' + now.getMinutes() +'</time></span>');
       });
       
     });
