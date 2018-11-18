@@ -47,8 +47,9 @@
         <h5>You are late~ No available order.</h5>
         @endif
           
-      <hr style="border-top: 3px solid rgba(0,0,0,.1);">  
-      <h3>Orders you have posted</h3>
+      <hr style="border-top: 3px solid rgba(0,0,0,.1);">
+      <h3>Order Posted By You</h3>
+      <h4>All Orders you have posted</h4>
       @if (count($ordersPostedByUser) > 0)
         <ul class="list-group list-group-flush">
             {{-- this is for displaying the orders that are created by the currently logged in user --}}
@@ -65,7 +66,7 @@
         </h4>
       @endif
       @if (count($completedOrdersPostByUser) > 0)
-        <h3>Orders you have posted and is completed</h3>
+        <h4>Orders you have posted and is completed</h4>
         <ul class="list-group list-group-flush">
           @foreach($completedOrdersPostByUser as $order)
               <li class="list-group-item list-group-item-action">
@@ -76,8 +77,10 @@
         </ul>
       @endif
 
+      <h3>Order Taken By You</h3>
+
       @if (count($incompletedOrdersTakenByUser) > 0)
-        <h3>Order taken by you and is in progress</h3>
+        <h4>Order taken by you and is in progress</h4>
         <ul class="list-group list-group-flush">
           @foreach($incompletedOrdersTakenByUser as $order)
             <li class="list-group-item list-group-item-action">
@@ -87,6 +90,18 @@
           @endforeach
         </ul>
       @endif
+
+      @if (count($completedOrdersTakenByUser) > 0)
+        <h4>Order Completed by you</h4>
+        <ul class="list-group list-group-flush">
+          @foreach($completedOrdersTakenByUser as $order)
+            <li class="list-group-item list-group-item-action">
+              <a href="{{route('orders.show', $order->id)}}">{{$order->title}}</a>
+            </li>
+          @endforeach
+        </ul>
+      @endif
+
       @else
         <p>You need to login to view all orders you have submitted.</p>
     </div>
