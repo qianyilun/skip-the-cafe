@@ -26,6 +26,10 @@
                         <td>{{$order->taker}}</td>
                         <td>{{$order->latitude}}</td>
                         <td>{{$order->longitude}}</td>
+                        <td>
+                            <a href="{{route('orders.show', $order->id)}}">View</a>
+                            <a href="{{route('orders.edit', $order->id)}}">Edit</a>
+                        </td>
                     </tr>
                 @endforeach
             </table>
@@ -46,6 +50,10 @@
                         <td>{{$user->email}}</td>
                         <td>{{$user->provider_id}}</td>
                         <td>{{$user->type}}</td>
+                        <td>
+                            <a href="">View</a>
+                            <a href="">Edit</a>
+                        </td>
                     </tr>
                 @endforeach
             </table>
