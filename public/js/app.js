@@ -81640,7 +81640,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
                 _this5.typingClock = setTimeout(function () {
                     _this5.typingFriend = {};
-                }, 9000);
+                }, 3000);
             }
         });
     }
