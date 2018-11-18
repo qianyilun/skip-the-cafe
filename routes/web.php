@@ -33,9 +33,8 @@ Route::get('notifyOwner/{id}', 'MailController@sendEmailToNotifyOwnerOrderComple
 Route::get('/admin', 'AdminController@admin')
     ->middleware('is_admin')
     ->name('admin');
-
 Route::get('/testadmin', 'AdminController@testAdmin')->name('testAdmin');
-
+Route::get('admin/user/{id}/orders', 'OrdersController@getUserOrders');
 /**
  * A test router for sending emails, also with an anonymous function
  */
