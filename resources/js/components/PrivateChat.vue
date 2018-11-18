@@ -222,7 +222,7 @@
 
                         this.typingClock=setTimeout(()=>{
                             this.typingFriend={};
-                        },9000);
+                        },3000);
                     }
 
 
