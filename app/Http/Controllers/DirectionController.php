@@ -75,6 +75,9 @@ class DirectionController extends Controller
         $order = Order::findOrFail($id);
         $ownerId = $order->user_id;
 
+        $mailController = new MailController();
+        $mailController->sendEmailToRemindUserChatMessage($order->id);
+
         return view('private')->with(['id'=> $ownerId]);
     }
 }

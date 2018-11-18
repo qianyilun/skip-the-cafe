@@ -107,7 +107,7 @@
 
 <script>
     export default {
-        props:['user', 'owner'],
+        props:['user'],
 
         data () {
             return {
@@ -118,7 +118,6 @@
                 allMessages:[],
                 typingClock:null,
                 users:[],
-                ownerId: this.owner,
             }
         },
 
@@ -169,8 +168,7 @@
                 });
             },
             fetchUsers() {
-                let temp = '/users/' + this.ownerId;
-                axios.get(temp).then(response => {
+                axios.get('/allUsers').then(response => {
                     this.users = response.data;
                     if(this.friends.length>0){
                         this.activeFriend=this.friends[0].id;

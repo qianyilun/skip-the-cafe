@@ -37,4 +37,13 @@ class HomeController extends Controller
         $result[] = User::find($id);
         return $result;
     }
+
+    public function allUsers()
+    {
+        return User::all();
+    }
+
+    public function privateChatBox() {
+        return view('privateChatBox');
+    }
 }
