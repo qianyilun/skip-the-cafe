@@ -48,9 +48,10 @@
         @endif
           
       <hr style="border-top: 3px solid rgba(0,0,0,.1);">
+
       <h3>Order Posted By You</h3>
-      <h4>All Orders you have posted</h4>
       @if (count($ordersPostedByUser) > 0)
+        <h5>All Orders you have posted</h5>
         <ul class="list-group list-group-flush">
             {{-- this is for displaying the orders that are created by the currently logged in user --}}
             @foreach($ordersPostedByUser as $order)
@@ -62,11 +63,10 @@
             @endforeach
         </ul>
       @else
-        <h4>You currently have not placed any orders. Try to Create one.
-        </h4>
+        <h5>You currently have not placed any orders. Try to Create one.</h5>
       @endif
       @if (count($completedOrdersPostByUser) > 0)
-        <h4>Orders you have posted and is completed</h4>
+        <h5>Orders you have posted and is completed</h5>
         <ul class="list-group list-group-flush">
           @foreach($completedOrdersPostByUser as $order)
               <li class="list-group-item list-group-item-action">
@@ -77,10 +77,12 @@
         </ul>
       @endif
 
+      <hr style="border-top: 3px solid rgba(0,0,0,.1);">
+
       <h3>Order Taken By You</h3>
 
       @if (count($incompletedOrdersTakenByUser) > 0)
-        <h4>Order taken by you and is in progress</h4>
+        <h5>Order taken by you and is in progress</h5>
         <ul class="list-group list-group-flush">
           @foreach($incompletedOrdersTakenByUser as $order)
             <li class="list-group-item list-group-item-action">
@@ -92,7 +94,7 @@
       @endif
 
       @if (count($completedOrdersTakenByUser) > 0)
-        <h4>Order Completed by you</h4>
+        <h5>Order Completed by you</h5>
         <ul class="list-group list-group-flush">
           @foreach($completedOrdersTakenByUser as $order)
             <li class="list-group-item list-group-item-action">
