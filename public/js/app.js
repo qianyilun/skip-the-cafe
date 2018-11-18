@@ -81528,7 +81528,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-    props: ['user'],
+    props: ['user', 'owner'],
 
     data: function data() {
         return {
@@ -81538,7 +81538,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             onlineFriends: [],
             allMessages: [],
             typingClock: null,
-            users: []
+            users: [],
+            ownerId: this.owner
         };
     },
 
@@ -81596,7 +81597,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         fetchUsers: function fetchUsers() {
             var _this4 = this;
 
-            axios.get('/users').then(function (response) {
+            var temp = '/users/' + this.ownerId;
+            axios.get(temp).then(function (response) {
                 _this4.users = response.data;
                 if (_this4.friends.length > 0) {
                     _this4.activeFriend = _this4.friends[0].id;
