@@ -67,7 +67,10 @@ class OrdersController extends Controller
       
       // $availableOrders = Order::where('owner', '!=' , $user->name)->whereNull('taker')->get();
       $ordersFromCurrentUsers = Order::where('owner', $user->name)->get();
-      return view('orders.index')->with(['user'=>$user, 'availableOrders'=> $availableOrders,'ordersFromCurrentUsers' => $ordersFromCurrentUsers, 'orders' => $orders, 'currentUserlongitude' => $currentUserlongitude, 'currentUserlatitude' => $currentUserlatitude]);
+
+      $completedOrdersFromCurrentUser = Order::where('owner', $user->name)->where('completed', true)->get();
+
+      return view('orders.index', compact('user','availableOrders', 'ordersFromCurrentUsers', 'orders', 'currentUserlongitude', 'currentUserlatitude', 'completedOrdersFromCurrentUser'));
     }
 
     /**

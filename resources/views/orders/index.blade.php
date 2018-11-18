@@ -52,10 +52,10 @@
       @if (count($ordersFromCurrentUsers) > 0)
         <ul class="list-group list-group-flush">
             {{-- this is for displaying the orders that are created by the currently logged in user --}}
-            @foreach($ordersFromCurrentUsers as $ordersFromCurrentUser)
-              @if ($ordersFromCurrentUser->owner === $user->name)
+            @foreach($ordersFromCurrentUsers as $order)
+              @if ($order->owner === $user->name)
                 <li class="list-group-item list-group-item-action">
-                  <a href="{{route('orders.show', $ordersFromCurrentUser->id)}}">{{$ordersFromCurrentUser->title}}</a>
+                  <a href="{{route('orders.show', $order->id)}}">{{$order->title}}</a>
                 </li>
               @endif
             @endforeach
@@ -64,6 +64,18 @@
         <h4>You currently have not placed any orders. Try to Create one.
         </h4>
       @endif
+      @if (count($completedOrdersFromCurrentUser) > 0)
+        <h3>Orders you have posted and is completed</h3>
+        <ul class="list-group list-group-flush">
+          {{-- this is for displaying the orders that are created by the currently logged in user --}}
+          @foreach($completedOrdersFromCurrentUser as $order)
+              <li class="list-group-item list-group-item-action">
+                <a href="{{route('orders.show', $order->id)}}">{{$order->title}}</a>
+              </li>
+          @endforeach
+        </ul>
+      @endif
+
       @else
         <p>You need to login to view all orders you have submitted.</p>
     </div>
@@ -83,6 +95,8 @@
         <th>taker</th>
         <th>latitude</th>
         <th>longtitude</th>
+        <th>Confirmed</th>
+        <th>Completed</th>
       </tr>
       @foreach ($orders as $order)
       <tr>
@@ -93,6 +107,8 @@
         <td style="margin-right: 5px;">{{$order->taker}}</td>
         <td style="margin-right: 5px;">{{$order->latitude}}</td>
         <td style="margin-right: 5px;">{{$order->longitude}}</td>
+        <td style="margin-right: 5px;">{{$order->confirmed}}</td>
+        <td style="margin-right: 5px;">{{$order->completed}}</td>
       </tr>
       @endforeach
     </table>
