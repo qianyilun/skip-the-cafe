@@ -13,7 +13,10 @@ class AdminController extends Controller
     }
 
     public function admin() {
-        return view('admin');
+        $orders = $this->getAllOrders();
+        $users = $this->getAllUsers();
+
+        return view('admin')->with(['orders' => $orders, 'users' => $users]);
     }
 
     public function testAdmin() {
