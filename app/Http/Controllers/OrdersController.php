@@ -70,7 +70,9 @@ class OrdersController extends Controller
 
       $incompletedOrdersTakenByUser = Order::where('taker', $user->id)->where('completed', false)->get();
 
-      return view('orders.index', compact('user','availableOrders', 'ordersPostedByUser', 'completedOrdersPostByUser', 'incompletedOrdersTakenByUser', 'orders', 'currentUserlongitude', 'currentUserlatitude'));
+      $completedOrdersTakenByUser = Order::where('taker', $user->id)->where('completed', true)->get();
+
+      return view('orders.index', compact('user','availableOrders', 'ordersPostedByUser', 'completedOrdersPostByUser', 'incompletedOrdersTakenByUser', 'completedOrdersTakenByUser', 'orders', 'currentUserlongitude', 'currentUserlatitude'));
     }
 
     /**
