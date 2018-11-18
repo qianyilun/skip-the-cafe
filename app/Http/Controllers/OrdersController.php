@@ -158,7 +158,22 @@ class OrdersController extends Controller
     public function update(Request $request, $id)
     {
         $order = Order::findOrFail($id);
-        $order->update($request->all());
+        // store the current logged in user as owner of the order
+        if(auth()->user() !== null) {
+            $user = auth()->user();
+            $order->owner = $user->name;
+        } else {
+            return redirect('/orders')->with('error', 'You need to login in order to create order');
+        }
+        $order->title = $request->title;
+        $order->item = $request->item;
+        $order->description = $request->description;
+        $order->address = $request->address;
+        $order->price = $request->price;
+        $order->longitude = $request->longitude;
+        $order->latitude = $request->latitude;
+        $order->user_id = auth()->user()->id; // this is how you access logged in user's id
+        $order->save();
 
         return redirect('/orders');
     }
@@ -204,6 +219,4 @@ class OrdersController extends Controller
       }
       return \Response::json(['msg' => 'successfully taken', 'takenId' => $id], 200);
     }
-
-
 }

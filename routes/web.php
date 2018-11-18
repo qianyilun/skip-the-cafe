@@ -29,6 +29,12 @@ Route::get('showDirection/{id}', 'DirectionController@showDirection')->name('sho
 Route::get('/sendTestEmails', 'MailController@sendEmailWhenCreateNewOrder');
 Route::get('notifyOwner/{id}', 'MailController@sendEmailToNotifyOwnerOrderCompleted')->name('notifyOwner');
 
+// Admin
+Route::get('/admin', 'AdminController@admin')
+    ->middleware('is_admin')
+    ->name('admin');
+
+Route::get('/testadmin', 'AdminController@testAdmin')->name('testAdmin');
 
 /**
  * A test router for sending emails, also with an anonymous function
