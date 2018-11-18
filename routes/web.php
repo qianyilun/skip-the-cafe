@@ -35,7 +35,7 @@ Route::get('/users', 'HomeController@users')->name('users');
 
 Route::get('messages', 'MessageController@fetchMessages');
 Route::post('messages', 'MessageController@sendMessage');
-Route::get('/private-messages/{user}', 'MessageController@privateMessages')->name('privateMessages');
+Route::get('/private-messages/{user}', 'MessageController@privateMessagesm')->name('privateMessages');
 Route::post('/private-messages/{user}', 'MessageController@sendPrivateMessage')->name('privateMessages.store');
 /**
  * A test router for sending emails, also with an anonymous function
