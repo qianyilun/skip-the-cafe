@@ -30,8 +30,8 @@ Route::get('/sendTestEmails', 'MailController@sendEmailWhenCreateNewOrder');
 Route::get('notifyOwner/{id}', 'MailController@sendEmailToNotifyOwnerOrderCompleted')->name('notifyOwner');
 
 Route::get('/chat', 'ChatController@index')->name('chat');
-Route::get('/private', 'HomeController@private')->name('private');
-Route::get('/users', 'HomeController@users')->name('users');
+Route::get('/private/{id}', 'DirectionController@private')->name('private');
+Route::get('/users/{id}', 'HomeController@users')->name('users');
 
 Route::get('messages', 'MessageController@fetchMessages');
 Route::post('messages', 'MessageController@sendMessage');

@@ -29,13 +29,12 @@ class HomeController extends Controller
         return view('home')->with(['user' => $user]);
     }
 
-    public function private()
-    {
-        return view('private');
-    }
 
-    public function users()
+
+    public function users($id)
     {
-        return User::all();
+        $result = array();
+        $result[] = User::find($id);
+        return $result;
     }
 }

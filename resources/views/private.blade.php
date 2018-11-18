@@ -2,7 +2,7 @@
 
 @section('content')
 
-    <private-chat :user="{{auth()->user()}}"></private-chat>
+    <private-chat :user="{{auth()->user()}}" :owner="{{$id}}"></private-chat>
 
 @endsection
 
