@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Log; // this is for writting logging messages to 
 use Illuminate\Support\Facades\DB;
 use GuzzleHttp; // this package is used to make HTTP request to external api
 use App\Order;
+use App\User;
 use Response;
 use function GuzzleHttp\json_decode;
 // define constants
@@ -217,5 +218,17 @@ class OrdersController extends Controller
         return \Response::json(['msg' => "failed to take order, unknown error: $e"], 500);
       }
       return \Response::json(['msg' => 'successfully taken', 'takenId' => $id], 200);
+    }
+
+    public function getUserOrders($id) {
+        $viewer = auth()->user();
+        $user = User::findOrFail($id);
+
+        if ($viewer->type != 'admin') {
+            return redirect('/');
+        }
+
+        $orders = $user->orders;
+        return view('userorders', compact('orders', 'user'));
     }
 }
