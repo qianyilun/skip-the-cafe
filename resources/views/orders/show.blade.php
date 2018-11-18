@@ -3,7 +3,7 @@
 @section('content')
     <div class="container">
         <div class="col-md-8">
-        <h2>TODO: Here we should be able to display an single order</h2>
+        <h2>Order Details</h2>
         <br>
             <dl class="row">
                 <dt class="col-sm-3">Title</dt>
@@ -20,6 +20,9 @@
 
                 <dt class="col-sm-3">Price</dt>
                 <dd class="col-sm-9">{{$order->price}}</dd>
+
+                <dt class="col-sm-3">taker</dt>
+                <dd class="col-sm-9">{{$order->taker}}</dd>
             </dl>
         <a class="btn btn-primary btn-block" href="{{route('orders.edit', $order->id)}}">Edit</a>
         </div>

@@ -10,23 +10,23 @@
             <input type="hidden" name="_method" value="PUT">
 
             <div class="form-group">
-                <input class="form-control" type="text" name="title" placeholder="Title">
+                <input class="form-control" type="text" name="title" placeholder="Title" value="{{$order->title}}">
             </div>
 
             <div class="form-group">
-                <input class="form-control" type="text" name="item" placeholder="Item (e.g. a coffee)">
+                <input class="form-control" type="text" name="item" placeholder="Item (e.g. a coffee)" value="{{$order->item}}">
             </div>
 
             <div class="form-group">
-                <textarea class="form-control" name="description" id="" rows="5"  placeholder="Order Description"></textarea>
+                <textarea class="form-control" name="description" id="" rows="5"  placeholder="Order Description">{{$order->description}}</textarea>
             </div>
 
             <div class="form-group">
-                <input class="form-control" type="textarea" name="address" placeholder="Address (Please be specific, e.g. SFU Burnaby campus library first floor)">
+                <input class="form-control" type="textarea" name="address" placeholder="Address (Please be specific, e.g. SFU Burnaby campus library first floor)" value="{{$order->address}}">
             </div>
 
             <div class="form-group">
-                <input class="form-control" type="number" name="price" placeholder="Price" step="0.01">
+                <input class="form-control" type="number" name="price" placeholder="Price" step="0.01" value="{{$order->price}}">
             </div>
 
             <input type="hidden" id="hiddenLongitude" value="" name="longitude" />
@@ -51,10 +51,7 @@
         crossorigin="anonymous">
 </script>
 <script>
-    // the following is for the ggoogle map section of our app
-    // stage 1: get user's current location, then when user create a new order, the address can be filled in automatically
     $(document).ready(function(){
-        // first, get the current client's ip
         var userIp = null;
         var access_key = 'a7d887b9bdaae171366d6b2b284ffa4c';
         $.get("http://ipinfo.io", function(response) {
@@ -72,9 +69,4 @@
             });
         }, "jsonp");
     });
-
-    // get the API result via jQuery.ajax
-
-
-    // stage 2: after getting the user's geo location, signal the backend to re-order the available orders list.
 </script>
