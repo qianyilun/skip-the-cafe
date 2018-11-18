@@ -14,6 +14,8 @@
                     <th>taker</th>
                     <th>latitude</th>
                     <th>longitude</th>
+                    <th>Completed</th>
+                    <th>Confirmed</th>
                     <th>Operations</th>
                 </tr>
                 @foreach ($orders as $order)
@@ -25,6 +27,8 @@
                         <td>{{$order->taker}}</td>
                         <td>{{$order->latitude}}</td>
                         <td>{{$order->longitude}}</td>
+                        <td>{{$order->completed}}</td>
+                        <td>{{$order->confirmed}}</td>
                         <td>
                             <a href="{{route('orders.show', $order->id)}}">View</a>
                             <a href="{{route('orders.edit', $order->id)}}">Edit</a>
