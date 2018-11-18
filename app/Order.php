@@ -11,6 +11,8 @@ class Order extends Model
         'description',
         'owner',
         'taker',
+        'confirmed',
+        'completed'
     ];
     public function user() {
       return $this->belongsTo('App\User'); // tells ORM that every post belongs to a user
