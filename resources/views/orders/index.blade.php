@@ -67,7 +67,6 @@
       @if (count($completedOrdersPostByUser) > 0)
         <h3>Orders you have posted and is completed</h3>
         <ul class="list-group list-group-flush">
-          {{-- this is for displaying the orders that are created by the currently logged in user --}}
           @foreach($completedOrdersPostByUser as $order)
               <li class="list-group-item list-group-item-action">
                 <a href="{{route('orders.show', $order->id)}}">{{$order->title}}</a>
@@ -77,6 +76,17 @@
         </ul>
       @endif
 
+      @if (count($incompletedOrdersTakenByUser) > 0)
+        <h3>Order taken by you and is in progress</h3>
+        <ul class="list-group list-group-flush">
+          @foreach($incompletedOrdersTakenByUser as $order)
+            <li class="list-group-item list-group-item-action">
+              <a href="{{route('orders.show', $order->id)}}">{{$order->title}}</a>
+              <a href="" class="btn btn-primary">Complete</a>
+            </li>
+          @endforeach
+        </ul>
+      @endif
       @else
         <p>You need to login to view all orders you have submitted.</p>
     </div>
