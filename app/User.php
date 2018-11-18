@@ -30,4 +30,9 @@ class User extends Authenticatable
     public function orders(){
       return $this->hasMany('App\Order'); // tells ORM each user has many post
     }
+
+    public function messages()
+    {
+        return $this->hasMany(Message::class);
+    }
 }

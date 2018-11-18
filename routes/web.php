@@ -29,7 +29,14 @@ Route::get('showDirection/{id}', 'DirectionController@showDirection')->name('sho
 Route::get('/sendTestEmails', 'MailController@sendEmailWhenCreateNewOrder');
 Route::get('notifyOwner/{id}', 'MailController@sendEmailToNotifyOwnerOrderCompleted')->name('notifyOwner');
 
+Route::get('/chat', 'ChatController@index')->name('chat');
+Route::get('/private', 'HomeController@private')->name('private');
+Route::get('/users', 'HomeController@users')->name('users');
 
+Route::get('messages', 'MessageController@fetchMessages');
+Route::post('messages', 'MessageController@sendMessage');
+Route::get('/private-messages/{user}', 'MessageController@privateMessages')->name('privateMessages');
+Route::post('/private-messages/{user}', 'MessageController@sendPrivateMessage')->name('privateMessages.store');
 /**
  * A test router for sending emails, also with an anonymous function
  */
