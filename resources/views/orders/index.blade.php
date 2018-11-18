@@ -49,10 +49,10 @@
           
       <hr style="border-top: 3px solid rgba(0,0,0,.1);">  
       <h3>Orders you have posted</h3>
-      @if (count($ordersFromCurrentUsers) > 0)
+      @if (count($ordersPostedByUser) > 0)
         <ul class="list-group list-group-flush">
             {{-- this is for displaying the orders that are created by the currently logged in user --}}
-            @foreach($ordersFromCurrentUsers as $order)
+            @foreach($ordersPostedByUser as $order)
               @if ($order->owner === $user->name)
                 <li class="list-group-item list-group-item-action">
                   <a href="{{route('orders.show', $order->id)}}">{{$order->title}}</a>
@@ -64,13 +64,14 @@
         <h4>You currently have not placed any orders. Try to Create one.
         </h4>
       @endif
-      @if (count($completedOrdersFromCurrentUser) > 0)
+      @if (count($completedOrdersPostByUser) > 0)
         <h3>Orders you have posted and is completed</h3>
         <ul class="list-group list-group-flush">
           {{-- this is for displaying the orders that are created by the currently logged in user --}}
-          @foreach($completedOrdersFromCurrentUser as $order)
+          @foreach($completedOrdersPostByUser as $order)
               <li class="list-group-item list-group-item-action">
                 <a href="{{route('orders.show', $order->id)}}">{{$order->title}}</a>
+                <a href="" class="btn btn-primary">Leave a review</a>
               </li>
           @endforeach
         </ul>

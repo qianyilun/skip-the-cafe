@@ -64,13 +64,11 @@ class OrdersController extends Controller
         ->having('distance', '<', 10000)
         ->orderBy('distance')
         ->get();
-      
-      // $availableOrders = Order::where('owner', '!=' , $user->name)->whereNull('taker')->get();
-      $ordersFromCurrentUsers = Order::where('owner', $user->name)->get();
 
-      $completedOrdersFromCurrentUser = Order::where('owner', $user->name)->where('completed', true)->get();
+      $ordersPostedByUser = Order::where('owner', $user->name)->get();
+      $completedOrdersPostByUser = Order::where('owner', $user->name)->where('completed', true)->get();
 
-      return view('orders.index', compact('user','availableOrders', 'ordersFromCurrentUsers', 'orders', 'currentUserlongitude', 'currentUserlatitude', 'completedOrdersFromCurrentUser'));
+      return view('orders.index', compact('user','availableOrders', 'ordersPostedByUser', 'completedOrdersPostByUser', 'orders', 'currentUserlongitude', 'currentUserlatitude'));
     }
 
     /**
