@@ -14,18 +14,50 @@
     <div class="col-md-7">
         <div class="tab-content" id="v-pills-tabContent">
             <div class="tab-pane fade show active" id="v-pills-basic-info" role="tabpanel" aria-labelledby="v-pills-baic-info-tab">
-                <h3>User Name</h3>
-                <p>{{$user->name}}</p>
-                <h3>User Email</h3>
-                <p>{{$user->email}}</p>
-                <h3>Total Order</h3>
-                <h3>Total Delivery</h3>
+                <div class="card">
+                    <div class="card-header">
+                        Your Profile
+                        @if (count($completedOrdersPostByUser) <=2 )
+                            <span class="badge badge-pill badge-info">New user</span>
+                        @endif
+                        @if (count($completedOrdersPostByUser) >= 4)
+                            <span class="badge badge-pill badge-primary">Order King</span>
+                        @endif
+                        @if (count($completedOrdersTakenByUser) >=4 )
+                            <span class="badge badge-pill badge-success">Delvery King</span>
+                        @endif
+                    </div>
+                    <div class="card-body">
+                        <table class="table borderless">
+                            <tbody>
+                                <tr>
+                                    <td scope="row"><h5 class="card-title"><b>User Name:</b></h5></td>
+                                    <td><p class="card-text">{{$user->name}}</p></td>
+                                </tr>
+                                <tr>
+                                    <td scope="row"><h5 class="card-title"><b class="mr-4">User Email:</b> </h5></td>
+                                    <td><span class="card-text">{{$user->email}}</span></td>
+                                </tr>
+                                <tr>
+                                    <td scope="row"><h5 class="card-title"><b class="mr-4">Total Order:</b> </h5></td>
+                                    <td><span class="card-text">{{count($completedOrdersPostByUser)}}</span></td>
+                                </tr>
+                                <tr>
+                                    <td scope="row"><h5 class="card-title"><b class="mr-3">Total Delivery:</b> </h5></td>
+                                    <td><span class="card-text">{{count($completedOrdersTakenByUser)}}</span></td>
+                                    </tr>
+                            </tbody>
+                        </table>                         
+                    </div>
+                </div>
             </div>
             <div class="tab-pane fade" id="v-pills-order-history" role="tabpanel" aria-labelledby="v-pills-profile-tab">
                 <h2>Order History</h2>
+                {{$completedOrdersPostByUser}}
             </div>
             <div class="tab-pane fade" id="v-pills-delivery-history" role="tabpanel" aria-labelledby="v-pills-messages-tab">
                 <h2>Delivery History</h2>
+                {{$completedOrdersTakenByUser}}
             </div>
             <div class="tab-pane fade" id="v-pills-settings" role="tabpanel" aria-labelledby="v-pills-settings-tab">
                 <h2>Setting</h2>
