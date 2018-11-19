@@ -80664,7 +80664,7 @@ var render = function() {
     [
       _c(
         "v-flex",
-        { attrs: { xs12: "", sm8: "", "offset-sm3": "" } },
+        { attrs: { xs12: "", sm6: "", "offset-sm3": "" } },
         [
           _c(
             "v-card",
@@ -80723,7 +80723,7 @@ var render = function() {
                                             attrs: {
                                               color:
                                                 _vm.user.id !== message.user.id
-                                                  ? "grey"
+                                                  ? "green"
                                                   : "blue",
                                               "text-color": "white"
                                             }

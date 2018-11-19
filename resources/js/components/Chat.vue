@@ -26,7 +26,7 @@
 
                                     <v-flex>
                                         <v-chip
-                                                :color="(user.id!==message.user.id)?'grey':'blue'"
+                                                :color="(user.id!==message.user.id)?'green':'blue'"
                                                 text-color="white"
                                         >
 
