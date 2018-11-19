@@ -19,7 +19,7 @@
               <input class="form-control" type="textarea" name="address" placeholder="Address (Please be specific, e.g. SFU Burnaby campus library first floor)">
           </div>
           <div class="form-group">
-              <input class="form-control" type="number" name="price" placeholder="Price" step="0.01">
+              <input class="form-control" type="number" name="price" placeholder="Price (CAD)" step="0.01">
           </div>
           <input type="hidden" id="hiddenLongitude" value="" name="longitude" />
           <input type="hidden" id="hiddenLatitude" value="" name="latitude" />

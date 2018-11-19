@@ -30,9 +30,36 @@
             </div>
 
             <div class="form-group">
-                <label for="price">Price</label>
+                <label for="price">Longitude</label>
+                <input class="form-control" type="number" name="longitude" placeholder="longitude" value="{{$order->longitude}}">
+            </div>
+
+            <div class="form-group">
+                <label for="price">Latitude</label>
+                <input class="form-control" type="number" name="latitude" placeholder="Price" value="{{$order->latitude}}">
+            </div>
+
+            <div class="form-group">
+                <label for="price">Price (CAD)</label>
                 <input class="form-control" type="number" name="price" placeholder="Price" step="0.01" value="{{$order->price}}">
             </div>
+
+            @if ($isAdmin)
+                <div class="form-group">
+                    <label for="taker">Taker (id)</label>
+                    <input class="form-control" type="number" name="taker" placeholder="taker" value="{{$order->taker}}">
+                </div>
+
+                <div class="form-group">
+                    <label for="taker">Confirmed</label>
+                    <input class="form-control" type="number" name="confirmed" placeholder="confirmed" value="{{$order->confirmed}}">
+                </div>
+
+                <div class="form-group">
+                    <label for="taker">Completed</label>
+                    <input class="form-control" type="number" name="completed" placeholder="completed" value="{{$order->completed}}">
+                </div>
+            @endif
 
             <input type="hidden" id="hiddenLongitude" value="" name="longitude" />
             <input type="hidden" id="hiddenLatitude" value="" name="latitude" />
