@@ -23,7 +23,7 @@
                         @if (count($completedOrdersPostByUser) >= 4)
                             <span class="badge badge-pill badge-primary">Order King</span>
                         @endif
-                        @if (count($completedOrdersTakenByUser) >=4 )
+                        @if (count($OrdersTakenByUser) >=4 )
                             <span class="badge badge-pill badge-success">Delvery King</span>
                         @endif
                     </div>
@@ -39,11 +39,11 @@
                                     <td><span class="card-text">{{$user->email}}</span></td>
                                 </tr>
                                 <tr>
-                                    <td scope="row"><h5 class="card-title"><b class="mr-4">Total Order:</b> </h5></td>
+                                    <td scope="row"><h5 class="card-title"><b class="mr-4">Total Complete Order:</b> </h5></td>
                                     <td><span class="card-text">{{count($completedOrdersPostByUser)}}</span></td>
                                 </tr>
                                 <tr>
-                                    <td scope="row"><h5 class="card-title"><b class="mr-3">Total Delivery:</b> </h5></td>
+                                    <td scope="row"><h5 class="card-title"><b class="mr-3">Total Complete Delivery:</b> </h5></td>
                                     <td><span class="card-text">{{count($completedOrdersTakenByUser)}}</span></td>
                                     </tr>
                             </tbody>
@@ -53,7 +53,11 @@
             </div>
             <div class="tab-pane fade" id="v-pills-order-history" role="tabpanel" aria-labelledby="v-pills-profile-tab">
                 <h2>Order History</h2>
-                {{-- {{$completedOrdersPostByUser}} --}}
+
+                @if (count($completedOrdersPostByUser) == 0)
+                    <p>You haven't delivery any order yet.</p>
+                @endif
+
                 <div class="list-group">
                     @foreach ($ordersPostedByUser as $order)
                         <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
@@ -71,7 +75,25 @@
             </div>
             <div class="tab-pane fade" id="v-pills-delivery-history" role="tabpanel" aria-labelledby="v-pills-messages-tab">
                 <h2>Delivery History</h2>
-                {{$completedOrdersTakenByUser}}
+
+                @if (count($OrdersTakenByUser) == 0)
+                    <p>You haven't delivery any order yet.</p>
+                @endif
+
+                <div class="list-group">
+                    @foreach ($OrdersTakenByUser as $order)
+                        <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+                            <div class="d-flex w-100 justify-content-between">
+                                <h4 class="mb-1">{{$order->title}}</h4>
+                                <small>{{$order->created_at}}</small>
+                            </div>
+                            <div class="d-flex w-150 justify-content-between">
+                                <p class="mb-1">Description: {{$order->description}}</p>
+                                <small>${{$order->price}}</small>
+                            </div>
+                        </a>
+                    @endforeach
+                </div>
             </div>
             <div class="tab-pane fade" id="v-pills-settings" role="tabpanel" aria-labelledby="v-pills-settings-tab">
                 <h2>Setting</h2>
