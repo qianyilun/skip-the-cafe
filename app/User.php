@@ -19,6 +19,9 @@ class User extends Authenticatable
         'name', 'email', 'password',
     ];
 
+    const ADMIN_TYPE = 'admin';
+    const DEFAULT_TYPE = 'default';
+
     /**
      * The attributes that should be hidden for arrays.
      *
@@ -27,12 +30,18 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
     public function orders(){
       return $this->hasMany('App\Order'); // tells ORM each user has many post
     }
 
+
     public function messages()
     {
         return $this->hasMany(Message::class);
+    }
+
+    public function isAdmin() {
+        return $this->type === self::ADMIN_TYPE;
     }
 }

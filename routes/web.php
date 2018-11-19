@@ -29,6 +29,7 @@ Route::get('showDirection/{id}', 'DirectionController@showDirection')->name('sho
 Route::get('/sendTestEmails', 'MailController@sendEmailWhenCreateNewOrder');
 Route::get('notifyOwner/{id}', 'MailController@sendEmailToNotifyOwnerOrderCompleted')->name('notifyOwner');
 
+
 Route::get('/chat', 'ChatController@index')->name('chat');
 Route::get('/private/{id}', 'DirectionController@private')->name('private');
 Route::get('/users/{id}', 'HomeController@users')->name('users');
@@ -39,6 +40,14 @@ Route::get('messages', 'MessageController@fetchMessages');
 Route::post('messages', 'MessageController@sendMessage');
 Route::get('/private-messages/{user}', 'MessageController@privateMessages')->name('privateMessages');
 Route::post('/private-messages/{user}', 'MessageController@sendPrivateMessage')->name('privateMessages.store');
+
+// Admin
+Route::get('/admin', 'AdminController@admin')
+    ->middleware('is_admin')
+    ->name('admin');
+Route::get('/testadmin', 'AdminController@testAdmin')->name('testAdmin');
+Route::get('admin/user/{id}/orders', 'OrdersController@getUserOrders');
+
 /**
  * A test router for sending emails, also with an anonymous function
  */
