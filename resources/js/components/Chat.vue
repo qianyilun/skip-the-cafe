@@ -15,10 +15,10 @@
                     >
 
                         <v-layout
-                                :align-end="(user.id!==message.user.id)"
+                                :text-xs-right="(user.id!==message.user.id)"
                                 column
                         >
-                            <v-flex>
+                            <v-flex :class="(user.id!==message.user.id)?'text-xs-left':'text-xs-right'">
                                 <v-layout column>
                                     <v-flex>
                                         <span class="small font-italic">{{message.user.name}}</span>
@@ -26,7 +26,7 @@
 
                                     <v-flex>
                                         <v-chip
-                                                :color="(user.id!==message.user.id)?'red':'green'"
+                                                :color="(user.id!==message.user.id)?'grey':'blue'"
                                                 text-color="white"
                                         >
 
@@ -69,7 +69,7 @@
                 <v-flex xs2>
                     <v-btn
                             @click="sendMessage"
-                            dark class="mt-3 ml-2 white--text" small color="green">send</v-btn>
+                            dark class="mt-3 ml-2 white--text" small color="blue">send</v-btn>
                 </v-flex>
             </v-layout>
 
