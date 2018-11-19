@@ -29,7 +29,12 @@ class HomeController extends Controller
         return view('home')->with(['user' => $user]);
     }
 
-
+    /**
+     * Find a specific users information based on userId
+     *
+     * @param $id
+     * @return array
+     */
 
     public function users($id)
     {
@@ -38,6 +43,11 @@ class HomeController extends Controller
         return $result;
     }
 
+    /**
+     * Fetch all users
+     *
+     * @return User[]|\Illuminate\Database\Eloquent\Collection
+     */
     public function allUsers()
     {
         return User::all();

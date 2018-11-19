@@ -10,16 +10,30 @@ use App\Events\PrivateMessageSent;
 
 class MessageController extends Controller
 {
+    /**
+     * MessageController constructor.
+     */
     public function __construct()
     {
         $this->middleware('auth');
     }
 
+    /**
+     * Fetch all messages from database
+     *
+     * @return Message[]|\Illuminate\Database\Eloquent\Builder[]|\Illuminate\Database\Eloquent\Collection
+     */
     public function fetchMessages()
     {
         return Message::with('user')->get();
     }
 
+    /**
+     * Find 1-1 messages based on sender and receiver
+     *
+     * @param User $user
+     * @return Message[]|\Illuminate\Database\Eloquent\Builder[]|\Illuminate\Database\Eloquent\Collection
+     */
     public function privateMessages(User $user)
     {
         $privateCommunication= Message::with('user')
@@ -32,6 +46,12 @@ class MessageController extends Controller
         return $privateCommunication;
     }
 
+    /**
+     * Send group messages and record to database
+     *
+     * @param Request $request
+     * @return \Illuminate\Contracts\Routing\ResponseFactory|\Illuminate\Http\Response
+     */
     public function sendMessage(Request $request)
     {
         $message=auth()->user()->messages()->create(['message'=>$request->message]);
@@ -42,6 +62,13 @@ class MessageController extends Controller
 
     }
 
+    /**
+     * Send 1-1 private message based on sender and receiver
+     *
+     * @param Request $request
+     * @param User $user
+     * @return \Illuminate\Contracts\Routing\ResponseFactory|\Illuminate\Http\Response
+     */
     public function sendPrivateMessage(Request $request,User $user)
     {
         $input=$request->all();

@@ -137,7 +137,6 @@
 </script>
 
 <style src='vuetify/dist/vuetify.min.css'>
-    /* global styles */
 </style>
 
 <style scoped>

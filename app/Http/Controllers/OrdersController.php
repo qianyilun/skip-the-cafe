@@ -193,8 +193,6 @@ class OrdersController extends Controller
     public function destroy($id)
     {
         $order = Order::findOrFail($id);
-        // a shorter version
-        // Order::whereId($id).delete();
         $order->delete();
         return redirect('/orders');
     }
@@ -226,6 +224,12 @@ class OrdersController extends Controller
       return \Response::json(['msg' => 'successfully taken', 'takenId' => $id], 200);
     }
 
+    /**
+     * Get users orders based on user id
+     *
+     * @param $id
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector|\Illuminate\View\View
+     */
     public function getUserOrders($id) {
         $viewer = auth()->user();
         $user = User::findOrFail($id);
