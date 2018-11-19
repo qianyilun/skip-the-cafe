@@ -80664,7 +80664,7 @@ var render = function() {
     [
       _c(
         "v-flex",
-        { attrs: { xs12: "", sm6: "", "offset-sm3": "" } },
+        { attrs: { xs12: "", sm8: "", "offset-sm3": "" } },
         [
           _c(
             "v-card",
@@ -80688,13 +80688,19 @@ var render = function() {
                           "v-layout",
                           {
                             attrs: {
-                              "align-end": _vm.user.id !== message.user.id,
+                              "text-xs-right": _vm.user.id !== message.user.id,
                               column: ""
                             }
                           },
                           [
                             _c(
                               "v-flex",
+                              {
+                                class:
+                                  _vm.user.id !== message.user.id
+                                    ? "text-xs-left"
+                                    : "text-xs-right"
+                              },
                               [
                                 _c(
                                   "v-layout",
@@ -80717,8 +80723,8 @@ var render = function() {
                                             attrs: {
                                               color:
                                                 _vm.user.id !== message.user.id
-                                                  ? "red"
-                                                  : "green",
+                                                  ? "grey"
+                                                  : "blue",
                                               "text-color": "white"
                                             }
                                           },
@@ -80833,7 +80839,7 @@ var render = function() {
                     "v-btn",
                     {
                       staticClass: "mt-3 ml-2 white--text",
-                      attrs: { dark: "", small: "", color: "green" },
+                      attrs: { dark: "", small: "", color: "blue" },
                       on: { click: _vm.sendMessage }
                     },
                     [_vm._v("send")]
@@ -81251,9 +81257,7 @@ var render = function() {
                 "v-list-tile",
                 {
                   key: friend.id,
-                  attrs: {
-                    color: friend.id == _vm.activeFriend ? "green" : ""
-                  },
+                  attrs: { color: friend.id == _vm.activeFriend ? "blue" : "" },
                   on: {
                     click: function($event) {
                       _vm.activeFriend = friend.id
@@ -81271,8 +81275,8 @@ var render = function() {
                             color: _vm.onlineFriends.find(function(user) {
                               return user.id === friend.id
                             })
-                              ? "green"
-                              : "red"
+                              ? "blue"
+                              : "grey"
                           }
                         },
                         [_vm._v("account_circle")]
@@ -81314,13 +81318,19 @@ var render = function() {
                       "v-layout",
                       {
                         attrs: {
-                          "align-end": _vm.user.id !== message.user.id,
+                          "text-xs-right": _vm.user.id !== message.user.id,
                           column: ""
                         }
                       },
                       [
                         _c(
                           "v-flex",
+                          {
+                            class:
+                              _vm.user.id !== message.user.id
+                                ? "text-xs-left"
+                                : "text-xs-right"
+                          },
                           [
                             _c(
                               "v-layout",
@@ -81343,8 +81353,8 @@ var render = function() {
                                         attrs: {
                                           color:
                                             _vm.user.id !== message.user.id
-                                              ? "red"
-                                              : "green",
+                                              ? "grey"
+                                              : "blue",
                                           "text-color": "white"
                                         }
                                       },
@@ -81460,7 +81470,7 @@ var render = function() {
                         "v-btn",
                         {
                           staticClass: "mt-3 ml-2 white--text",
-                          attrs: { dark: "", small: "", color: "green" },
+                          attrs: { dark: "", small: "", color: "blue" },
                           on: { click: _vm.sendMessage }
                         },
                         [_vm._v("send")]
@@ -81899,7 +81909,7 @@ var render = function() {
                             color: _vm.onlineFriends.find(function(user) {
                               return user.id === friend.id
                             })
-                              ? "green"
+                              ? "blue"
                               : "grey"
                           }
                         },

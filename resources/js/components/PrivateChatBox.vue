@@ -9,7 +9,7 @@
                         @click="activeFriend=friend.id"
                 >
                     <v-list-tile-action>
-                        <v-icon :color="(onlineFriends.find(user=>user.id===friend.id))?'green':'grey'">account_circle</v-icon>
+                        <v-icon :color="(onlineFriends.find(user=>user.id===friend.id))?'blue':'grey'">account_circle</v-icon>
                     </v-list-tile-action>
 
                     <v-list-tile-content>
