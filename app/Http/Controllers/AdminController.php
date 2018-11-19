@@ -23,6 +23,7 @@ class AdminController extends Controller
         $orders = $this->getAllOrders();
         $users = $this->getAllUsers();
 
+        // `run "User::where('email', 'youremail.com')->update(['type'=>'admin']);" in tinker to make a user administrator`
         return view('admin')->with(['orders' => $orders, 'users' => $users]);
     }
 
