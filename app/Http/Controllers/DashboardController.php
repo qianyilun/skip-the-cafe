@@ -9,7 +9,7 @@ class DashboardController extends Controller
     public function index()
     {
       if(auth()->user() === null) {
-        return redirect('/')->with('error', 'You need to login in order to view/create order.'); 
+        return redirect('/')->with('error', 'Please login first'); 
       }
 
       $user = null;

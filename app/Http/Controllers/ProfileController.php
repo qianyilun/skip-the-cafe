@@ -12,7 +12,7 @@ class ProfileController extends Controller
     public function index()
     {
       if(auth()->user() === null) {
-        return redirect('/')->with('error', 'You need to login in order to view/create order.'); 
+        return redirect('/')->with('error', 'You need to login first.'); 
       }
 
       $user = null;
@@ -22,9 +22,11 @@ class ProfileController extends Controller
 
       $ordersPostedByUser = Order::where('owner', $user->name)->orderBy('created_at', 'desc')->get();
       $completedOrdersPostByUser = Order::where('owner', $user->name)->where('completed', true)->get();
+      
+      $OrdersTakenByUser = Order::where('taker', $user->id)->get();
       $completedOrdersTakenByUser = Order::where('taker', $user->id)->where('completed', true)->get();
 
-      return view('profile.index', compact('user', 'ordersPostedByUser','completedOrdersPostByUser','completedOrdersTakenByUser'));
+      return view('profile.index', compact('user', 'ordersPostedByUser','completedOrdersPostByUser','OrdersTakenByUser', 'completedOrdersTakenByUser'));
 
     }
 }
