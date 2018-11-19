@@ -35,6 +35,13 @@ Route::get('/admin', 'AdminController@admin')
     ->name('admin');
 Route::get('/testadmin', 'AdminController@testAdmin')->name('testAdmin');
 Route::get('admin/user/{id}/orders', 'OrdersController@getUserOrders');
+
+// user profile
+Route::get('/profile', 'ProfileController@index')->name('profile');
+
+// dashboard
+Route::get('/dashboard', 'DashboardController@index')->name('dashboard');
+
 /**
  * A test router for sending emails, also with an anonymous function
  */
