@@ -41,7 +41,7 @@
                 <tr>
                     <th>user id</th>
                     <th>user name</th>
-                    <th>usr email</th>
+                    <th>user email</th>
                     <th>provider id</th>
                     <th>user type</th>
                     <th>Operations</th>
