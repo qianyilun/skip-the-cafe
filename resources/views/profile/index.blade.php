@@ -53,7 +53,21 @@
             </div>
             <div class="tab-pane fade" id="v-pills-order-history" role="tabpanel" aria-labelledby="v-pills-profile-tab">
                 <h2>Order History</h2>
-                {{$completedOrdersPostByUser}}
+                {{-- {{$completedOrdersPostByUser}} --}}
+                <div class="list-group">
+                    @foreach ($ordersPostedByUser as $order)
+                        <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+                            <div class="d-flex w-100 justify-content-between">
+                                <h4 class="mb-1">{{$order->title}}</h4>
+                                <small>{{$order->created_at}}</small>
+                            </div>
+                            <div class="d-flex w-150 justify-content-between">
+                                <p class="mb-1">Description: {{$order->description}}</p>
+                                <small>${{$order->price}}</small>
+                            </div>
+                        </a>
+                    @endforeach
+                </div>
             </div>
             <div class="tab-pane fade" id="v-pills-delivery-history" role="tabpanel" aria-labelledby="v-pills-messages-tab">
                 <h2>Delivery History</h2>
