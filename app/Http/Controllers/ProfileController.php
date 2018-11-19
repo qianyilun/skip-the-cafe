@@ -20,10 +20,11 @@ class ProfileController extends Controller
         $user = auth()->user();
       }
 
+      $ordersPostedByUser = Order::where('owner', $user->name)->orderBy('created_at', 'desc')->get();
       $completedOrdersPostByUser = Order::where('owner', $user->name)->where('completed', true)->get();
       $completedOrdersTakenByUser = Order::where('taker', $user->id)->where('completed', true)->get();
 
-      return view('profile.index', compact('user', 'completedOrdersPostByUser','completedOrdersTakenByUser'));
+      return view('profile.index', compact('user', 'ordersPostedByUser','completedOrdersPostByUser','completedOrdersTakenByUser'));
 
     }
 }
