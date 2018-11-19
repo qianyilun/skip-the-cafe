@@ -150,8 +150,10 @@ class OrdersController extends Controller
      */
     public function edit($id)
     {
+        $user = auth()->user();
+        $isAdmin = $user->type === "admin" ? true : false;
         $order = Order::findOrFail($id);
-        return view('orders.edit', compact('order'));
+        return view('orders.edit', compact('order', 'isAdmin'));
     }
 
     /**
@@ -164,13 +166,7 @@ class OrdersController extends Controller
     public function update(Request $request, $id)
     {
         $order = Order::findOrFail($id);
-        // store the current logged in user as owner of the order
-        if(auth()->user() !== null) {
-            $user = auth()->user();
-            $order->owner = $user->name;
-        } else {
-            return redirect('/orders')->with('error', 'You need to login in order to create order');
-        }
+
         $order->title = $request->title;
         $order->item = $request->item;
         $order->description = $request->description;
@@ -178,7 +174,18 @@ class OrdersController extends Controller
         $order->price = $request->price;
         $order->longitude = $request->longitude;
         $order->latitude = $request->latitude;
-        $order->user_id = auth()->user()->id; // this is how you access logged in user's id
+
+        // for admin edit only
+        if (isset($request->taker)) {
+            $order->taker = $request->taker;
+        }
+        if (isset($request->confirmed)) {
+            $order->confirmed = $request->confirmed === "1" ? true : false;
+        }
+        if (isset($request->completed)) {
+            $order->completed = $request->completed === "1" ? true : false;
+        }
+
         $order->save();
 
         return redirect('/orders');
