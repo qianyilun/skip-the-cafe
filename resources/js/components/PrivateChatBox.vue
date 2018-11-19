@@ -4,12 +4,12 @@
             <v-list>
                 <v-list-tile
                         v-for="friend in friends"
-                        :color="(friend.id==activeFriend)?'green':''"
+                        :color="(friend.id==activeFriend)?'blue':''"
                         :key="friend.id"
                         @click="activeFriend=friend.id"
                 >
                     <v-list-tile-action>
-                        <v-icon :color="(onlineFriends.find(user=>user.id===friend.id))?'green':'red'">account_circle</v-icon>
+                        <v-icon :color="(onlineFriends.find(user=>user.id===friend.id))?'green':'grey'">account_circle</v-icon>
                     </v-list-tile-action>
 
                     <v-list-tile-content>
@@ -35,10 +35,11 @@
                 >
 
                     <v-layout
-                            :align-end="(user.id!==message.user.id)"
+
+                            :text-xs-right="(user.id!==message.user.id)"
                             column
                     >
-                        <v-flex>
+                        <v-flex :class="(user.id!==message.user.id)?'text-xs-left':'text-xs-right'" >
                             <v-layout column>
                                 <v-flex>
                                     <span class="small font-italic">{{message.user.name}}</span>
@@ -46,8 +47,9 @@
 
                                 <v-flex>
                                     <v-chip
-                                            :color="(user.id!==message.user.id)?'red':'green'"
+                                            :color="(user.id!==message.user.id)?'grey':'blue'"
                                             text-color="white"
+
                                     >
 
                                         <v-list-tile-content >
@@ -92,7 +94,7 @@
                     <v-flex xs2>
                         <v-btn
                                 @click="sendMessage"
-                                dark class="mt-3 ml-2 white--text" small color="green">send</v-btn>
+                                dark class="mt-3 ml-2 white--text" small color="blue">send</v-btn>
                     </v-flex>
                 </v-layout>
 
