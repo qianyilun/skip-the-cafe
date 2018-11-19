@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Log; // this is for writting logging messages to 
 use Illuminate\Support\Facades\DB;
 use GuzzleHttp; // this package is used to make HTTP request to external api
 use App\Order;
+use App\User;
 use Response;
 use function GuzzleHttp\json_decode;
 // define constants
@@ -64,10 +65,15 @@ class OrdersController extends Controller
         ->orderBy('distance')
         ->take(5)
         ->get();
-      
-      // $availableOrders = Order::where('owner', '!=' , $user->name)->whereNull('taker')->get();
-      $ordersFromCurrentUsers = Order::where('owner', $user->name)->get();
-      return view('orders.index')->with(['user'=>$user, 'availableOrders'=> $availableOrders,'ordersFromCurrentUsers' => $ordersFromCurrentUsers, 'orders' => $orders, 'currentUserlongitude' => $currentUserlongitude, 'currentUserlatitude' => $currentUserlatitude]);
+
+      $ordersPostedByUser = Order::where('owner', $user->name)->get();
+      $completedOrdersPostByUser = Order::where('owner', $user->name)->where('completed', true)->get();
+
+      $incompletedOrdersTakenByUser = Order::where('taker', $user->id)->where('completed', false)->get();
+
+      $completedOrdersTakenByUser = Order::where('taker', $user->id)->where('completed', true)->get();
+
+      return view('orders.index', compact('user','availableOrders', 'ordersPostedByUser', 'completedOrdersPostByUser', 'incompletedOrdersTakenByUser', 'completedOrdersTakenByUser', 'orders', 'currentUserlongitude', 'currentUserlatitude'));
     }
 
     /**
@@ -158,7 +164,22 @@ class OrdersController extends Controller
     public function update(Request $request, $id)
     {
         $order = Order::findOrFail($id);
-        $order->update($request->all());
+        // store the current logged in user as owner of the order
+        if(auth()->user() !== null) {
+            $user = auth()->user();
+            $order->owner = $user->name;
+        } else {
+            return redirect('/orders')->with('error', 'You need to login in order to create order');
+        }
+        $order->title = $request->title;
+        $order->item = $request->item;
+        $order->description = $request->description;
+        $order->address = $request->address;
+        $order->price = $request->price;
+        $order->longitude = $request->longitude;
+        $order->latitude = $request->latitude;
+        $order->user_id = auth()->user()->id; // this is how you access logged in user's id
+        $order->save();
 
         return redirect('/orders');
     }
@@ -205,5 +226,15 @@ class OrdersController extends Controller
       return \Response::json(['msg' => 'successfully taken', 'takenId' => $id], 200);
     }
 
+    public function getUserOrders($id) {
+        $viewer = auth()->user();
+        $user = User::findOrFail($id);
 
+        if ($viewer->type != 'admin') {
+            return redirect('/');
+        }
+
+        $orders = $user->orders;
+        return view('userorders', compact('orders', 'user'));
+    }
 }
