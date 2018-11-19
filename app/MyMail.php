@@ -8,8 +8,6 @@
 
 namespace App;
 
-
-
 class MyMail
 {
     private $orderTitle;

@@ -37,6 +37,11 @@ class ChatController extends Controller
         return view('private');
     }
 
+    /**
+     * Fetch all users
+     *
+     * @return User[]|\Illuminate\Database\Eloquent\Collection
+     */
     public function users()
     {
         return User::all();

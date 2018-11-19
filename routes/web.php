@@ -48,21 +48,6 @@ Route::get('/admin', 'AdminController@admin')
 Route::get('/testadmin', 'AdminController@testAdmin')->name('testAdmin');
 Route::get('admin/user/{id}/orders', 'OrdersController@getUserOrders');
 
-/**
- * A test router for sending emails, also with an anonymous function
- */
-Route::get('/sendTestEmails', function () {
-   $data = [
-       'title' => 'Order submitted and posted',
-       'content' => 'This is content'
-   ];
-
-   Mail::send('emails.test', $data, function($message) {
-       $message->to('qianyiluntemp@gmail.com', 'yilun qian')->subject('hey');
-   });
-});
-
-//Route::get('/sendNewOrderEmail', 'MailController@send');
 /*
 |--------------------------------------------------------------------------
 | Testing Routes

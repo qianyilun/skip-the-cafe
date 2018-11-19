@@ -31,16 +31,24 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
     public function orders(){
       return $this->hasMany('App\Order'); // tells ORM each user has many post
     }
 
-
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
     public function messages()
     {
         return $this->hasMany(Message::class);
     }
 
+    /**
+     * @return bool
+     */
     public function isAdmin() {
         return $this->type === self::ADMIN_TYPE;
     }
