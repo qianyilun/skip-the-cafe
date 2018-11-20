@@ -47,6 +47,7 @@ Route::get('/admin', 'AdminController@admin')
     ->name('admin');
 Route::get('/testadmin', 'AdminController@testAdmin')->name('testAdmin');
 Route::get('admin/user/{id}/orders', 'OrdersController@getUserOrders');
+Route::get('admin/user/{id}/grantadmin', 'AdminController@grantAdmin');
 
 /*
 |--------------------------------------------------------------------------
