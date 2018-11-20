@@ -124,17 +124,12 @@ class OrdersController extends Controller
 
         // update order owner's wallet
         $user = User::where('id', $order->user_id)->first();
+        $userWalletBefore = $user->wallet;
         $remainWallet = $user->wallet - $order->price;
         if($remainWallet < 0) {
           return redirect('/')->with('error', 'Insufficient funds in your wallet, there is no free meal in this world:)');
         }
         $user->wallet = $remainWallet;
-        $user->save();
-        $order->save();
-
-        // send emails to poster to notify their order has been posted
-        $mailController = new MailController();
-        $mailController->sendEmailWhenCreateNewOrder($order->title);
 
         // randomly choose a number from 1 to n ( n = total number of records in Order table)
         // for demo purpose
@@ -142,6 +137,17 @@ class OrdersController extends Controller
         $randomNumber = random_int(1,2);
         // $randomNumber = 2; // uncomment this to see how a pop up looks like
         // if a random free order is the order we just saved, display a pop up window to ask users to share this news with their friends to promopt our site
+        if($bingoNumber == $randomNumber) {
+          $user->wallet = $userWalletBefore; // if the order is free then no charge for the order
+        }
+        $user->save();
+        $order->save();
+
+        // send emails to poster to notify their order has been posted
+        $mailController = new MailController();
+        $mailController->sendEmailWhenCreateNewOrder($order->title);
+
+        
         if($bingoNumber == $randomNumber) {
           return redirect('/orders')->with('modal', 'hasModal');
         }
