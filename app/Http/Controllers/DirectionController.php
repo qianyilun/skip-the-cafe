@@ -70,5 +70,14 @@ class DirectionController extends Controller
       return view('directions.showDirection', compact('id', 'orderLongitude', 'orderLatitude', 'currentUserlongitude', 'currentUserlatitude', 'orderAddress', 'orderItem', 'orderOwner', 'orderPrice','orderDescription'));
     }
 
-    
+    public function private($id)
+    {
+        $order = Order::findOrFail($id);
+        $ownerId = $order->user_id;
+
+        $mailController = new MailController();
+        $mailController->sendEmailToRemindUserChatMessage($order->id);
+
+        return view('private')->with(['id'=> $ownerId]);
+    }
 }
