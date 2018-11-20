@@ -13,8 +13,6 @@
     <script src="{{ asset('js/app.js') }}" ></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.bundle.min.js"></script>
 
-
-
     <!-- Fonts -->
     <link rel="dns-prefetch" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet" type="text/css">
@@ -159,90 +157,106 @@
 
         <main class="py-4">
           <div class="container">
-                {{$user}}
             <div class="row">
                 <div class="col-md-3">
                     <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
-                        <a class="nav-link active" id="v-pills-baisc-info-tab" data-toggle="pill" href="#v-pills-basic-info" role="tab" aria-controls="v-pills-basic-info" aria-selected="true">Basic Info</a>
-                        <a class="nav-link" id="v-pills-order-history-tab" data-toggle="pill" href="#v-pills-order-history" role="tab" aria-controls="v-pills-order-history" aria-selected="false">Order History</a>
-                        <a class="nav-link" id="v-pills-delivery-history-tab" data-toggle="pill" href="#v-pills-delivery-history" role="tab" aria-controls="v-pills-delivery-history" aria-selected="false">Delivery History</a>
-                        <a class="nav-link" id="v-pills-settings-tab" data-toggle="pill" href="#v-pills-settings" role="tab" aria-controls="v-pills-settings" aria-selected="false">Settings</a>
+                        <a class="nav-link active" id="v-pills-order-tab" data-toggle="pill" href="#v-pills-order" role="tab" >Order</a>
+                        <a class="nav-link" id="v-pills-delivery-tab" data-toggle="pill" href="#v-pills-delivery" role="tab" >Delivery</a>
+                        {{-- <a class="nav-link" id="v-pills-delivery-history-tab" data-toggle="pill" href="#v-pills-delivery-history" role="tab" aria-controls="v-pills-delivery-history" aria-selected="false">Delivery History</a>
+                        <a class="nav-link" id="v-pills-settings-tab" data-toggle="pill" href="#v-pills-settings" role="tab" aria-controls="v-pills-settings" aria-selected="false">Settings</a> --}}
                     </div>
                 </div>
             
                 <div class="col-md-7">
                     <div class="tab-content" id="v-pills-tabContent">
-                        <div class="tab-pane fade show active" id="v-pills-basic-info" role="tabpanel" aria-labelledby="v-pills-baic-info-tab">
-                            <canvas id="line-chart" width="800" height="450"></canvas>
-                            <script>
-                                new Chart(document.getElementById("line-chart"), {
-                                    type: 'line',
-                                    data: {
-                                        labels: [1500,1600,1700,1750,1800,1850,1900,1950,1999,2050],
-                                        datasets: [{ 
-                                            data: [86,114,106,106,107,111,133,221,783,2478],
-                                            label: "Africa",
-                                            borderColor: "#3e95cd",
-                                            fill: false
-                                        }, { 
-                                            data: [282,350,411,502,635,809,947,1402,3700,5267],
-                                            label: "Asia",
-                                            borderColor: "#8e5ea2",
-                                            fill: false
-                                        }, { 
-                                            data: [168,170,178,190,203,276,408,547,675,734],
-                                            label: "Europe",
-                                            borderColor: "#3cba9f",
-                                            fill: false
-                                        }, { 
-                                            data: [40,20,10,16,24,38,74,167,508,784],
-                                            label: "Latin America",
-                                            borderColor: "#e8c3b9",
-                                            fill: false
-                                        }, { 
-                                            data: [6,3,2,2,7,26,82,172,312,433],
-                                            label: "North America",
-                                            borderColor: "#c45850",
-                                            fill: false
-                                        }
-                                        ]
-                                    },
-                                    options: {
-                                        title: {
-                                        display: true,
-                                        text: 'Order'
-                                        }
-                                    }
-                                    });
-                            </script>
+                        <div class="tab-pane fade show active" id="v-pills-order" role="tabpanel" aria-labelledby="v-pills-baic-info-tab">
+                            <ul class="nav nav-tabs" id="myTab" role="tablist">
+                                <li class="nav-item">
+                                    <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Home</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Profile</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact" aria-selected="false">Contact</a>
+                                </li>
+                            </ul>
+                            <div class="tab-content" id="myTabContent">
+                                <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                                    <canvas id="line-chart" width="800" height="450"></canvas>
+                                    <script>
+                                        new Chart(document.getElementById("line-chart"), {
+                                            type: 'line',
+                                            data: {
+                                                labels: [1500,1600,1700,1750,1800,1850,1900,1950,1999,2050],
+                                                datasets: [{ 
+                                                    data: [86,114,106,106,107,111,133,221,783,2478],
+                                                    label: "Africa",
+                                                    borderColor: "#3e95cd",
+                                                    fill: false
+                                                }, { 
+                                                    data: [282,350,411,502,635,809,947,1402,3700,5267],
+                                                    label: "Asia",
+                                                    borderColor: "#8e5ea2",
+                                                    fill: false
+                                                }, { 
+                                                    data: [168,170,178,190,203,276,408,547,675,734],
+                                                    label: "Europe",
+                                                    borderColor: "#3cba9f",
+                                                    fill: false
+                                                }, { 
+                                                    data: [40,20,10,16,24,38,74,167,508,784],
+                                                    label: "Latin America",
+                                                    borderColor: "#e8c3b9",
+                                                    fill: false
+                                                }, { 
+                                                    data: [6,3,2,2,7,26,82,172,312,433],
+                                                    label: "North America",
+                                                    borderColor: "#c45850",
+                                                    fill: false
+                                                }
+                                                ]
+                                            },
+                                            options: {
+                                                title: {
+                                                display: true,
+                                                text: 'Order'
+                                                }
+                                            }
+                                            });
+                                    </script>
+                                </div>
+                                <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">...</div>
+                                <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">...</div>
+                            </div>
                         </div>
-                        <div class="tab-pane fade" id="v-pills-order-history" role="tabpanel" aria-labelledby="v-pills-profile-tab">
+                        <div class="tab-pane fade" id="v-pills-delivery" role="tabpanel" aria-labelledby="v-pills-profile-tab">
                                 <canvas id="pie-chart" width="800" height="450"></canvas>
                                 <script>
                                 new Chart(document.getElementById("pie-chart"), {
-                        type: 'pie',
-                        data: {
-                          labels: ["Africa", "Asia", "Europe", "Latin America", "North America"],
-                          datasets: [{
-                            label: "Population (millions)",
-                            backgroundColor: ["#3e95cd", "#8e5ea2","#3cba9f","#e8c3b9","#c45850"],
-                            data: [2478,5267,734,784,433]
-                          }]
-                        },
-                        options: {
-                          title: {
-                            display: true,
-                            text: 'Predicted world population (millions) in 2050'
-                          }
-                        }
-                    });</script>
+                                    type: 'pie',
+                                    data: {
+                                    labels: ["Africa", "Asia", "Europe", "Latin America", "North America"],
+                                    datasets: [{
+                                        label: "Population (millions)",
+                                        backgroundColor: ["#3e95cd", "#8e5ea2","#3cba9f","#e8c3b9","#c45850"],
+                                        data: [2478,5267,734,784,433]
+                                    }]
+                                    },
+                                    options: {
+                                    title: {
+                                        display: true,
+                                        text: 'Predicted world population (millions) in 2050'
+                                    }
+                                    }
+                                });</script>
                         </div>
-                        <div class="tab-pane fade" id="v-pills-delivery-history" role="tabpanel" aria-labelledby="v-pills-messages-tab">
+                        {{-- <div class="tab-pane fade" id="v-pills-delivery-history" role="tabpanel" aria-labelledby="v-pills-messages-tab">
                             safsfasdf
                         </div>
                         <div class="tab-pane fade" id="v-pills-settings" role="tabpanel" aria-labelledby="v-pills-settings-tab">
                             <h2>asfdasf</h2>
-                        </div>
+                        </div> --}}
                     </div>
                 </div>
             </div>
