@@ -13,7 +13,7 @@
           <div class="form-group">
             <label style="font-weight: bold;" class="control-label" for="email">Item</label>
             <input class="form-control" type="text" name="item" id="inputItem" placeholder="(e.g. a coffee)">
-            <div id="autocompleteItem"></div>
+            <div style="position: absolute;" id="autocompleteItem"></div>
           </div>
           <div class="form-group">
               <label style="font-weight: bold;" class="control-label" for="email">Detail description of your order</label>
