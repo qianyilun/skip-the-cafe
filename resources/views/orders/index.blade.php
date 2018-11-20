@@ -267,10 +267,6 @@
     
 });
 
-//The following code is for bringing up the popup window when a free order is given
-@if(session()->has('modal'))
-  alert('has modal');
-@endif
 </script>
 <script async defer src="https://maps.googleapis.com/maps/api/js?key={{env('GOOGLE_API_KEY')}}&callback=initMap"
 type="text/javascript"></script>
