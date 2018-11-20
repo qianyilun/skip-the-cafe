@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use App\Order;
+use App\User;
 
 class DashboardController extends Controller
 {    
@@ -17,7 +20,16 @@ class DashboardController extends Controller
         $user = auth()->user();
       }
 
-      return view('dashboard.index', compact('user'));
+
+      $ordersPostedByUser = Order::where('owner', $user->name)->get();
+      $completedOrdersPostByUser = Order::where('owner', $user->name)->where('completed', true)->get();
+
+      $incompletedOrdersTakenByUser = Order::where('taker', $user->id)->where('completed', false)->get();
+
+      $completedOrdersTakenByUser = Order::where('taker', $user->id)->where('completed', true)->get();
+
+
+      return view('dashboard.index', compact('user', 'ordersPostedByUser', 'completedOrdersPostByUser', 'incompletedOrdersTakenByUser', 'completedOrdersTakenByUser', 'orders', 'currentUserlongitude', 'currentUserlatitude'));
 
     }
 }
