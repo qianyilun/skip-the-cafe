@@ -190,8 +190,8 @@
                                             data: {
                                                 labels: ["9/11","9/11","9/09","today","9/11","9/11","9/11"],
                                                 datasets: [{ 
-                                                    data: [86,114,106,333,444,555,666],
-                                                    label: "weekly orders",
+                                                    data: [86,114,106,333,0,555,666],
+                                                    label: "orders",
                                                     borderColor: "#3e95cd",
                                                     fill: false
                                                 }
@@ -200,31 +200,29 @@
                                             options: {
                                                 title: {
                                                 display: true,
-                                                text: 'Total Order over time'
+                                                text: 'Weekly Order Over Time'
                                                 }
                                             }
                                             });
                                     </script>
-                                    
-                                    <canvas id="store-ranking-chart" width="800" height="450"></canvas>
+
+                                    <br><br><br>
+                                    <canvas id="store-percent-chart-order" width="800" height="450"></canvas>
                                     <script>
-                                        new Chart(document.getElementById("store-ranking-chart"), {
-                                            type: 'bar',
+                                        new Chart(document.getElementById("store-percent-chart-order"), {
+                                            type: 'pie',
                                             data: {
                                             labels: ["starbucks", "tim hortons", "waves coffe", "shop2", "shop1"],
-                                            datasets: [
-                                                {
-                                                label: "order times",
+                                            datasets: [{
+                                                label: "order times:",
                                                 backgroundColor: ["#3e95cd", "#8e5ea2","#3cba9f","#e8c3b9","#c45850"],
                                                 data: [2,3,10,4,7,0]
-                                                }
-                                            ]
+                                            }]
                                             },
                                             options: {
-                                            legend: { display: false },
                                             title: {
                                                 display: true,
-                                                text: 'Store Ranking'
+                                                text: 'Weekly Store Proportion'
                                             }
                                             }
                                         });
@@ -232,7 +230,52 @@
                                 </div>
 
                                 <div class="tab-pane fade" id="expend-charts" role="tabpanel" >
+                                    <canvas id="total-spend-chart" width="800" height="450"></canvas>
+                                    <script>
+                                        new Chart(document.getElementById("total-spend-chart"), {
+                                            type: 'line',
+                                            data: {
+                                                labels: ["9/11","9/11","9/09","today","9/11","9/11","9/11"],
+                                                datasets: [{ 
+                                                    data: [13.45,4,0,3.33,7,3,19],
+                                                    label: "cost($)",
+                                                    borderColor: "#3e95cd",
+                                                    fill: false
+                                                }
+                                                ]
+                                            },
+                                            options: {
+                                                title: {
+                                                display: true,
+                                                text: 'Weekly Spend'
+                                                }
+                                            }
+                                            });
+                                    </script>
                                     
+                                    <canvas id="store-ranking-chart-spend" width="800" height="450"></canvas>
+                                    <script>
+                                        new Chart(document.getElementById("store-ranking-chart-spend"), {
+                                            type: 'bar',
+                                            data: {
+                                            labels: ["starbucks", "tim hortons", "waves coffe", "shop2", "shop1"],
+                                            datasets: [
+                                                {
+                                                label: "weekly spend($)",
+                                                backgroundColor: ["#3e95cd", "#8e5ea2","#3cba9f","#e8c3b9","#c45850"],
+                                                data: [2.2,3.4,10.33,4.11,7.33,0]
+                                                }
+                                            ]
+                                            },
+                                            options: {
+                                            legend: { display: false },
+                                            title: {
+                                                display: true,
+                                                text: 'Store Spending'
+                                            }
+                                            }
+                                        });
+                                    </script>
                                 </div>
                                 {{-- <div class="tab-pane fade" id="b" role="tabpanel">
                                     ..3.
