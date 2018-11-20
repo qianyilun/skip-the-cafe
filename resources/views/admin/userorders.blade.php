@@ -32,6 +32,7 @@
                     </tr>
                 @endforeach
             </table>
+            <a href="/admin">Back to Admin</a>
         </div>
 
 @endsection

@@ -17,7 +17,7 @@ class AdminController extends Controller
         $orders = $this->getAllOrders();
         $users = $this->getAllUsers();
 
-        return view('admin', compact('orders', 'users', 'currentUser'));
+        return view('admin.admin', compact('orders', 'users', 'currentUser'));
     }
 
     public function testAdmin() {
@@ -25,7 +25,7 @@ class AdminController extends Controller
         $orders = $this->getAllOrders();
         $users = $this->getAllUsers();
 
-        return view('admin', compact('orders', 'users', 'currentUser'));
+        return view('admin.admin', compact('orders', 'users', 'currentUser'));
     }
 
     private function getAllOrders() {
@@ -44,5 +44,11 @@ class AdminController extends Controller
         $user->save();
 
         return redirect('/admin');
+    }
+
+    public function editUser($id) {
+        $user = User::findOrFail($id);
+
+        return view('admin.edituser', compact('user'));
     }
 }
