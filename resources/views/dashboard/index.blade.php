@@ -282,26 +282,120 @@
                                 </div> --}}
                             </div>
                         </div>
+
                         <div class="tab-pane fade" id="v-pills-delivery" role="tabpanel" aria-labelledby="v-pills-profile-tab">
-                                <canvas id="pie-chart" width="800" height="450"></canvas>
-                                <script>
-                                new Chart(document.getElementById("pie-chart"), {
-                                    type: 'pie',
-                                    data: {
-                                    labels: ["Africa", "Asia", "Europe", "Latin America", "North America"],
-                                    datasets: [{
-                                        label: "Population (millions)",
-                                        backgroundColor: ["#3e95cd", "#8e5ea2","#3cba9f","#e8c3b9","#c45850"],
-                                        data: [2478,5267,734,784,433]
-                                    }]
-                                    },
-                                    options: {
-                                    title: {
-                                        display: true,
-                                        text: 'Predicted world population (millions) in 2050'
-                                    }
-                                    }
-                                });</script>
+                            <ul class="nav nav-tabs" id="myTab" role="tablist">
+                                <li class="nav-item">
+                                    <a class="nav-link active" id="delivery-tab" data-toggle="tab" href="#delivery-charts" role="tab">Delivery</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" id="earn-tab" data-toggle="tab" href="#earn-charts" role="tab">Earn</a>
+                                </li>
+                                {{-- <li class="nav-item">
+                                    <a class="nav-link" id="3-tab" data-toggle="tab" href="#b" role="tab" >3</a>
+                                </li> --}}
+                            </ul>
+                            <div class="tab-content" id="myTabContent">
+                                <div class="tab-pane fade show active" id="delivery-charts" role="tabpanel" >
+                                    <canvas id="delivery-total-chart" width="800" height="450"></canvas>
+                                    <script>
+                                        new Chart(document.getElementById("delivery-total-chart"), {
+                                            type: 'line',
+                                            data: {
+                                                labels: ["9/11","9/11","9/09","today","9/11","9/11","9/11"],
+                                                datasets: [{ 
+                                                    data: [86,114,106,333,0,555,666],
+                                                    label: "delivery",
+                                                    borderColor: "#3e95cd",
+                                                    fill: false
+                                                }
+                                                ]
+                                            },
+                                            options: {
+                                                title: {
+                                                display: true,
+                                                text: 'Weekly Delivery Over Time'
+                                                }
+                                            }
+                                            });
+                                    </script>
+
+                                    <br><br><br>
+                                    <canvas id="store-percent-chart-delivery" width="800" height="450"></canvas>
+                                    <script>
+                                        new Chart(document.getElementById("store-percent-chart-delivery"), {
+                                            type: 'pie',
+                                            data: {
+                                            labels: ["starbucks", "tim hortons", "waves coffe", "shop2", "shop1"],
+                                            datasets: [{
+                                                label: "delivery times:",
+                                                backgroundColor: ["#3e95cd", "#8e5ea2","#3cba9f","#e8c3b9","#c45850"],
+                                                data: [2,3,10,4,7,0]
+                                            }]
+                                            },
+                                            options: {
+                                            title: {
+                                                display: true,
+                                                text: 'Weekly Store Proportion (Delivery)'
+                                            }
+                                            }
+                                        });
+                                    </script>
+                                </div>
+
+                                <div class="tab-pane fade" id="earn-charts" role="tabpanel" >
+                                    <canvas id="total-earn-chart" width="800" height="450"></canvas>
+                                    <script>
+                                        new Chart(document.getElementById("total-earn-chart"), {
+                                            type: 'line',
+                                            data: {
+                                                labels: ["9/11","9/11","9/09","today","9/11","9/11","9/11"],
+                                                datasets: [{ 
+                                                    data: [13.45,4,0,3.33,7,3,19],
+                                                    label: "earn($)",
+                                                    borderColor: "#3e95cd",
+                                                    fill: false
+                                                }
+                                                ]
+                                            },
+                                            options: {
+                                                title: {
+                                                display: true,
+                                                text: 'Weekly Earn'
+                                                }
+                                            }
+                                            });
+                                    </script>
+                                    
+                                    <br><br><br>
+                                    <canvas id="store-ranking-chart-earn" width="800" height="450"></canvas>
+                                    <script>
+                                        new Chart(document.getElementById("store-ranking-chart-earn"), {
+                                            type: 'bar',
+                                            data: {
+                                            labels: ["starbucks", "tim hortons", "waves coffe", "shop2", "shop1"],
+                                            datasets: [
+                                                {
+                                                label: "weekly earn($)",
+                                                backgroundColor: ["#3e95cd", "#8e5ea2","#3cba9f","#e8c3b9","#c45850"],
+                                                data: [2.2,3.4,10.33,4.11,7.33,0]
+                                                }
+                                            ]
+                                            },
+                                            options: {
+                                            legend: { display: false },
+                                            title: {
+                                                display: true,
+                                                text: 'Store Earn'
+                                            }
+                                            }
+                                        });
+                                    </script>
+                                </div>
+                                {{-- <div class="tab-pane fade" id="b" role="tabpanel">
+                                    ..3.
+                                </div> --}}
+                            </div>
                         </div>
                         {{-- <div class="tab-pane fade" id="v-pills-delivery-history" role="tabpanel" aria-labelledby="v-pills-messages-tab">
                             safsfasdf
