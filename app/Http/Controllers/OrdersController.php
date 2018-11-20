@@ -12,7 +12,7 @@ use App\User;
 use Response;
 use function GuzzleHttp\json_decode;
 // define constants
-define("ACCESS_KEY", "a7d887b9bdaae171366d6b2b284ffa4c"); // this is access key for ipStack api, which is used to get current user's geo location
+// define("ACCESS_KEY", "a7d887b9bdaae171366d6b2b284ffa4c"); // this is access key for ipStack api, which is used to get current user's geo location
 
 class OrdersController extends Controller
 {
@@ -49,7 +49,7 @@ class OrdersController extends Controller
 
       // use GuzzleHttp( a package to make HTTP request in server) to make api call
       $client = new GuzzleHttp\Client();
-      $response = $client->get( 'http://api.ipstack.com/'.$userIp . '?access_key=' . ACCESS_KEY);
+      $response = $client->get( 'http://api.ipstack.com/'.$userIp . '?access_key=' . config('app.ACCESS_KEY'));
 
       $responseBody = $response->getBody();// the response is an PSR-7 object so that we need to call an instance method to get the response body, checkout GuzzleHttp documentation for details
       // convert json to array of strings
@@ -215,6 +215,17 @@ class OrdersController extends Controller
     }
 
 
+    /**
+     * 
+     * this action is for displaying orders.comment view
+     * @param  int  $id
+     */
+    public function commentOrder(Request $request, $id)
+    {
+      // the input $id is refering to the order id
+      $order = Order::findOrFail($id);
+      return view('orders.comment', compact('order'));
+    }
     /**
      * assign the specified order to the currently logged in user.
      * this action is for responding to the ajax call from orders.index view

@@ -15,16 +15,6 @@
   </div>
 </div>
 <div class="content">
-  <h1>Modal Animations</h1>
-  <div class="buttons">
-    <div id="one" class="button">Unfolding</div>
-    <div id="two" class="button">Revealing</div>
-    <div id="three" class="button">Uncovering</div>
-    <div id="four" class="button">Blow Up</div><br>
-    <div id="five" class="button">Meep Meep</div>
-    <div id="six" class="button">Sketch</div>
-    <div id="seven" class="button">Bond</div>
-  </div>
 </div>
 
 
@@ -87,6 +77,9 @@
               @if ($order->owner === $user->name)
                 <li class="list-group-item list-group-item-action">
                   <a href="{{route('orders.show', $order->id)}}">{{$order->title}}</a>
+                  
+                  <a href="{{url('comment/' . $order->id)}}"><button class="btn btn-success">Contact taker</button></a>
+                  
                 </li>
               @endif
             @endforeach

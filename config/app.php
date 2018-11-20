@@ -121,6 +121,8 @@ return [
 
     'cipher' => 'AES-256-CBC',
 
+    'ACCESS_KEY' => 'a7d887b9bdaae171366d6b2b284ffa4c',
+
     /*
     |--------------------------------------------------------------------------
     | Autoloaded Service Providers
