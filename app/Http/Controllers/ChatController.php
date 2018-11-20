@@ -24,7 +24,7 @@ class ChatController extends Controller
      */
     public function index()
     {
-        return view('chat');
+        return view('chats.chat');
     }
 
     /**
@@ -34,7 +34,7 @@ class ChatController extends Controller
      */
     public function private()
     {
-        return view('private');
+        return view('chats.private');
     }
 
     /**
