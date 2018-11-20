@@ -1,5 +1,27 @@
 @extends('layouts.app')
-
+<style>
+.modal  {
+    /*   display: block;*/
+    padding-right: 0px;
+    background-color: rgba(4, 4, 4, 0.8); 
+    }
+   
+    .modal-dialog {
+            top: 20%;
+                width: 100%;
+    position: absolute;
+        }
+      .modal-content {
+        border-radius: 0px;
+        border: none;
+        top: 40%;
+    }
+    .modal-body {
+            background-color: #0f8845;
+            color: white;
+    }
+               
+</style>
 @section('content')
 {{-- Strictly for popup window --}}
 
@@ -131,6 +153,24 @@
         <p>You need to login to view all orders you have submitted.</p>
     </div>
     @endif
+    <div class="row">
+        <!-- Large modal -->
+      <button type="button" id="modalButton" style="display: none;" class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-lg">Windows 8 modal - Click to View</button>
+
+    <div id="{{Session::get('modal')}}" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+        <div class="modal-dialog modal-lg">
+          <div class="modal-content">
+          
+            <div class="modal-body">
+          
+            <H2>Great news!</H2>
+            <h4>Your order has been selected to be free a order. Share this news with your friends!</h4>
+          
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
 </div>
 
 
@@ -152,13 +192,11 @@
           type: 'post',
           url: `orders/take/${orderId}`,
           success: function(msg) {
-            console.log(msg);
             location.href = `/showDirection/${orderId}`
           },
           error: function(msg) {
             alert('Fail to take the order');
             console.log('ajax call to takeOrder action in order controller error ', msg);
-            // window.location.reload(true);
           }
       });
   }
@@ -222,17 +260,22 @@
           type: 'post',
           url: `orders/take/${orderId}`,
           success: function(msg) {
-            console.log(msg);
             location.href = `/showDirection/${orderId}`
           },
           error: function(msg) {
             alert('Fail to take the order');
             console.log('ajax call to takeOrder action in order controller error ', msg);
-            // window.location.reload(true);
           }
       });
     });
-    
+});
+// if this order is free order, display a pop up
+$(document).ready(function() {
+//   var freeOrNot = "{{session('modal')}}";
+  var modal = $('.modal.fade.bs-example-modal-lg').attr('id');
+  if(modal == 'hasModal') {
+    $('#modalButton').click();
+  }
 });
 
 </script>

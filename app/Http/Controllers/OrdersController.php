@@ -112,12 +112,7 @@ class OrdersController extends Controller
         } else {
           return redirect('/orders')->with('error', 'You need to login in order to create order'); 
         }
-         // randomly choose a number from 1 to n ( n = total number of records in Order table)
-        // for demo purpose
-        $bingoNumber = 2;
-        // $randomNumber = random_int(1,2);
-        $randomNumber = 2; // for testing, 
-
+        
         $order->title = $request->title;
         $order->item = $request->item;
         $order->description = $request->description;
@@ -126,8 +121,6 @@ class OrdersController extends Controller
         $order->longitude = $request->longitude;
         $order->latitude = $request->latitude;
         $order->user_id = auth()->user()->id; // this is how you access logged in user's id
-
-        
 
         // update order owner's wallet
         $user = User::where('id', $order->user_id)->first();
@@ -138,16 +131,22 @@ class OrdersController extends Controller
         $user->wallet = $remainWallet;
         $user->save();
         $order->save();
-        
-        // if a random free order is the order we just saved, display a pop up window to ask users to share this news with their friends to promopt our site
-        if($bingoNumber == $randomNumber) {
-          return redirect('/orders')->with('modal', true);
-        }
+
         // send emails to poster to notify their order has been posted
         $mailController = new MailController();
         $mailController->sendEmailWhenCreateNewOrder($order->title);
 
-        return redirect('/orders');
+        // randomly choose a number from 1 to n ( n = total number of records in Order table)
+        // for demo purpose
+        $bingoNumber = 2;
+        $randomNumber = random_int(1,2);
+        // $randomNumber = 2; // uncomment this to see how a pop up looks like
+        // if a random free order is the order we just saved, display a pop up window to ask users to share this news with their friends to promopt our site
+        if($bingoNumber == $randomNumber) {
+          return redirect('/orders')->with('modal', 'hasModal');
+        }
+
+        return redirect('/orders')->with('modal', 'hasNoModal');
     }
 
     /**
