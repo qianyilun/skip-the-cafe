@@ -49,6 +49,11 @@
       <button style="width: 100%; margin-bottom: 20px;" class="btn btn-primary">Complete order, notify the order owner</button>
     </a>
   </div>
+  <div class="col-sm-12" style="width: 100%;">
+    <a href="{{route('private', ['id' => $id])}}">
+      <button style="width: 100%; margin-bottom: 20px;" class="btn btn-primary">Chat</button>
+    </a>
+  </div>
 </div>
 
 <div class="row">

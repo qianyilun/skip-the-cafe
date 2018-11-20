@@ -18,6 +18,10 @@
                     <a class="btn btn-primary btn-lg btn-block" href="{{route('orders.index')}}">View All Orders</a>
                     <br>
                     <a class="btn btn-primary btn-lg btn-block" href="{{route('orders.create')}}">New Order</a>
+                    <br>
+                    @if(auth()->user() != null && auth()->user()->type === 'admin')
+                    <a class="btn btn-danger btn-lg btn-block" href="{{route('admin')}}">Admin Page</a>
+                    @endif
                 </div>
             </div>
         </div>

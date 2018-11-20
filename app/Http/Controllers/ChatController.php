@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\User;
 
-class HomeController extends Controller
+class ChatController extends Controller
 {
     /**
      * Create a new controller instance.
@@ -24,23 +24,17 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $user_id = auth()->user()->id;
-        $user = User::find($user_id);
-        return view('home')->with(['user' => $user]);
+        return view('chat');
     }
 
     /**
-     * Find a specific users information based on userId
+     * Show the application dashboard.
      *
-     * @param $id
-     * @return array
+     * @return \Illuminate\Http\Response
      */
-
-    public function users($id)
+    public function private()
     {
-        $result = array();
-        $result[] = User::find($id);
-        return $result;
+        return view('private');
     }
 
     /**
@@ -48,12 +42,8 @@ class HomeController extends Controller
      *
      * @return User[]|\Illuminate\Database\Eloquent\Collection
      */
-    public function allUsers()
+    public function users()
     {
         return User::all();
-    }
-
-    public function privateChatBox() {
-        return view('privateChatBox');
     }
 }

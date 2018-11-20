@@ -29,6 +29,18 @@ Route::get('showDirection/{id}', 'DirectionController@showDirection')->name('sho
 Route::get('/sendTestEmails', 'MailController@sendEmailWhenCreateNewOrder');
 Route::get('notifyOwner/{id}', 'MailController@sendEmailToNotifyOwnerOrderCompleted')->name('notifyOwner');
 
+
+Route::get('/chat', 'ChatController@index')->name('chat');
+Route::get('/private/{id}', 'DirectionController@private')->name('private');
+Route::get('/users/{id}', 'HomeController@users')->name('users');
+Route::get('/allUsers', 'HomeController@allUsers')->name('allUsers');
+Route::get('/privateChatBox', 'HomeController@privateChatBox')->name('privateChatBox');
+
+Route::get('messages', 'MessageController@fetchMessages');
+Route::post('messages', 'MessageController@sendMessage');
+Route::get('/private-messages/{user}', 'MessageController@privateMessages')->name('privateMessages');
+Route::post('/private-messages/{user}', 'MessageController@sendPrivateMessage')->name('privateMessages.store');
+
 // Admin
 Route::get('/admin', 'AdminController@admin')
     ->middleware('is_admin')
@@ -36,27 +48,18 @@ Route::get('/admin', 'AdminController@admin')
 Route::get('/testadmin', 'AdminController@testAdmin')->name('testAdmin');
 Route::get('admin/user/{id}/orders', 'OrdersController@getUserOrders');
 
+
 // user profile
 Route::get('/profile', 'ProfileController@index')->name('profile');
 
 // dashboard
 Route::get('/dashboard', 'DashboardController@index')->name('dashboard');
 
-/**
- * A test router for sending emails, also with an anonymous function
- */
-Route::get('/sendTestEmails', function () {
-   $data = [
-       'title' => 'Order submitted and posted',
-       'content' => 'This is content'
-   ];
+Route::get('admin/user/{id}/grantadmin', 'AdminController@grantAdmin');
+Route::get('admin/user/{id}/edit', 'AdminController@editUser');
+Route::post('admin/user/{id}/update', 'AdminController@updateUser');
+Route::post('admin/user/{id}/delete', 'AdminController@deleteUser');
 
-   Mail::send('emails.test', $data, function($message) {
-       $message->to('qianyiluntemp@gmail.com', 'yilun qian')->subject('hey');
-   });
-});
-
-//Route::get('/sendNewOrderEmail', 'MailController@send');
 /*
 |--------------------------------------------------------------------------
 | Testing Routes
