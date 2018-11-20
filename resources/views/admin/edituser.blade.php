@@ -36,4 +36,12 @@
             {{csrf_field()}}
             <input class="btn btn-primary" type="submit" name="UPDATE">
         </form>
+
+        @if ($user->id !== auth()->user()->id)
+            <form method="post" action="/admin/user/{{$user->id}}/delete">
+                {{csrf_field()}}
+                <input class="btn btn-danger" type="submit" value="DELETE">
+            </form>
+        @endif
+    </div>
 @endsection
