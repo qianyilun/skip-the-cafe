@@ -32,14 +32,15 @@ Route::get('/sendTestEmails', 'MailController@sendEmailWhenCreateNewOrder');
 Route::get('notifyOwner/{id}', 'MailController@sendEmailToNotifyOwnerOrderCompleted')->name('notifyOwner');
 
 
-Route::get('/chat', 'ChatController@index')->name('chat');
+Route::get('/chat', 'GroupChatController@index')->name('chat');
+Route::get('messages', 'GroupMessageController@fetchMessages');
+Route::post('messages', 'GroupMessageController@sendMessage');
+
 Route::get('/private/{id}', 'DirectionController@private')->name('private');
 Route::get('/users/{id}', 'HomeController@users')->name('users');
 Route::get('/allUsers', 'HomeController@allUsers')->name('allUsers');
 Route::get('/privateChatBox', 'HomeController@privateChatBox')->name('privateChatBox');
 
-Route::get('messages', 'MessageController@fetchMessages');
-Route::post('messages', 'MessageController@sendMessage');
 Route::get('/private-messages/{user}', 'MessageController@privateMessages')->name('privateMessages');
 Route::post('/private-messages/{user}', 'MessageController@sendPrivateMessage')->name('privateMessages.store');
 
@@ -49,6 +50,10 @@ Route::get('/admin', 'AdminController@admin')
     ->name('admin');
 Route::get('/testadmin', 'AdminController@testAdmin')->name('testAdmin');
 Route::get('admin/user/{id}/orders', 'OrdersController@getUserOrders');
+Route::get('admin/user/{id}/grantadmin', 'AdminController@grantAdmin');
+Route::get('admin/user/{id}/edit', 'AdminController@editUser');
+Route::post('admin/user/{id}/update', 'AdminController@updateUser');
+Route::post('admin/user/{id}/delete', 'AdminController@deleteUser');
 
 /*
 |--------------------------------------------------------------------------
