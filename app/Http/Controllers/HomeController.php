@@ -54,6 +54,6 @@ class HomeController extends Controller
     }
 
     public function privateChatBox() {
-        return view('privateChatBox');
+        return view('chats.privateChatBox');
     }
 }

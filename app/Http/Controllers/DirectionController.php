@@ -78,6 +78,6 @@ class DirectionController extends Controller
         $mailController = new MailController();
         $mailController->sendEmailToRemindUserChatMessage($order->id);
 
-        return view('private')->with(['id'=> $ownerId]);
+        return view('chats.private')->with(['id'=> $ownerId]);
     }
 }
