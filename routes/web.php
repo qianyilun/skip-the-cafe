@@ -30,14 +30,17 @@ Route::get('/sendTestEmails', 'MailController@sendEmailWhenCreateNewOrder');
 Route::get('notifyOwner/{id}', 'MailController@sendEmailToNotifyOwnerOrderCompleted')->name('notifyOwner');
 
 
-Route::get('/chat', 'ChatController@index')->name('chat');
+Route::get('/chat', 'GroupChatController@index')->name('chat');
+Route::get('messages', 'GroupMessageController@fetchMessages');
+Route::post('messages', 'GroupMessageController@sendMessage');
+
 Route::get('/private/{id}', 'DirectionController@private')->name('private');
 Route::get('/users/{id}', 'HomeController@users')->name('users');
 Route::get('/allUsers', 'HomeController@allUsers')->name('allUsers');
 Route::get('/privateChatBox', 'HomeController@privateChatBox')->name('privateChatBox');
 
-Route::get('messages', 'MessageController@fetchMessages');
-Route::post('messages', 'MessageController@sendMessage');
+//Route::get('messages', 'MessageController@fetchMessages');
+//Route::post('messages', 'MessageController@sendMessage');
 Route::get('/private-messages/{user}', 'MessageController@privateMessages')->name('privateMessages');
 Route::post('/private-messages/{user}', 'MessageController@sendPrivateMessage')->name('privateMessages.store');
 
