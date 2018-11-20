@@ -246,6 +246,6 @@ class OrdersController extends Controller
         }
 
         $orders = $user->orders;
-        return view('userorders', compact('orders', 'user'));
+        return view('admin.userorders', compact('orders', 'user'));
     }
 }
