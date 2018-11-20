@@ -154,7 +154,7 @@
                 </div>
             </div>
         </nav>
-
+        {{-- {{ $ordersPostedByUser}} --}}
         <main class="py-4">
           <div class="container">
             <div class="row">
@@ -172,47 +172,27 @@
                         <div class="tab-pane fade show active" id="v-pills-order" role="tabpanel" aria-labelledby="v-pills-baic-info-tab">
                             <ul class="nav nav-tabs" id="myTab" role="tablist">
                                 <li class="nav-item">
-                                    <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Home</a>
+                                    <a class="nav-link active" id="order-tab" data-toggle="tab" href="#order-charts" role="tab">Order</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Profile</a>
+                                    <a class="nav-link" id="expend-tab" data-toggle="tab" href="#expend-charts" role="tab">Expend</a>
                                 </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact" aria-selected="false">Contact</a>
-                                </li>
+                                {{-- <li class="nav-item">
+                                    <a class="nav-link" id="3-tab" data-toggle="tab" href="#b" role="tab" >3</a>
+                                </li> --}}
                             </ul>
                             <div class="tab-content" id="myTabContent">
-                                <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
-                                    <canvas id="line-chart" width="800" height="450"></canvas>
+                                <div class="tab-pane fade show active" id="order-charts" role="tabpanel" >
+                                    <canvas id="order-total-chart" width="800" height="450"></canvas>
                                     <script>
-                                        new Chart(document.getElementById("line-chart"), {
+                                        new Chart(document.getElementById("order-total-chart"), {
                                             type: 'line',
                                             data: {
-                                                labels: [1500,1600,1700,1750,1800,1850,1900,1950,1999,2050],
+                                                labels: ["9/11","9/11","9/09","today","9/11","9/11","9/11"],
                                                 datasets: [{ 
-                                                    data: [86,114,106,106,107,111,133,221,783,2478],
-                                                    label: "Africa",
+                                                    data: [86,114,106,333,444,555,666],
+                                                    label: "weekly orders",
                                                     borderColor: "#3e95cd",
-                                                    fill: false
-                                                }, { 
-                                                    data: [282,350,411,502,635,809,947,1402,3700,5267],
-                                                    label: "Asia",
-                                                    borderColor: "#8e5ea2",
-                                                    fill: false
-                                                }, { 
-                                                    data: [168,170,178,190,203,276,408,547,675,734],
-                                                    label: "Europe",
-                                                    borderColor: "#3cba9f",
-                                                    fill: false
-                                                }, { 
-                                                    data: [40,20,10,16,24,38,74,167,508,784],
-                                                    label: "Latin America",
-                                                    borderColor: "#e8c3b9",
-                                                    fill: false
-                                                }, { 
-                                                    data: [6,3,2,2,7,26,82,172,312,433],
-                                                    label: "North America",
-                                                    borderColor: "#c45850",
                                                     fill: false
                                                 }
                                                 ]
@@ -220,14 +200,43 @@
                                             options: {
                                                 title: {
                                                 display: true,
-                                                text: 'Order'
+                                                text: 'Total Order over time'
                                                 }
                                             }
                                             });
                                     </script>
+                                    
+                                    <canvas id="store-ranking-chart" width="800" height="450"></canvas>
+                                    <script>
+                                        new Chart(document.getElementById("store-ranking-chart"), {
+                                            type: 'bar',
+                                            data: {
+                                            labels: ["starbucks", "tim hortons", "waves coffe", "shop2", "shop1"],
+                                            datasets: [
+                                                {
+                                                label: "order times",
+                                                backgroundColor: ["#3e95cd", "#8e5ea2","#3cba9f","#e8c3b9","#c45850"],
+                                                data: [2,3,10,4,7,0]
+                                                }
+                                            ]
+                                            },
+                                            options: {
+                                            legend: { display: false },
+                                            title: {
+                                                display: true,
+                                                text: 'Store Ranking'
+                                            }
+                                            }
+                                        });
+                                    </script>
                                 </div>
-                                <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">...</div>
-                                <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">...</div>
+
+                                <div class="tab-pane fade" id="expend-charts" role="tabpanel" >
+                                    
+                                </div>
+                                {{-- <div class="tab-pane fade" id="b" role="tabpanel">
+                                    ..3.
+                                </div> --}}
                             </div>
                         </div>
                         <div class="tab-pane fade" id="v-pills-delivery" role="tabpanel" aria-labelledby="v-pills-profile-tab">
