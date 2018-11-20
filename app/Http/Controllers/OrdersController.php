@@ -227,7 +227,12 @@ class OrdersController extends Controller
       }
       // the input $id is refering to the order id
       $order = Order::findOrFail($id);
-      return view('orders.comment', compact('order'));
+      $takerId = $order->taker;
+      $userName = User::where('id', $takerId)->first()->name;
+      // Log::alert('message!!! '.$user);
+      // Log::alert('message2222 '.$user->name);
+      // $userName = $user->name;
+      return view('orders.comment', compact('order', 'userName'));
     }
 
 
@@ -241,14 +246,16 @@ class OrdersController extends Controller
       // the input $id is refering to the order id
       $request->validate([
         'comment' => 'required',
-        'orderId' => 'required'
+        'orderId' => 'required',
+        'rating' => 'required'
       ]);
+      
       // if user is not authorized, then kick him out of the site.
       if(auth()->user() == null) {
         return redirect('/')->with('error', 'You need to login in order to leave comment'); 
       }
       try {
-        $order = Order::where('id', $request->orderId)->update(['comment'=> $request->comment]);
+        $order = Order::where('id', $request->orderId)->update(['comment'=> $request->comment, 'rating' => $request->rating]);
       } catch( \Exception $e) {
         return redirect('/orders')->with('error', 'Fail to update comment Error: '.$e);
       }
