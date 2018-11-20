@@ -138,6 +138,7 @@ class OrdersController extends Controller
         $user->wallet = $remainWallet;
         $user->save();
         $order->save();
+        
         // if a random free order is the order we just saved, display a pop up window to ask users to share this news with their friends to promopt our site
         if($bingoNumber == $randomNumber) {
           return redirect('/orders')->with('modal', true);
