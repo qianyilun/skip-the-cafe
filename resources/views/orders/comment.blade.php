@@ -27,18 +27,25 @@
     #rating {
       margin-top: 45px;
     }
-
+    #takerHighlight {
+      color: red;
+    }
+    
 </style>
 @section('content')
 <div>
-<h1>Comments about how {{$order->taker}} is doing?</h1>
+  <div class="row">
+    <div class="col-md-12">
+      <h1>Comments: how <span id="takerHighlight">{{$userName}}</span> is doing this time?</h1>
+    </div>
+  </div>
     <div class="row">
       <div class="col-md-3">
         <h3 id="rating">Give a rating: </h3>
       </div>
       <div class="col-md-8">
           <div class="box">
-            <ul class="comment" name="xingji">
+            <ul class="comment" name="">
                 <li value="1">☆</li>
                 <li value="2">☆</li>
                 <li value="3">☆</li>
@@ -92,7 +99,6 @@ $(function(){
   });
 
   $(".comment li").click(function() {
-    alert($(this).attr('value'));
     $('#ratingInForm').attr('value', $(this).attr('value'));
   });
 
