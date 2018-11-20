@@ -25,7 +25,8 @@ Route::get('auth/{provider}', 'Auth\AuthController@redirectToProvider');
 Route::get('auth/{provider}/callback', 'Auth\AuthController@handleProviderCallback');
 Route::resource('orders', 'OrdersController');
 Route::post('orders/take/{id}', 'OrdersController@takeOrder'); // this route is for receiving ajax call from orders.index view
-Route::get('comment/{id}', 'OrdersController@commentOrder')->name('comment'); // this route is for receiving ajax call from orders.index view
+Route::get('comment/{id}', 'OrdersController@displayCommentForm')->name('comment'); // this route is for displaying comment form
+Route::post('comment', 'OrdersController@submitCommentForm'); // this route is for submitting comment form to an order
 Route::get('showDirection/{id}', 'DirectionController@showDirection')->name('showDirection');
 Route::get('/sendTestEmails', 'MailController@sendEmailWhenCreateNewOrder');
 Route::get('notifyOwner/{id}', 'MailController@sendEmailToNotifyOwnerOrderCompleted')->name('notifyOwner');
