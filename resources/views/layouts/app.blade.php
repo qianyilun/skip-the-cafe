@@ -166,6 +166,8 @@
             @yield('content')
           </div>
         </main>
-    </div>
+        <!-- Footer -->
+      </div>
+      
 </body>
 </html>

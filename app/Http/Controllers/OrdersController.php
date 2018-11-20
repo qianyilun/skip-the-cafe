@@ -12,7 +12,7 @@ use App\User;
 use Response;
 use function GuzzleHttp\json_decode;
 // define constants
-define("ACCESS_KEY", "a7d887b9bdaae171366d6b2b284ffa4c"); // this is access key for ipStack api, which is used to get current user's geo location
+// define("ACCESS_KEY", "a7d887b9bdaae171366d6b2b284ffa4c"); // this is access key for ipStack api, which is used to get current user's geo location
 
 class OrdersController extends Controller
 {
@@ -49,7 +49,7 @@ class OrdersController extends Controller
 
       // use GuzzleHttp( a package to make HTTP request in server) to make api call
       $client = new GuzzleHttp\Client();
-      $response = $client->get( 'http://api.ipstack.com/'.$userIp . '?access_key=' . ACCESS_KEY);
+      $response = $client->get( 'http://api.ipstack.com/'.$userIp . '?access_key=' . config('app.ACCESS_KEY'));
 
       $responseBody = $response->getBody();// the response is an PSR-7 object so that we need to call an instance method to get the response body, checkout GuzzleHttp documentation for details
       // convert json to array of strings
@@ -112,6 +112,7 @@ class OrdersController extends Controller
         } else {
           return redirect('/orders')->with('error', 'You need to login in order to create order'); 
         }
+        
         $order->title = $request->title;
         $order->item = $request->item;
         $order->description = $request->description;
@@ -121,13 +122,37 @@ class OrdersController extends Controller
         $order->latitude = $request->latitude;
         $order->user_id = auth()->user()->id; // this is how you access logged in user's id
 
+        // update order owner's wallet
+        $user = User::where('id', $order->user_id)->first();
+        $userWalletBefore = $user->wallet;
+        $remainWallet = $user->wallet - $order->price;
+        if($remainWallet < 0) {
+          return redirect('/')->with('error', 'Insufficient funds in your wallet, there is no free meal in this world:)');
+        }
+        $user->wallet = $remainWallet;
+
+        // randomly choose a number from 1 to n ( n = total number of records in Order table)
+        // for demo purpose
+        $bingoNumber = 2;
+        $randomNumber = random_int(1,2);
+        // $randomNumber = 2; // uncomment this to see how a pop up looks like
+        // if a random free order is the order we just saved, display a pop up window to ask users to share this news with their friends to promopt our site
+        if($bingoNumber == $randomNumber) {
+          $user->wallet = $userWalletBefore; // if the order is free then no charge for the order
+        }
+        $user->save();
         $order->save();
 
         // send emails to poster to notify their order has been posted
         $mailController = new MailController();
         $mailController->sendEmailWhenCreateNewOrder($order->title);
 
-        return redirect('/orders');
+        
+        if($bingoNumber == $randomNumber) {
+          return redirect('/orders')->with('modal', 'hasModal');
+        }
+
+        return redirect('/orders')->with('modal', 'hasNoModal');
     }
 
     /**
@@ -204,6 +229,55 @@ class OrdersController extends Controller
         $order = Order::findOrFail($id);
         $order->delete();
         return redirect('/orders');
+    }
+
+
+    /**
+     * 
+     * this action is for displaying orders.comment view
+     * @param  int  $id
+     */
+    public function displayCommentForm(Request $request, $id)
+    {
+      if(auth()->user() == null) {
+        return redirect('/')->with('error', 'You need to login in order to leave comment'); 
+      }
+      // the input $id is refering to the order id
+      $order = Order::findOrFail($id);
+      $takerId = $order->taker;
+      $userName = User::where('id', $takerId)->first()->name;
+      // Log::alert('message!!! '.$user);
+      // Log::alert('message2222 '.$user->name);
+      // $userName = $user->name;
+      return view('orders.comment', compact('order', 'userName'));
+    }
+
+
+    /**
+     * 
+     * this action is for handling the comment form submission
+     * @param  int  $id
+     */
+    public function submitCommentForm(Request $request)
+    {
+      // the input $id is refering to the order id
+      $request->validate([
+        'comment' => 'required',
+        'orderId' => 'required',
+        'rating' => 'required'
+      ]);
+      
+      // if user is not authorized, then kick him out of the site.
+      if(auth()->user() == null) {
+        return redirect('/')->with('error', 'You need to login in order to leave comment'); 
+      }
+      try {
+        $order = Order::where('id', $request->orderId)->update(['comment'=> $request->comment, 'rating' => $request->rating]);
+      } catch( \Exception $e) {
+        return redirect('/orders')->with('error', 'Fail to update comment Error: '.$e);
+      }
+      
+      return redirect('/orders')->with('success', 'Comment submitted! Thank you for taking the time, your comment is important to both the platform and the taker:)');
     }
 
 

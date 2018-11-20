@@ -1,6 +1,45 @@
 @extends('layouts.app')
-
+<style>
+.modal  {
+    /*   display: block;*/
+    padding-right: 0px;
+    background-color: rgba(4, 4, 4, 0.8); 
+    }
+   
+    .modal-dialog {
+            top: 20%;
+                width: 100%;
+    position: absolute;
+        }
+      .modal-content {
+        border-radius: 0px;
+        border: none;
+        top: 40%;
+    }
+    .modal-body {
+            background-color: #0f8845;
+            color: white;
+    }
+               
+</style>
 @section('content')
+{{-- Strictly for popup window --}}
+
+<div id="modal-container">
+  <div class="modal-background">
+    <div class="modal">
+      <h2>I'm a Modal</h2>
+      <p>Hear me roar.</p>
+      <svg class="modal-svg" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" preserveAspectRatio="none">
+								<rect x="0" y="0" fill="none" width="226" height="162" rx="3" ry="3"></rect>
+							</svg>
+    </div>
+  </div>
+</div>
+<div class="content">
+</div>
+
+
 <div class="row">
   <div class="col-md-7">
     <div class="row">
@@ -60,6 +99,9 @@
               @if ($order->owner === $user->name)
                 <li class="list-group-item list-group-item-action">
                   <a href="{{route('orders.show', $order->id)}}">{{$order->title}}</a>
+                  @if ($order->taker != '' && $order->taker != null)
+                  <a href="{{url('comment/' . $order->id)}}"><button class="btn btn-success">Leave a comment for the taker</button></a>
+                  @endif
                 </li>
               @endif
             @endforeach
@@ -111,40 +153,26 @@
         <p>You need to login to view all orders you have submitted.</p>
     </div>
     @endif
+    <div class="row">
+        <!-- Large modal -->
+      <button type="button" id="modalButton" style="display: none;" class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-lg">Windows 8 modal - Click to View</button>
+
+    <div id="{{Session::get('modal')}}" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+        <div class="modal-dialog modal-lg">
+          <div class="modal-content">
+          
+            <div class="modal-body">
+          
+            <H2>Great news!</H2>
+            <h4>Your order has been selected to be free a order. Share this news with your friends!</h4>
+          
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
 </div>
 
-<div class="row" style="width: 100%; margin-top: 30px;">
-  <div class="col-md-12">
-    <table style="width: 100%;">
-      <h4>The following table is solely for debugging purpose.</h4>
-      <h4>When we do final demo, this table will be removed.</h4>
-      <tr>
-        <th>order id</th>
-        <th>title</th>
-        <th>item</th>
-        <th>owner</th>
-        <th>taker</th>
-        <th>latitude</th>
-        <th>longtitude</th>
-        <th>Confirmed</th>
-        <th>Completed</th>
-      </tr>
-      @foreach ($orders as $order)
-      <tr>
-        <td style="margin-right: 5px;">{{$order->id}}</td>
-        <td>{{$order->title}}</td>
-        <td style="margin-right: 5px;">{{$order->item}}</td>
-        <td style="margin-right: 5px;">{{$order->owner}}</td>
-        <td style="margin-right: 5px;">{{$order->taker}}</td>
-        <td style="margin-right: 5px;">{{$order->latitude}}</td>
-        <td style="margin-right: 5px;">{{$order->longitude}}</td>
-        <td style="margin-right: 5px;">{{$order->confirmed}}</td>
-        <td style="margin-right: 5px;">{{$order->completed}}</td>
-      </tr>
-      @endforeach
-    </table>
-  </div>
-</div>
 
 @endsection
 <script
@@ -164,13 +192,11 @@
           type: 'post',
           url: `orders/take/${orderId}`,
           success: function(msg) {
-            console.log(msg);
             location.href = `/showDirection/${orderId}`
           },
           error: function(msg) {
             alert('Fail to take the order');
             console.log('ajax call to takeOrder action in order controller error ', msg);
-            // window.location.reload(true);
           }
       });
   }
@@ -234,18 +260,24 @@
           type: 'post',
           url: `orders/take/${orderId}`,
           success: function(msg) {
-            console.log(msg);
             location.href = `/showDirection/${orderId}`
           },
           error: function(msg) {
             alert('Fail to take the order');
             console.log('ajax call to takeOrder action in order controller error ', msg);
-            // window.location.reload(true);
           }
       });
     });
-    
 });
+// if this order is free order, display a pop up
+$(document).ready(function() {
+//   var freeOrNot = "{{session('modal')}}";
+  var modal = $('.modal.fade.bs-example-modal-lg').attr('id');
+  if(modal == 'hasModal') {
+    $('#modalButton').click();
+  }
+});
+
 </script>
 <script async defer src="https://maps.googleapis.com/maps/api/js?key={{env('GOOGLE_API_KEY')}}&callback=initMap"
 type="text/javascript"></script>

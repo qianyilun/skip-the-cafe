@@ -7,19 +7,27 @@
       <div class="col-md-8">
         <form method="post" action="/orders">
           <div class="form-group">
-            <input class="form-control" type="text" name="title" placeholder="Title">
+            <label style="font-weight: bold;" class="control-label" for="email">Title</label>
+            <input class="form-control" type="text" name="title" placeholder="An 'attractive' title gives your order higher chance to be taken">
           </div>
           <div class="form-group">
-            <input class="form-control" type="text" name="item" placeholder="Item (e.g. a coffee)">
+            <label style="font-weight: bold;" class="control-label" for="email">Item</label>
+            <input class="form-control" type="text" name="item" placeholder="(e.g. a coffee)">
           </div>
           <div class="form-group">
-              <textarea  class="form-control" name="description" id="" rows="5"  placeholder="Order Description"></textarea>
+              <label style="font-weight: bold;" class="control-label" for="email">Detail description of your order</label>
+              <textarea  class="form-control" name="description" id="" rows="5"  placeholder="Order Description: more cream on the coffee...etc"></textarea>
           </div>
           <div class="form-group">
-              <input class="form-control" type="textarea" name="address" placeholder="Address (Please be specific, e.g. SFU Burnaby campus library first floor)">
+              <label style="font-weight: bold;" class="control-label" for="email">Your location</label>
+              <input class="form-control" type="textarea" name="address" placeholder="(Please be specific, e.g. SFU Burnaby campus library first floor)">
           </div>
           <div class="form-group">
-              <input class="form-control" type="number" name="price" placeholder="Price (CAD)" step="0.01">
+              <label style="font-weight: bold;" class="control-label" for="email">Price</label>
+              <input class="form-control" type="number" name="price" placeholder="Up to 2 decimals." step="0.01">
+              <small id="passwordHelpBlock" class="form-text text-muted">
+                  Price should include the <b>price you pay to the taker</b> and cost of the items.
+              </small>
           </div>
           <input type="hidden" id="hiddenLongitude" value="" name="longitude" />
           <input type="hidden" id="hiddenLatitude" value="" name="latitude" />
