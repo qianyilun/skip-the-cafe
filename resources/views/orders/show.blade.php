@@ -18,11 +18,26 @@
                 <dt class="col-sm-3">Address</dt>
                 <dd class="col-sm-9">{{$order->address}}</dd>
 
+                <dt class="col-sm-3">longitude</dt>
+                <dd class="col-sm-9">{{$order->longitude}}</dd>
+
+                <dt class="col-sm-3">Latitude</dt>
+                <dd class="col-sm-9">{{$order->latitude}}</dd>
+
                 <dt class="col-sm-3">Price</dt>
                 <dd class="col-sm-9">{{$order->price}}</dd>
 
                 <dt class="col-sm-3">taker</dt>
                 <dd class="col-sm-9">{{$order->taker}}</dd>
+
+                @if ($isAdmin)
+                    <dt class="col-sm-3">Confirmed</dt>
+                    <dd class="col-sm-9">{{$order->confirmed}}</dd>
+
+                    <dt class="col-sm-3">Completed</dt>
+                    <dd class="col-sm-9">{{$order->completed}}</dd>
+
+                @endif
             </dl>
         <a class="btn btn-primary btn-block" href="{{route('orders.edit', $order->id)}}">Edit</a>
         </div>
