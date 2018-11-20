@@ -138,8 +138,10 @@ class OrdersController extends Controller
      */
     public function show($id)
     {
+        $user = auth()->user();
+        $isAdmin = $user->type === "admin" ? true : false;
         $order = Order::findOrFail($id);
-        return view('orders.show', compact('order'));
+        return view('orders.show', compact('order', 'isAdmin'));
     }
 
     /**
