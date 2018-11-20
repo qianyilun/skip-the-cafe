@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Log; // this is for writting logging messages to 
 use Illuminate\Support\Facades\DB;
 use GuzzleHttp; // this package is used to make HTTP request to external api
 use App\Order;
+use App\User;
 use Response;
 use function GuzzleHttp\json_decode;
 // define constants
@@ -64,10 +65,15 @@ class OrdersController extends Controller
         ->orderBy('distance')
         ->take(5)
         ->get();
-      
-      // $availableOrders = Order::where('owner', '!=' , $user->name)->whereNull('taker')->get();
-      $ordersFromCurrentUsers = Order::where('owner', $user->name)->get();
-      return view('orders.index')->with(['user'=>$user, 'availableOrders'=> $availableOrders,'ordersFromCurrentUsers' => $ordersFromCurrentUsers, 'orders' => $orders, 'currentUserlongitude' => $currentUserlongitude, 'currentUserlatitude' => $currentUserlatitude]);
+
+      $ordersPostedByUser = Order::where('owner', $user->name)->get();
+      $completedOrdersPostByUser = Order::where('owner', $user->name)->where('completed', true)->get();
+
+      $incompletedOrdersTakenByUser = Order::where('taker', $user->id)->where('completed', false)->get();
+
+      $completedOrdersTakenByUser = Order::where('taker', $user->id)->where('completed', true)->get();
+
+      return view('orders.index', compact('user','availableOrders', 'ordersPostedByUser', 'completedOrdersPostByUser', 'incompletedOrdersTakenByUser', 'completedOrdersTakenByUser', 'orders', 'currentUserlongitude', 'currentUserlatitude'));
     }
 
     /**
@@ -154,8 +160,10 @@ class OrdersController extends Controller
      */
     public function edit($id)
     {
+        $user = auth()->user();
+        $isAdmin = $user->type === "admin" ? true : false;
         $order = Order::findOrFail($id);
-        return view('orders.edit', compact('order'));
+        return view('orders.edit', compact('order', 'isAdmin'));
     }
 
     /**
@@ -168,7 +176,27 @@ class OrdersController extends Controller
     public function update(Request $request, $id)
     {
         $order = Order::findOrFail($id);
-        $order->update($request->all());
+
+        $order->title = $request->title;
+        $order->item = $request->item;
+        $order->description = $request->description;
+        $order->address = $request->address;
+        $order->price = $request->price;
+        $order->longitude = $request->longitude;
+        $order->latitude = $request->latitude;
+
+        // for admin edit only
+        if (isset($request->taker)) {
+            $order->taker = $request->taker;
+        }
+        if (isset($request->confirmed)) {
+            $order->confirmed = $request->confirmed === "1" ? true : false;
+        }
+        if (isset($request->completed)) {
+            $order->completed = $request->completed === "1" ? true : false;
+        }
+
+        $order->save();
 
         return redirect('/orders');
     }
@@ -182,8 +210,6 @@ class OrdersController extends Controller
     public function destroy($id)
     {
         $order = Order::findOrFail($id);
-        // a shorter version
-        // Order::whereId($id).delete();
         $order->delete();
         return redirect('/orders');
     }
@@ -215,5 +241,21 @@ class OrdersController extends Controller
       return \Response::json(['msg' => 'successfully taken', 'takenId' => $id], 200);
     }
 
+    /**
+     * Get users orders based on user id
+     *
+     * @param $id
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector|\Illuminate\View\View
+     */
+    public function getUserOrders($id) {
+        $viewer = auth()->user();
+        $user = User::findOrFail($id);
 
+        if ($viewer->type != 'admin') {
+            return redirect('/');
+        }
+
+        $orders = $user->orders;
+        return view('userorders', compact('orders', 'user'));
+    }
 }
