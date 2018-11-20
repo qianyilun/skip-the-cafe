@@ -39,8 +39,6 @@ Route::get('/users/{id}', 'HomeController@users')->name('users');
 Route::get('/allUsers', 'HomeController@allUsers')->name('allUsers');
 Route::get('/privateChatBox', 'HomeController@privateChatBox')->name('privateChatBox');
 
-//Route::get('messages', 'MessageController@fetchMessages');
-//Route::post('messages', 'MessageController@sendMessage');
 Route::get('/private-messages/{user}', 'MessageController@privateMessages')->name('privateMessages');
 Route::post('/private-messages/{user}', 'MessageController@sendPrivateMessage')->name('privateMessages.store');
 
