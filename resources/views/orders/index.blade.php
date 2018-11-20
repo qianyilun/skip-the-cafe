@@ -133,38 +133,6 @@
     @endif
 </div>
 
-<div class="row" style="width: 100%; margin-top: 30px;">
-  <div class="col-md-12">
-    <table style="width: 100%;">
-      <h4>The following table is solely for debugging purpose.</h4>
-      <h4>When we do final demo, this table will be removed.</h4>
-      <tr>
-        <th>order id</th>
-        <th>title</th>
-        <th>item</th>
-        <th>owner</th>
-        <th>taker</th>
-        <th>latitude</th>
-        <th>longtitude</th>
-        <th>Confirmed</th>
-        <th>Completed</th>
-      </tr>
-      @foreach ($orders as $order)
-      <tr>
-        <td style="margin-right: 5px;">{{$order->id}}</td>
-        <td>{{$order->title}}</td>
-        <td style="margin-right: 5px;">{{$order->item}}</td>
-        <td style="margin-right: 5px;">{{$order->owner}}</td>
-        <td style="margin-right: 5px;">{{$order->taker}}</td>
-        <td style="margin-right: 5px;">{{$order->latitude}}</td>
-        <td style="margin-right: 5px;">{{$order->longitude}}</td>
-        <td style="margin-right: 5px;">{{$order->confirmed}}</td>
-        <td style="margin-right: 5px;">{{$order->completed}}</td>
-      </tr>
-      @endforeach
-    </table>
-  </div>
-</div>
 
 @endsection
 <script
