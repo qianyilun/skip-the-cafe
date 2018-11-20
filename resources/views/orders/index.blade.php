@@ -78,7 +78,7 @@
                 <li class="list-group-item list-group-item-action">
                   <a href="{{route('orders.show', $order->id)}}">{{$order->title}}</a>
                   
-                  <a href="{{url('comment/' . $order->id)}}"><button class="btn btn-success">Contact taker</button></a>
+                  <a href="{{url('comment/' . $order->id)}}"><button class="btn btn-success">Leave a comment for the taker</button></a>
                   
                 </li>
               @endif

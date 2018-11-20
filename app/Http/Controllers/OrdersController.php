@@ -220,12 +220,43 @@ class OrdersController extends Controller
      * this action is for displaying orders.comment view
      * @param  int  $id
      */
-    public function commentOrder(Request $request, $id)
+    public function displayCommentForm(Request $request, $id)
     {
+      if(auth()->user() == null) {
+        return redirect('/')->with('error', 'You need to login in order to leave comment'); 
+      }
       // the input $id is refering to the order id
       $order = Order::findOrFail($id);
       return view('orders.comment', compact('order'));
     }
+
+
+    /**
+     * 
+     * this action is for handling the comment form submission
+     * @param  int  $id
+     */
+    public function submitCommentForm(Request $request)
+    {
+      // the input $id is refering to the order id
+      $request->validate([
+        'comment' => 'required',
+        'orderId' => 'required'
+      ]);
+      // if user is not authorized, then kick him out of the site.
+      if(auth()->user() == null) {
+        return redirect('/')->with('error', 'You need to login in order to leave comment'); 
+      }
+      try {
+        $order = Order::where('id', $request->orderId)->update(['comment'=> $request->comment]);
+      } catch( \Exception $e) {
+        return redirect('/orders')->with('error', 'Fail to update comment Error: '.$e);
+      }
+      
+      return redirect('/orders')->with('success', 'Comment submitted! Thank you for taking the time, your comment is important to both the platform and the taker:)');
+    }
+
+
     /**
      * assign the specified order to the currently logged in user.
      * this action is for responding to the ajax call from orders.index view
