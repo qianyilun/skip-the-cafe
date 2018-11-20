@@ -127,8 +127,17 @@ class OrdersController extends Controller
         $order->latitude = $request->latitude;
         $order->user_id = auth()->user()->id; // this is how you access logged in user's id
 
-        $order->save();
+        
 
+        // update order owner's wallet
+        $user = User::where('id', $order->user_id)->first();
+        $remainWallet = $user->wallet - $order->price;
+        if($remainWallet < 0) {
+          return redirect('/')->with('error', 'Insufficient funds in your wallet, there is no free meal in this world:)');
+        }
+        $user->wallet = $remainWallet;
+        $user->save();
+        $order->save();
         // if a random free order is the order we just saved, display a pop up window to ask users to share this news with their friends to promopt our site
         if($bingoNumber == $randomNumber) {
           return redirect('/orders')->with('modal', true);
