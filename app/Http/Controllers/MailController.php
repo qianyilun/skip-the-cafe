@@ -12,6 +12,8 @@ use App\Order;
 class MailController extends Controller
 {
     /**
+     * Send confirmation email after a new order is created
+     *
      * @param $orderTitle
      */
 
@@ -31,18 +33,11 @@ class MailController extends Controller
     }
 
     /**
-     * A sample function for sending a hardcode email when necessary
+     * Send email to notify order owner his order has been taken by taker
+     *
+     * @param $ownerId
+     * @param $orderTitle
      */
-    public function send() {
-        $data = [
-           'title' => 'Order submitted and posted',
-           'content' => 'This is content'
-        ];
-        Mail::send('emails.test', $data, function($message) {
-            $message->to('qianyiluntemp@gmail.com', 'yilun qian TEST')->subject('hey tester');
-        });
-    }
-
     public function sendEmailToNotifyOrderOwner($ownerId, $orderTitle) {
         $owner = DB::table('users')->where('id', "$ownerId")->first();
         $takerName = auth()->user()->name;
@@ -59,6 +54,12 @@ class MailController extends Controller
         });
     }
 
+    /**
+     * Send email to notify owner his order has been completed
+     *
+     * @param $id
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     */
     public function sendEmailToNotifyOwnerOrderCompleted($id) {
         $order = Order::findOrFail($id);
 
@@ -83,5 +84,36 @@ class MailController extends Controller
         });
 
         return redirect('/orders');
+    }
+
+    /**
+     * Send email to order owner that his has unread message
+     *
+     * @param $id
+     */
+    public function sendEmailToRemindUserChatMessage($id) {
+        $order = Order::findOrFail($id);
+
+        $owner = DB::table('users')->where('id', "$order->user_id")->first();
+        $takerName = auth()->user()->name;
+        $orderTitle = $order->title;
+        $sendTo = $owner->email;
+        $userName = $owner->name;
+        $data = [
+            'userName' => $userName,
+            'orderTitle' => $orderTitle,
+        ];
+
+        try {
+            DB::table('orders')->where('id', $id)->update(['completed' => true]);
+        } catch (\Illuminate\Database\QueryException $e) {
+            throw $e;
+        }
+
+        Mail::send('emails.chat', $data, function($message) use ($sendTo, $userName, $takerName){
+            $message->to($sendTo, $userName)->subject("You order has been delivered by $takerName");
+        });
+
+        return ;
     }
 }

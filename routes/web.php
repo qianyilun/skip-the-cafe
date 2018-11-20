@@ -30,21 +30,24 @@ Route::get('/sendTestEmails', 'MailController@sendEmailWhenCreateNewOrder');
 Route::get('notifyOwner/{id}', 'MailController@sendEmailToNotifyOwnerOrderCompleted')->name('notifyOwner');
 
 
-/**
- * A test router for sending emails, also with an anonymous function
- */
-Route::get('/sendTestEmails', function () {
-   $data = [
-       'title' => 'Order submitted and posted',
-       'content' => 'This is content'
-   ];
+Route::get('/chat', 'ChatController@index')->name('chat');
+Route::get('/private/{id}', 'DirectionController@private')->name('private');
+Route::get('/users/{id}', 'HomeController@users')->name('users');
+Route::get('/allUsers', 'HomeController@allUsers')->name('allUsers');
+Route::get('/privateChatBox', 'HomeController@privateChatBox')->name('privateChatBox');
 
-   Mail::send('emails.test', $data, function($message) {
-       $message->to('qianyiluntemp@gmail.com', 'yilun qian')->subject('hey');
-   });
-});
+Route::get('messages', 'MessageController@fetchMessages');
+Route::post('messages', 'MessageController@sendMessage');
+Route::get('/private-messages/{user}', 'MessageController@privateMessages')->name('privateMessages');
+Route::post('/private-messages/{user}', 'MessageController@sendPrivateMessage')->name('privateMessages.store');
 
-//Route::get('/sendNewOrderEmail', 'MailController@send');
+// Admin
+Route::get('/admin', 'AdminController@admin')
+    ->middleware('is_admin')
+    ->name('admin');
+Route::get('/testadmin', 'AdminController@testAdmin')->name('testAdmin');
+Route::get('admin/user/{id}/orders', 'OrdersController@getUserOrders');
+
 /*
 |--------------------------------------------------------------------------
 | Testing Routes
