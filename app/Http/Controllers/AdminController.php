@@ -13,18 +13,19 @@ class AdminController extends Controller
     }
 
     public function admin() {
+        $currentUser = auth()->user();
         $orders = $this->getAllOrders();
         $users = $this->getAllUsers();
 
-        return view('admin')->with(['orders' => $orders, 'users' => $users]);
+        return view('admin', compact('orders', 'users', 'currentUser'));
     }
 
     public function testAdmin() {
+        $currentUser = auth()->user();
         $orders = $this->getAllOrders();
         $users = $this->getAllUsers();
 
-        // `run "User::where('email', 'youremail.com')->update(['type'=>'admin']);" in tinker to make a user administrator`
-        return view('admin')->with(['orders' => $orders, 'users' => $users]);
+        return view('admin', compact('orders', 'users', 'currentUser'));
     }
 
     private function getAllOrders() {
@@ -35,5 +36,13 @@ class AdminController extends Controller
     private function getAllUsers() {
         $users = User::all();
         return $users;
+    }
+
+    public function grantAdmin($id) {
+        $user = User::findOrFail($id);
+        $user->type = 'admin';
+        $user->save();
+
+        return redirect('/admin');
     }
 }

@@ -55,6 +55,9 @@
                         <td>{{$user->type}}</td>
                         <td>
                             <a href="admin/user/{{$user->id}}/orders">View Orders</a>
+                            @if ($user->type !== 'admin')
+                            <a href="admin/user/{{$user->id}}/grantadmin">Grant Admin</a>
+                            @endif
                         </td>
                     </tr>
                 @endforeach
