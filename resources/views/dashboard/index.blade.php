@@ -314,7 +314,7 @@
                                             data: {
                                                 labels: weekly_x,
                                                 datasets: [{ 
-                                                    data: [86,114,106,333,0,555,666],
+                                                    data: {{json_encode($weekly_delivery_count)}},
                                                     label: "delivery",
                                                     borderColor: "#3e95cd",
                                                     fill: false
