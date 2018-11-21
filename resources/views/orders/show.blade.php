@@ -43,7 +43,7 @@
             <a class="btn btn-primary btn-block" href="{{route('orders.edit', $order->id)}}">Edit</a>
             @endif
             @if ($isOrderCreator)
-                <a class="btn btn-primary btn-block" href="{{route('chatWithAdmin')}}">Chat with Customer Service</a>
+                <a class="btn btn-primary btn-block" href="{{route('chatWithAdmin')}}" target="_blank">Chat with Customer Service</a>
             @endif
         </div>
     </div>
