@@ -28,6 +28,14 @@ class DashboardController extends Controller
         $weekly_order_count[6-$i] = $order_count;
       };
 
+      $weekly_order_spend = [0,1,2,3,4,5,6];
+      foreach ($weekly_order_spend as $i){
+        $day = Carbon::now()->subDays($i);
+        $order = Order::whereDate('created_at', $day)->where('owner', $user->name)->get();
+        $order_spend= $order->sum('price');
+        $weekly_order_spend[6-$i] = $order_spend;
+      };
+
 
 
 
@@ -41,9 +49,8 @@ class DashboardController extends Controller
 
 
       return view('dashboard.index',
-             compact('user', 'ordersPostedByUser', 'completedOrdersPostByUser', 'incompletedOrdersTakenByUser', 
-                     'completedOrdersTakenByUser', 'orders', 'currentUserlongitude', 'currentUserlatitude',
-                     'weekly_order_count'));
+             compact('user', "ordersPostedByUser",
+                     'weekly_order_count','weekly_order_spend'));
 
     }
 }
