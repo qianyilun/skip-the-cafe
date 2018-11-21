@@ -73,6 +73,26 @@ class DashboardController extends Controller
         }
       };
 
+      $weekly_store_count_delivery = [0,0,0,0,0];
+      for($i=0; $i<7; $i++){
+        $day = Carbon::now()->subDays($i);
+        $orders = Order::whereDate('created_at', $day)->where('taker', $user->id)->get();
+        
+        foreach ($orders as $key => $order) {
+          $flag=true;
+          for($j=0; $j<4; $j++){
+            if ( strpos( strtolower($order->item), strtolower($stores[$j]) ) !== false) {
+              $weekly_store_count_delivery[$j] += 1;
+              $flag=false;
+            }
+          }
+          if ($flag){
+            $weekly_store_count_delivery[4] += 1;
+            $flag=true;
+          }
+        }
+      };
+
 
       $ordersPostedByUser = Order::where('owner', $user->name)->get();
       $ordersDeliveriedByUser = Order::where('taker', $user->id)->get();
@@ -89,7 +109,7 @@ class DashboardController extends Controller
              compact('user', "ordersPostedByUser", "ordersDeliveriedByUser",
                      'weekly_order_count','weekly_order_spend',
                      'weekly_delivery_count','weekly_delivery_earn',
-                     'weekly_store_count'));
+                     'weekly_store_count','weekly_store_count_delivery'));
 
     }
 }
