@@ -69,4 +69,23 @@ class AdminController extends Controller
         $user->delete();
         return redirect('/admin');
     }
-}
+
+    public function createUser() {
+        return view('admin.createuser');
+    }
+
+    public function storeUser(Request $request) {
+        $user = new User;
+        $request->validate([
+            'name' => 'required',
+            'email' => 'required',
+            'type' => 'required'
+        ]);
+
+        $user->name = $request->name;
+        $user->email = $request->email;
+        $user->type = $request->type;
+        $user->save();
+
+        return redirect('/admin');
+    }}
