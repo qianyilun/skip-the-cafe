@@ -90,25 +90,6 @@
           
       <hr style="border-top: 3px solid rgba(0,0,0,.1);">
 
-      <h3>Order Posted By You</h3>
-      @if (count($ordersPostedByUser) > 0)
-        <h5>All Orders you have posted</h5>
-        <ul class="list-group list-group-flush">
-            {{-- this is for displaying the orders that are created by the currently logged in user --}}
-            @foreach($ordersPostedByUser as $order)
-              @if ($order->owner === $user->name)
-                <li class="list-group-item list-group-item-action">
-                  <a href="{{route('orders.show', $order->id)}}">{{$order->title}}</a>
-                  @if ($order->taker != '' && $order->taker != null)
-                  <a href="{{url('comment/' . $order->id)}}"><button class="btn btn-success">Leave a comment for the taker</button></a>
-                  @endif
-                </li>
-              @endif
-            @endforeach
-        </ul>
-      @else
-        <h5>You currently have not placed any orders. Try to Create one.</h5>
-      @endif
 
       {{--@if (count($completedOrdersPostByUser) > 0)--}}
         {{--<h5>Orders you have posted and is completed</h5>--}}
