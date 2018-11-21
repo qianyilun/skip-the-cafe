@@ -26,6 +26,7 @@ Route::get('auth/{provider}/callback', 'Auth\AuthController@handleProviderCallba
 
 // Routes for order CRUD
 Route::resource('orders', 'OrdersController');
+Route::get('allOrders', 'OrdersController@allOrders')->name('allOrders');
 
 Route::post('orders/take/{id}', 'OrdersController@takeOrder'); // this route is for receiving ajax call from orders.index view
 Route::get('comment/{id}', 'OrdersController@displayCommentForm')->name('comment'); // this route is for displaying comment form

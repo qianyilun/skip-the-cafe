@@ -41,6 +41,10 @@
           <a href="{{route('orders.create')}}">
             <button class="btn btn-primary btn-lg btn-block"> New Order</button>
           </a>
+          <br>
+          <a href="{{route('allOrders')}}">
+            <button class="btn btn-primary btn-lg btn-block"> All Orders</button>
+          </a>
       </div>
     </div>
     

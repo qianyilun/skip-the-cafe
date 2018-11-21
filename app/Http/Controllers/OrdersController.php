@@ -152,7 +152,21 @@ class OrdersController extends Controller
           return redirect('/orders')->with('modal', 'hasModal');
         }
 
-        return redirect('/orders')->with('modal', 'hasNoModal');
+        return redirect('allOrders')->with('modal', 'hasNoModal');
+    }
+
+    public function allOrders()
+    {
+      if(auth()->user() === null) {
+        return redirect('/')->with('error', 'You need to login in order to view/create order.'); 
+      }
+      $user = null;
+      if(auth()->user() !== null) {
+        $user = auth()->user();
+      }
+      $uncompletedOrdersPostByUser = Order::where('owner', $user->name)->where('completed', false)->get();
+
+      return view('orders.allOrders', compact('uncompletedOrdersPostByUser'));
     }
 
     /**

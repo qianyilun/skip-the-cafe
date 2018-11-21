@@ -124,6 +124,11 @@
                                 @endif
                             </li>
                         @else
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('dashboard') }}">
+                                        {{ __('Dashboard') }}
+                                </a>
+                            </li>
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                     Chat <span class="caret"></span>
@@ -146,10 +151,6 @@
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                                     <a class="dropdown-item" href="{{ route('profile') }}">
                                         {{ __('Profile') }}
-                                    </a>
-
-                                    <a class="dropdown-item" href="{{ route('dashboard') }}">
-                                        {{ __('Dashboard') }}
                                     </a>
                                     
                                     <a class="dropdown-item" href="{{ route('logout') }}"
@@ -188,7 +189,7 @@
                                     <a class="nav-link active" id="order-tab" data-toggle="tab" href="#order-charts" role="tab">Order</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" id="expend-tab" data-toggle="tab" href="#expend-charts" role="tab">Expend</a>
+                                    <a class="nav-link" id="expend-tab" data-toggle="tab" href="#expend-charts" role="tab">Cost</a>
                                 </li>
                                 {{-- <li class="nav-item">
                                     <a class="nav-link" id="3-tab" data-toggle="tab" href="#b" role="tab" >3</a>
