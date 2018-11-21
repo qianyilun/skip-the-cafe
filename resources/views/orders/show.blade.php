@@ -40,7 +40,7 @@
                 @endif
             </dl>
             @if ($isAdmin || $isOrderCreator)
-            <a class="btn btn-primary btn-block" href="{{route('orders.edit', $order->id)}}">Edit</a>
+            <a class="btn btn-success btn-block" href="{{route('orders.edit', $order->id)}}">Edit</a>
             @endif
             @if ($isOrderCreator)
                 <a class="btn btn-primary btn-block" href="{{route('chatWithAdmin')}}" target="_blank">Chat with Customer Service</a>

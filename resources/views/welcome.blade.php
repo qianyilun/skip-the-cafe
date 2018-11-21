@@ -15,7 +15,7 @@
                 </div>
                 <div>
                     <br>
-                    <a class="btn btn-primary btn-lg btn-block" href="{{route('orders.index')}}">View All Orders</a>
+                    <a class="btn btn-info btn-lg btn-block" href="{{route('orders.index')}}">View All Orders</a>
                     <br>
                     <a class="btn btn-primary btn-lg btn-block" href="{{route('orders.create')}}">New Order</a>
                     <br>
