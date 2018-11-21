@@ -39,14 +39,11 @@
 <div class="content">
 </div>
 
-
 <div class="row">
   <div class="col-md-7">
     <div class="row">
       <div class="col-md-12">
-        <div id="map" style="height:300px; width:100%;"></div>
-        <br>
-        <br>
+        <div id="map" style="height:600px; width:100%;"></div>
         <br>
       </div>
     </div>
@@ -64,7 +61,7 @@
       <h3>All available orders</h3>
         {{-- <h6>TODO: This Page should display all orders submitted by the current user</h6> --}}
         @if (count($availableOrders) > 0)
-          <ul class="list-group list-group-flush" id="listOfTakeButtons">
+          <ul class="list-group" id="listOfTakeButtons">
             @foreach($availableOrders as $availableOrder)
               <li class="list-group-item list-group-item-action">
                 {{-- <a href="{{route('orders.show', $order->id)}}">{{$order->title}}</a>
@@ -93,7 +90,7 @@
       <h3>Order Posted By You</h3>
       @if (count($ordersPostedByUser) > 0)
         <h5>All Orders you have posted</h5>
-        <ul class="list-group list-group-flush">
+        <ul class="list-group">
             {{-- this is for displaying the orders that are created by the currently logged in user --}}
             @foreach($ordersPostedByUser as $order)
               @if ($order->owner === $user->name)
@@ -109,46 +106,6 @@
       @else
         <h5>You currently have not placed any orders. Try to Create one.</h5>
       @endif
-
-      {{--@if (count($completedOrdersPostByUser) > 0)--}}
-        {{--<h5>Orders you have posted and is completed</h5>--}}
-        {{--<ul class="list-group list-group-flush">--}}
-          {{--@foreach($completedOrdersPostByUser as $order)--}}
-              {{--<li class="list-group-item list-group-item-action">--}}
-                {{--<a href="{{route('orders.show', $order->id)}}">{{$order->title}}</a>--}}
-                {{--<a href="" class="btn btn-primary">Leave a review</a>--}}
-              {{--</li>--}}
-          {{--@endforeach--}}
-        {{--</ul>--}}
-      {{--@endif--}}
-
-      {{--<hr style="border-top: 3px solid rgba(0,0,0,.1);">--}}
-
-      {{--<h3>Order Taken By You</h3>--}}
-
-      {{--@if (count($incompletedOrdersTakenByUser) > 0)--}}
-        {{--<h5>Order taken by you and is in progress</h5>--}}
-        {{--<ul class="list-group list-group-flush">--}}
-          {{--@foreach($incompletedOrdersTakenByUser as $order)--}}
-            {{--<li class="list-group-item list-group-item-action">--}}
-              {{--<a href="{{route('orders.show', $order->id)}}">{{$order->title}}</a>--}}
-              {{--<a href="" class="btn btn-primary">Complete</a>--}}
-            {{--</li>--}}
-          {{--@endforeach--}}
-        {{--</ul>--}}
-      {{--@endif--}}
-
-      {{--@if (count($completedOrdersTakenByUser) > 0)--}}
-        {{--<h5>Order Completed by you</h5>--}}
-        {{--<ul class="list-group list-group-flush">--}}
-          {{--@foreach($completedOrdersTakenByUser as $order)--}}
-            {{--<li class="list-group-item list-group-item-action">--}}
-              {{--<a href="{{route('orders.show', $order->id)}}">{{$order->title}}</a>--}}
-            {{--</li>--}}
-          {{--@endforeach--}}
-        {{--</ul>--}}
-      {{--@endif--}}
-
       @else
         <p>You need to login to view all orders you have submitted.</p>
     </div>
