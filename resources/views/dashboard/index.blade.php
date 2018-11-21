@@ -200,7 +200,7 @@
                                             data: {
                                                 labels: weekly_x,
                                                 datasets: [{ 
-                                                    data: [86,114,106,333,0,555,666],
+                                                    data:  {{json_encode($weekly_order_count)}},
                                                     label: "orders",
                                                     borderColor: "#3e95cd",
                                                     fill: false
