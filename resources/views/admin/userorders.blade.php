@@ -26,13 +26,19 @@
                         <td>{{$order->latitude}}</td>
                         <td>{{$order->longitude}}</td>
                         <td>
-                            <a href="{{route('orders.show', $order->id)}}">View</a>
-                            <a href="{{route('orders.edit', $order->id)}}">Edit</a>
+                            <a href="{{route('orders.show', $order->id)}}">
+                                <button type="button" class="btn btn-info btn-sm">View</button>
+                            </a>
+                            <a href="{{route('orders.edit', $order->id)}}">
+                                <button type="button" class="btn btn-success btn-sm">Edit</button>
+                            </a>
                         </td>
                     </tr>
                 @endforeach
             </table>
-            <a href="/admin">Back to Admin</a>
+            <a href="/admin">
+                <button type="button" class="btn btn-secondary btn-sm">Back</button>
+            </a>
         </div>
 
 @endsection
