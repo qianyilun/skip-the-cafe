@@ -10,7 +10,7 @@
             {{-- <a class="nav-link" id="v-pills-settings-tab" data-toggle="pill" href="#v-pills-settings" role="tab" aria-controls="v-pills-settings" aria-selected="false">Settings</a> --}}
         </div>
     </div>
-
+    
     <div class="col-md-7">
         <div class="tab-content" id="v-pills-tabContent">
             <div class="tab-pane fade show active" id="v-pills-basic-info" role="tabpanel" aria-labelledby="v-pills-baic-info-tab">
@@ -112,7 +112,7 @@
                                 <small>${{$order->price}}</small>
                             </div>
                             <div>
-                                @if ($order->completed == 1 )
+                                @if ($order->completed == 0 )
                                     <a href="{{ url('/showDirection/'. $order->id) }}"><button type="button" class="btn btn-success btn-sm">Completed the order</button></a>
                                 @endif
                             </div>
