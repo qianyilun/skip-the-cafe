@@ -356,7 +356,7 @@
                                             datasets: [{
                                                 label: "delivery times:",
                                                 backgroundColor: ["#3e95cd", "#8e5ea2","#3cba9f","#e8c3b9","#c45850"],
-                                                data: [2,3,10,4,7,0]
+                                                data: {{json_encode($weekly_store_count_delivery)}}
                                             }]
                                             },
                                             options: {
