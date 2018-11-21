@@ -81,7 +81,7 @@
                             </div>
                             <div>
                                 @if ($order->completed == 0)
-                                    <span class="badge badge-pill badge-info">Not Dleivery yet</span>
+                                    <span class="badge badge-pill badge-info">Not Delivery yet</span>
                                 @else
                                     <span class="badge badge-pill badge-info">Delivered</span>
                                 @endif 
