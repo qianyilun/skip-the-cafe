@@ -62,10 +62,9 @@
                     @foreach ($ordersPostedByUser as $order)
                         <div class="list-group-item list-group-item-action flex-column align-items-start">
                             <div class="d-flex w-100 justify-content-between">
-
                                 <h4 class="mb-1">
                                     <a href="{{route('orders.show', $order->id)}}">{{$order->title}}</a>
-                                    </h4>
+                                </h4>
                                 <small>{{$order->created_at}}</small>
                             </div>
                             <div>
@@ -98,17 +97,26 @@
 
                 <div class="list-group">
                     @foreach ($OrdersTakenByUser as $order)
-                        <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+                        <div class="list-group-item list-group-item-action flex-column align-items-start">
                             <div class="d-flex w-100 justify-content-between">
                                 <h4 class="mb-1">{{$order->title}}</h4>
                                 <small>{{$order->created_at}}</small>
+                            </div>
+                            <div>
+                                @if ($order->completed == 0)
+                                    <span class="badge badge-pill badge-info">Not Dleivery yet</span>
+                                @endif 
                             </div>
                             <div class="d-flex w-150 justify-content-between">
                                 <p class="mb-1">Description: {{$order->description}}</p>
                                 <small>${{$order->price}}</small>
                             </div>
-                        </a>
-                        <a href="{{ url('/showDirection/'. $order->id) }}">asfasdf</a>
+                            <div>
+                                @if ($order->completed == 1 )
+                                    <a href="{{ url('/showDirection/'. $order->id) }}"><button type="button" class="btn btn-success btn-sm">Completed the order</button></a>
+                                @endif
+                            </div>
+                        </div>
                     @endforeach
                 </div>
             </div>
