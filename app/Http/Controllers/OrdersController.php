@@ -149,7 +149,7 @@ class OrdersController extends Controller
 
         
         if($bingoNumber == $randomNumber) {
-          return redirect('allOrders')->with('modal', 'hasModal');
+          return redirect('/orders')->with('modal', 'hasModal');
         }
 
         return redirect('allOrders')->with('modal', 'hasNoModal');
