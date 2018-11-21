@@ -23,6 +23,7 @@ Vue.component('example-component', require('./components/ExampleComponent.vue'))
 Vue.component('Chat', require('./components/Chat.vue'));
 Vue.component('PrivateChat', require('./components/PrivateChat.vue'));
 Vue.component('PrivateChatBox', require('./components/PrivateChatBox.vue'));
+Vue.component('ChatWithAdmin', require('./components/ChatWithAdmin.vue'));
 
 const app = new Vue({
     el: '#app'

@@ -38,6 +38,8 @@ Route::post('/autocomplete/fetch', 'AutocompleteController@fetch')->name('autoco
 Route::get('/chat', 'GroupChatController@index')->name('chat');
 Route::get('messages', 'GroupMessageController@fetchMessages');
 Route::post('messages', 'GroupMessageController@sendMessage');
+Route::get('/findAdmin', 'HomeController@findAdmin')->name('findAdmin');
+Route::get('/chatWithAdmin', 'HomeController@chatWithAdmin')->name('chatWithAdmin');
 
 Route::get('/private/{id}', 'DirectionController@private')->name('private');
 Route::get('/users/{id}', 'HomeController@users')->name('users');
