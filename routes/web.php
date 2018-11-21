@@ -33,6 +33,7 @@ Route::post('comment', 'OrdersController@submitCommentForm'); // this route is f
 Route::get('showDirection/{id}', 'DirectionController@showDirection')->name('showDirection');
 Route::get('/sendTestEmails', 'MailController@sendEmailWhenCreateNewOrder');
 Route::get('notifyOwner/{id}', 'MailController@sendEmailToNotifyOwnerOrderCompleted')->name('notifyOwner');
+Route::get('sendShareEmail', 'MailController@sendEmailToShareFreeOrder')->name('sendShareEmail');
 Route::post('/autocomplete/fetch', 'AutocompleteController@fetch')->name('autocomplete.fetch');
 
 Route::get('/chat', 'GroupChatController@index')->name('chat');
