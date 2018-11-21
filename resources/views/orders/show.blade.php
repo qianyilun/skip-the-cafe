@@ -39,7 +39,9 @@
 
                 @endif
             </dl>
-        <a class="btn btn-primary btn-block" href="{{route('orders.edit', $order->id)}}">Edit</a>
+            @if ($isAdmin || $isOrderCreator)
+            <a class="btn btn-primary btn-block" href="{{route('orders.edit', $order->id)}}">Edit</a>
+            @endif
         </div>
     </div>
 @endsection
