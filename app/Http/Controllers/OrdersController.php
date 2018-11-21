@@ -166,7 +166,10 @@ class OrdersController extends Controller
         $user = auth()->user();
         $isAdmin = $user->type === "admin" ? true : false;
         $order = Order::findOrFail($id);
-        return view('orders.show', compact('order', 'isAdmin'));
+
+        $isOrderCreator = $order->user->id === $user->id ? true : false;
+
+        return view('orders.show', compact('order', 'isAdmin', 'isOrderCreator'));
     }
 
     /**
@@ -180,7 +183,11 @@ class OrdersController extends Controller
         $user = auth()->user();
         $isAdmin = $user->type === "admin" ? true : false;
         $order = Order::findOrFail($id);
-        return view('orders.edit', compact('order', 'isAdmin'));
+        $isOrderCreator = $order->user->id === $user->id ? true : false;
+        if (!$isOrderCreator && !$isAdmin) {
+            return redirect('orders.show');
+        }
+        return view('orders.edit', compact('order', 'isAdmin', 'isOrderCreator'));
     }
 
     /**

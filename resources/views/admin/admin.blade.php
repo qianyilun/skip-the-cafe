@@ -36,6 +36,7 @@
             @endforeach
         </table>
         <h2>View All Users</h2>
+        <a href="admin/user/create">Create User</a>
         <table class="table">
             <tr>
                 <th>user id</th>
