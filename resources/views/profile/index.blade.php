@@ -17,7 +17,7 @@
                 <div class="card">
                     <div class="card-header">
                         Your Profile
-                        @if (count($completedOrdersPostByUser) <=2 )
+                        @if (count($ordersPostedByUser) <=2 )
                             <span class="badge badge-pill badge-info">New user</span>
                         @endif
                         @if (count($completedOrdersPostByUser) >= 4)
@@ -45,7 +45,11 @@
                                 <tr>
                                     <td scope="row"><h5 class="card-title"><b class="mr-3">Total Complete Delivery:</b> </h5></td>
                                     <td><span class="card-text">{{count($completedOrdersTakenByUser)}}</span></td>
-                                    </tr>
+                                </tr>
+                                <tr>
+                                    <td scope="row"><h5 class="card-title"><b class="mr-3">User Rating:</b> </h5></td>
+                                    <td><span class="card-text">{{$average_rating}}</span></td>      
+                                </tr>
                             </tbody>
                         </table>                         
                     </div>

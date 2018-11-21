@@ -26,7 +26,18 @@ class ProfileController extends Controller
       $OrdersTakenByUser = Order::where('taker', $user->id)->get();
       $completedOrdersTakenByUser = Order::where('taker', $user->id)->where('completed', true)->get();
 
-      return view('profile.index', compact('user', 'ordersPostedByUser','completedOrdersPostByUser','OrdersTakenByUser', 'completedOrdersTakenByUser'));
+      $total_rating = 0.0;
+      $total_rating_count = 0;
+      foreach ($OrdersTakenByUser as $order){
+        if($order->rating > 0){
+          $total_rating += $order->rating;
+          $total_rating_count += 1;
+        }
+      }
+      $average_rating = $total_rating/$total_rating_count;
+
+      return view('profile.index', compact('user', 'ordersPostedByUser','completedOrdersPostByUser',
+                  'OrdersTakenByUser', 'completedOrdersTakenByUser','average_rating'));
 
     }
 }
