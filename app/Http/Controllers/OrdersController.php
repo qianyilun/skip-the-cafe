@@ -136,7 +136,6 @@ class OrdersController extends Controller
         // for demo purpose
         $bingoNumber = 2;
         $randomNumber = random_int(1,2);
-        // $randomNumber = 2; // uncomment this to see how a pop up looks like
         // if a random free order is the order we just saved, display a pop up window to ask users to share this news with their friends to promopt our site
         if($bingoNumber == $randomNumber) {
           $user->wallet = $userWalletBefore; // if the order is free then no charge for the order
@@ -256,9 +255,6 @@ class OrdersController extends Controller
       $order = Order::findOrFail($id);
       $takerId = $order->taker;
       $userName = User::where('id', $takerId)->first()->name;
-      // Log::alert('message!!! '.$user);
-      // Log::alert('message2222 '.$user->name);
-      // $userName = $user->name;
       return view('orders.comment', compact('order', 'userName'));
     }
 
