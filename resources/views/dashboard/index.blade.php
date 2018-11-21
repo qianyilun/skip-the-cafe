@@ -154,7 +154,6 @@
                 </div>
             </div>
         </nav>
-        {{-- {{ $ordersPostedByUser}} --}}
         <main class="py-4">
           <div class="container">
             <div class="row">
@@ -185,10 +184,21 @@
                                 <div class="tab-pane fade show active" id="order-charts" role="tabpanel" >
                                     <canvas id="order-total-chart" width="800" height="450"></canvas>
                                     <script>
+                                        var date = new Date();
+                                        const DAY = 1000 * 60 * 60 * 24;
+                                        var weekly_x = []
+                                        for (let i = 0; i < 7; i++) {
+                                            var month = date.getUTCMonth() + 1; //months from 1-12
+                                            var day = date.getUTCDate();
+
+                                            newdate = month + "/" + day;
+                                            weekly_x.unshift(newdate);
+                                            date.setTime(date.getTime() - DAY);
+                                        }
                                         new Chart(document.getElementById("order-total-chart"), {
                                             type: 'line',
                                             data: {
-                                                labels: ["9/11","9/11","9/09","today","9/11","9/11","9/11"],
+                                                labels: weekly_x,
                                                 datasets: [{ 
                                                     data: [86,114,106,333,0,555,666],
                                                     label: "orders",
@@ -235,7 +245,7 @@
                                         new Chart(document.getElementById("total-spend-chart"), {
                                             type: 'line',
                                             data: {
-                                                labels: ["9/11","9/11","9/09","today","9/11","9/11","9/11"],
+                                                labels: weekly_x,
                                                 datasets: [{ 
                                                     data: [13.45,4,0,3.33,7,3,19],
                                                     label: "cost($)",
@@ -302,7 +312,7 @@
                                         new Chart(document.getElementById("delivery-total-chart"), {
                                             type: 'line',
                                             data: {
-                                                labels: ["9/11","9/11","9/09","today","9/11","9/11","9/11"],
+                                                labels: weekly_x,
                                                 datasets: [{ 
                                                     data: [86,114,106,333,0,555,666],
                                                     label: "delivery",
@@ -349,7 +359,7 @@
                                         new Chart(document.getElementById("total-earn-chart"), {
                                             type: 'line',
                                             data: {
-                                                labels: ["9/11","9/11","9/09","today","9/11","9/11","9/11"],
+                                                labels: weekly_x,
                                                 datasets: [{ 
                                                     data: [13.45,4,0,3.33,7,3,19],
                                                     label: "earn($)",
