@@ -29,7 +29,7 @@
     </div>
     <br>
     <a href="{{route('notifyOwner', ['id' => $id])}}">
-      <button style="width: 100%; margin-bottom: 20px;" class="btn btn-primary">Complete order, notify the order owner</button>
+      <button style="width: 100%; margin-bottom: 20px;" class="btn btn-success">Complete order and notify the order owner</button>
     </a>
     <a href="{{route('private', ['id' => $id])}}">
       <button style="width: 100%; margin-bottom: 20px;" class="btn btn-primary">Chat</button>
