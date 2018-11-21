@@ -89,8 +89,9 @@ class OrdersController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse
+     * @throws \Exception
      */
     public function store(Request $request)
     {
@@ -240,9 +241,11 @@ class OrdersController extends Controller
 
 
     /**
-     * 
-     * this action is for displaying orders.comment view
-     * @param  int  $id
+     * This action is for displaying orders.comment view
+     *
+     * @param Request $request
+     * @param $id
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\Http\RedirectResponse|\Illuminate\View\View
      */
     public function displayCommentForm(Request $request, $id)
     {
@@ -259,11 +262,11 @@ class OrdersController extends Controller
       return view('orders.comment', compact('order', 'userName'));
     }
 
-
     /**
-     * 
      * this action is for handling the comment form submission
-     * @param  int  $id
+     *
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function submitCommentForm(Request $request)
     {
@@ -289,8 +292,9 @@ class OrdersController extends Controller
 
 
     /**
-     * assign the specified order to the currently logged in user.
+     * Assign the specified order to the currently logged in user.
      * this action is for responding to the ajax call from orders.index view
+     *
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
