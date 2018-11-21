@@ -1,7 +1,17 @@
 @extends('layouts.app')
 
 @section('content')
-<h2>All Orders</h2>
+
+<div class="row">
+    <div class="col-md-9">
+        <h2>All Orders</h2>
+    </div>
+
+    <div class="col-md-3">
+        <a class="btn btn-primary" href="{{route('chatWithAdmin')}}" target= "_blank">Chat with Customer Service</a>
+    </div>
+</div>
+<br>
 
 <div class="row">
     <div class="col-md-1"></div>
