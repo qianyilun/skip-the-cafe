@@ -127,4 +127,22 @@ class MailController extends Controller
 
         return ;
     }
+
+    /**
+     * Send email to order owner that his has unread message
+     *
+     * @param $id
+     */
+    public function sendEmailToShareFreeOrder() {
+        $data = [
+            'userName' => '',
+            'orderTitle' => '',
+        ];
+
+        Mail::send('emails.chat', $data, function($message) {
+            $message->to()->subject("You order is free!");
+        });
+
+        return ;
+    }
 }
