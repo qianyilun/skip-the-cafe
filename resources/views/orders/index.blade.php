@@ -49,19 +49,13 @@
   </div>
   <div class="col-md-5">
     @if ($user !== null)
-      <h3>All available orders</h3>
+      <h3>We Suggested Orders</h3>
+      <h20>-- Skip the cafe has already automatically filtered the orders that are nearby</h20>
         {{-- <h6>TODO: This Page should display all orders submitted by the current user</h6> --}}
         @if (count($availableOrders) > 0)
           <ul class="list-group" id="listOfTakeButtons">
             @foreach($availableOrders as $availableOrder)
               <li class="list-group-item list-group-item-action">
-                {{-- <a href="{{route('orders.show', $order->id)}}">{{$order->title}}</a>
-                <span>Order owner: {{$order->owner}}</span>
-                @if ($order->owner !== $user->name)
-                <a href="" class="btn btn-default">
-                <button class="btn btn-primary" id="{{$order->id}}">Take</button>
-                </a>
-                @endif --}}
                 <span>Order title: <b>{{$availableOrder->title}}</b> </span><br>
                 <span>Order item: <b>{{$availableOrder->item}}</b> </span><br>
                 <span>Address: <b>{{$availableOrder->address}}</b> </span><br>
@@ -198,7 +192,6 @@
 });
 // if this order is free order, display a pop up
 $(document).ready(function() {
-//   var freeOrNot = "{{session('modal')}}";
   var modal = $('.modal.fade.bs-example-modal-lg').attr('id');
   if(modal == 'hasModal') {
     $('#modalButton').click();
