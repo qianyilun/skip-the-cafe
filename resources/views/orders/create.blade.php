@@ -34,6 +34,9 @@
           <input type="hidden" id="hiddenLatitude" value="" name="latitude" />
           {{csrf_field()}}
           <input class="btn btn-primary" type="submit" name="submit">
+          <a href="/orders">
+            <button type="button" class="btn btn-secondary">Back</button>
+          </a>
         </form>
       </div>
     </div>
