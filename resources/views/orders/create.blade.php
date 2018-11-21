@@ -67,8 +67,8 @@ $(document).ready(function(){
   });
 
   $(document).ready(function(){
-
-  $('#inputItem').keyup(function(){ 
+    // following code is for autocomplete in the "item" input box
+    $('#inputItem').keyup(function(){ 
         var query = $(this).val();
         if(query != '')
         {
