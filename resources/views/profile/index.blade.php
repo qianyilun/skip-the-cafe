@@ -70,6 +70,8 @@
                             <div>
                                 @if ($order->completed == 0)
                                     <span class="badge badge-pill badge-info">Not Dleivery yet</span>
+                                @else
+                                    <span class="badge badge-pill badge-info">Dleivery</span>
                                 @endif 
                                 @if ($order->taker == NULL)
                                     <span class="badge badge-pill badge-info">No taker</span>
@@ -80,8 +82,10 @@
                                 <small>${{$order->price}}</small>
                             </div>
                             <div>
-                                @if ($order->taker != '' && $order->taker != null && $order->completed == 1 )
+                                @if ($order->taker != '' && $order->taker != null && $order->completed == 1 && $order->comment == NULL )
                                     <a href="{{url('comment/' . $order->id)}}"><button type="button" class="btn btn-success btn-sm">Leave a comment for the taker</button></a>
+                                @else
+                                    <p class="mb-1">Owner's Comment: {{$order->comment}}</p>
                                 @endif
                             </div>
                         </div>
@@ -90,7 +94,7 @@
             </div>
             <div class="tab-pane fade" id="v-pills-delivery-history" role="tabpanel" aria-labelledby="v-pills-messages-tab">
                 <h2>Delivery History</h2>
-
+                
                 @if (count($OrdersTakenByUser) == 0)
                     <p>You haven't delivery any order yet.</p>
                 @endif
@@ -105,6 +109,8 @@
                             <div>
                                 @if ($order->completed == 0)
                                     <span class="badge badge-pill badge-info">Not Dleivery yet</span>
+                                @else
+                                    <span class="badge bage-pill badge-success">delivered</span>
                                 @endif 
                             </div>
                             <div class="d-flex w-150 justify-content-between">
@@ -113,7 +119,7 @@
                             </div>
                             <div>
                                 @if ($order->completed == 0 )
-                                    <a href="{{ url('/showDirection/'. $order->id) }}"><button type="button" class="btn btn-success btn-sm">Completed the order</button></a>
+                                    <a href="{{ url('/showDirection/'. $order->id) }}"><button type="button" class="btn btn-success btn-sm">Confirm the order</button></a>
                                 @endif
                             </div>
                         </div>
