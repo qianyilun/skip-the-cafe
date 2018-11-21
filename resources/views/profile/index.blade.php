@@ -23,8 +23,8 @@
                         @if (count($completedOrdersPostByUser) >= 4)
                             <span class="badge badge-pill badge-primary">Order King</span>
                         @endif
-                        @if (count($OrdersTakenByUser) >=4 )
-                            <span class="badge badge-pill badge-success">Delvery King</span>
+                        @if (count($OrdersTakenByUser) >=3 )
+                            <span class="badge badge-pill badge-success">Time savior</span>
                         @endif
                     </div>
                     <div class="card-body">
@@ -54,22 +54,38 @@
             <div class="tab-pane fade" id="v-pills-order-history" role="tabpanel" aria-labelledby="v-pills-profile-tab">
                 <h2>Order History</h2>
 
-                @if (count($completedOrdersPostByUser) == 0)
-                    <p>You haven't delivery any order yet.</p>
+                @if (count($ordersPostedByUser) == 0)
+                    <p>You haven't post any order yet.</p>
                 @endif
 
                 <div class="list-group">
                     @foreach ($ordersPostedByUser as $order)
-                        <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+                        <div class="list-group-item list-group-item-action flex-column align-items-start">
                             <div class="d-flex w-100 justify-content-between">
-                                <h4 class="mb-1">{{$order->title}}</h4>
+
+                                <h4 class="mb-1">
+                                    <a href="{{route('orders.show', $order->id)}}">{{$order->title}}</a>
+                                    </h4>
                                 <small>{{$order->created_at}}</small>
+                            </div>
+                            <div>
+                                @if ($order->completed == 0)
+                                    <span class="badge badge-pill badge-info">Not Dleivery yet</span>
+                                @endif 
+                                @if ($order->taker == NULL)
+                                    <span class="badge badge-pill badge-info">No taker</span>
+                                @endif 
                             </div>
                             <div class="d-flex w-150 justify-content-between">
                                 <p class="mb-1">Description: {{$order->description}}</p>
                                 <small>${{$order->price}}</small>
                             </div>
-                        </a>
+                            <div>
+                                @if ($order->taker != '' && $order->taker != null && $order->completed == 1 )
+                                    <a href="{{url('comment/' . $order->id)}}"><button type="button" class="btn btn-success btn-sm">Leave a comment for the taker</button></a>
+                                @endif
+                            </div>
+                        </div>
                     @endforeach
                 </div>
             </div>
@@ -92,6 +108,7 @@
                                 <small>${{$order->price}}</small>
                             </div>
                         </a>
+                        <a href="{{ url('/showDirection/'. $order->id) }}">asfasdf</a>
                     @endforeach
                 </div>
             </div>
