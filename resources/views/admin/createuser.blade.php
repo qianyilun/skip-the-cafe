@@ -39,7 +39,10 @@
             </div>
 
             {{csrf_field()}}
-            <input class="btn btn-primary" type="submit" name="submit">
+            <input class="btn btn-primary btn-sm" type="submit" name="submit">
+            <a href="/admin">
+                <button type="button" class="btn btn-secondary btn-sm">Back</button>
+            </a>
         </form>
 
     </div>
