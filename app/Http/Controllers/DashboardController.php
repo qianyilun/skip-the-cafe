@@ -39,8 +39,16 @@ class DashboardController extends Controller
       $weekly_delivery_count = [0,1,2,3,4,5,6];
       foreach ($weekly_delivery_count as $i){
         $day = Carbon::now()->subDays($i);
-        $order_count= count(Order::whereDate('created_at', $day)->where('taker', $user->id)->get());
-        $weekly_delivery_count[6-$i] = $order_count;
+        $delivery_count= count(Order::whereDate('created_at', $day)->where('taker', $user->id)->get());
+        $weekly_delivery_count[6-$i] = $delivery_count;
+      };
+
+      $weekly_delivery_earn = [0,1,2,3,4,5,6];
+      foreach ($weekly_delivery_earn as $i){
+        $day = Carbon::now()->subDays($i);
+        $order = Order::whereDate('created_at', $day)->where('taker', $user->id)->get();
+        $order_earn= $order->sum('price');
+        $weekly_delivery_earn[6-$i] = $order_earn;
       };
 
 
@@ -61,7 +69,7 @@ class DashboardController extends Controller
       return view('dashboard.index',
              compact('user', "ordersPostedByUser", "ordersDeliveriedByUser",
                      'weekly_order_count','weekly_order_spend',
-                     'weekly_delivery_count'));
+                     'weekly_delivery_count','weekly_delivery_earn'));
 
     }
 }
