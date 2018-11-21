@@ -60,7 +60,7 @@
                 <span>Address: <b>{{$availableOrder->address}}</b> </span><br>
                 <span>Order owner: <b>{{$availableOrder->owner}}</b> </span>
                 <a class="btn btn-default">
-                  <button class="btn btn-primary" id="{{$availableOrder->id}}">Take</button>
+                  <button class="btn btn-success" id="{{$availableOrder->id}}">Take</button>
                 </a>
               </li>
             @endforeach
