@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 use App\Order;
 use App\User;
 
@@ -79,12 +80,14 @@ class AdminController extends Controller
         $request->validate([
             'name' => 'required',
             'email' => 'required',
-            'type' => 'required'
+            'type' => 'required',
+            'password'=>'required'
         ]);
 
         $user->name = $request->name;
         $user->email = $request->email;
         $user->type = $request->type;
+        $user->password = Hash::make($request->password);
         $user->save();
 
         return redirect('/admin');
