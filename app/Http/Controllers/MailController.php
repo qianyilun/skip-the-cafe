@@ -131,18 +131,20 @@ class MailController extends Controller
     /**
      * Send email to order owner that his has unread message
      *
-     * @param $id
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
     public function sendEmailToShareFreeOrder() {
+        $user = auth()->user();
+        $sendTo = $user->email;
+        $userName = $user->name;
         $data = [
-            'userName' => '',
-            'orderTitle' => '',
+            'userName' => $user->name,
         ];
 
-        Mail::send('emails.chat', $data, function($message) {
-            $message->to()->subject("You order is free!");
+        Mail::send('emails.free_order', $data, function($message) use ($sendTo, $userName){
+            $message->to($sendTo, $userName)->subject("You order is free!");
         });
 
-        return ;
+        return redirect('/profile');
     }
 }

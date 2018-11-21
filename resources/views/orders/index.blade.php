@@ -50,7 +50,7 @@
   <div class="col-md-5">
     @if ($user !== null)
       <h3>We Suggested Orders</h3>
-      <h20>-- Skip the cafe has already automatically filtered the orders that are nearby</h20>
+      <h10>-- Skip the cafe has already automatically filtered the orders that are nearby</h10>
         {{-- <h6>TODO: This Page should display all orders submitted by the current user</h6> --}}
         @if (count($availableOrders) > 0)
           <ul class="list-group" id="listOfTakeButtons">
@@ -85,8 +85,8 @@
             <div class="modal-body">
           
             <H2>Great news!</H2>
-            <h4>Your order has been selected to be free a order. Share this news with your friends!</h4>
-              <a href="#"><button class="btn btn-primary">Share this news</button></a>
+            <h4>Your order has been selected to be a free order. Share this news with your friends!</h4>
+              <a href="sendShareEmail"><button class="btn btn-primary">Share this news</button></a>
             </div>
           </div>
         </div>
