@@ -6,13 +6,13 @@
         <h2>View All Orders</h2>
         <table class="table">
             <tr>
-                <th>order id</th>
-                <th>title</th>
-                <th>item</th>
-                <th>owner</th>
-                <th>taker</th>
-                <th>latitude</th>
-                <th>longitude</th>
+                <th>Order Id</th>
+                <th>Title</th>
+                <th>Item</th>
+                <th>Owner</th>
+                <th>Taker</th>
+                <th>Latitude</th>
+                <th>Longitude</th>
                 <th>Completed</th>
                 <th>Confirmed</th>
                 <th>Operations</th>
@@ -29,20 +29,28 @@
                     <td>{{$order->completed}}</td>
                     <td>{{$order->confirmed}}</td>
                     <td>
-                        <a href="{{route('orders.show', $order->id)}}">View</a>
-                        <a href="{{route('orders.edit', $order->id)}}">Edit</a>
+                        <a href="{{route('orders.show', $order->id)}}">
+                            <button type="button" class="btn btn-info btn-sm">View</button>
+                        </a>
+                        <a href="{{route('orders.edit', $order->id)}}">
+                            <button type="button" class="btn btn-success btn-sm">Edit</button>
+                        </a>                        
                     </td>
                 </tr>
             @endforeach
         </table>
-        <h2>View All Users</h2>
-        <a href="admin/user/create">Create User</a>
+        <h2>View All Users      
+        <a href="admin/user/create">
+            <button type="button" class="btn btn-primary btn-sm">Create New User</button>
+        </a>
+        </h2>
+
         <table class="table">
             <tr>
-                <th>user id</th>
-                <th>user name</th>
-                <th>user email</th>
-                <th>user type</th>
+                <th>User Id</th>
+                <th>User Name</th>
+                <th>User Email</th>
+                <th>User Type</th>
                 <th>Operations</th>
             </tr>
             @foreach ($users as $user)
@@ -52,11 +60,17 @@
                     <td>{{$user->email}}</td>
                     <td>{{$user->type}}</td>
                     <td>
-                        <a href="admin/user/{{$user->id}}/orders">View Orders</a>
+                        <a href="admin/user/{{$user->id}}/orders">
+                        <button type="button" class="btn btn-info btn-sm">View Orders</button>
+                        </a>
+                        <a href="admin/user/{{$user->id}}/edit">
+                            <button type="button" class="btn btn-success btn-sm">Edit User</button>
+                        </a>
                         @if ($user->type !== 'admin')
-                        <a href="admin/user/{{$user->id}}/grantadmin">Grant Admin</a>
+                        <a href="admin/user/{{$user->id}}/grantadmin">
+                            <button type="button" class="btn btn-warning btn-sm">Grant Admin</button>
+                        </a>
                         @endif
-                        <a href="admin/user/{{$user->id}}/edit">Edit User</a>
                     </td>
                 </tr>
             @endforeach
