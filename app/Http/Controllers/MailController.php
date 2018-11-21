@@ -94,7 +94,7 @@ class MailController extends Controller
           throw $e;
         }
 
-        return redirect('/orders');
+        return redirect('/profile');
     }
 
     /**
