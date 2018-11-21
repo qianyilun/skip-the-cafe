@@ -188,7 +188,7 @@
                                     <a class="nav-link active" id="order-tab" data-toggle="tab" href="#order-charts" role="tab">Order</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" id="expend-tab" data-toggle="tab" href="#expend-charts" role="tab">Expend</a>
+                                    <a class="nav-link" id="expend-tab" data-toggle="tab" href="#expend-charts" role="tab">Cost</a>
                                 </li>
                                 {{-- <li class="nav-item">
                                     <a class="nav-link" id="3-tab" data-toggle="tab" href="#b" role="tab" >3</a>
