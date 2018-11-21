@@ -76,7 +76,7 @@
     @endif
     <div class="row">
         <!-- Large modal -->
-      <button type="button" id="modalButton" style="display: none;" class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-lg">Windows 8 modal - Click to View</button>
+      <button type="button" id="modalButton" style="display: none;" class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-lg">w</button>
 
     <div id="{{Session::get('modal')}}" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
         <div class="modal-dialog modal-lg">
@@ -86,7 +86,7 @@
           
             <H2>Great news!</H2>
             <h4>Your order has been selected to be free a order. Share this news with your friends!</h4>
-          
+              <a href="#"><button class="btn btn-primary">Share this news</button></a>
             </div>
           </div>
         </div>
