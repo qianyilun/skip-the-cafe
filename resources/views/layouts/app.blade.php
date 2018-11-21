@@ -128,10 +128,10 @@
                                     Chat <span class="caret"></span>
                                 </a>
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="{{ route('chat') }}" >
+                                    <a class="dropdown-item" href="{{ route('chat') }} " target="_blank" >
                                         Group Chat
                                     </a>
-                                    <a class="dropdown-item" href="{{ route('privateChatBox') }}" >
+                                    <a class="dropdown-item" href="{{ route('privateChatBox') }}" target="_blank" >
                                         Private Chat Box
                                     </a>
                                 </div>
