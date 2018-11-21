@@ -361,7 +361,7 @@
                                             data: {
                                                 labels: weekly_x,
                                                 datasets: [{ 
-                                                    data: [13.45,4,0,3.33,7,3,19],
+                                                    data: {{json_encode($weekly_delivery_earn)}},
                                                     label: "earn($)",
                                                     borderColor: "#3e95cd",
                                                     fill: false
