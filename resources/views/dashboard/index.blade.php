@@ -126,6 +126,20 @@
                         @else
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                    Chat <span class="caret"></span>
+                                </a>
+                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item" href="{{ route('chat') }}" >
+                                        Group Chat
+                                    </a>
+                                    <a class="dropdown-item" href="{{ route('privateChatBox') }}" >
+                                        Private Chat Box
+                                    </a>
+                                </div>
+                            </li>
+                            
+                            <li class="nav-item dropdown">
+                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                     {{ Auth::user()->name }} <span class="caret"></span>
                                 </a>
 
@@ -222,11 +236,11 @@
                                         new Chart(document.getElementById("store-percent-chart-order"), {
                                             type: 'pie',
                                             data: {
-                                            labels: ["starbucks", "tim hortons", "waves coffe", "shop2", "shop1"],
+                                            labels: ["Starbucks", "Tim Hortons", "Waves Coffe", "Renaissance", "Other"],
                                             datasets: [{
                                                 label: "order times:",
                                                 backgroundColor: ["#3e95cd", "#8e5ea2","#3cba9f","#e8c3b9","#c45850"],
-                                                data: [2,3,10,4,7,0]
+                                                data: {{json_encode($weekly_store_count)}}
                                             }]
                                             },
                                             options: {
@@ -263,12 +277,13 @@
                                             });
                                     </script>
                                     
+                                    <br><br><br>
                                     <canvas id="store-ranking-chart-spend" width="800" height="450"></canvas>
                                     <script>
                                         new Chart(document.getElementById("store-ranking-chart-spend"), {
                                             type: 'bar',
                                             data: {
-                                            labels: ["starbucks", "tim hortons", "waves coffe", "shop2", "shop1"],
+                                            labels: ["Starbucks", "Tim Hortons", "Waves Coffe", "Renaissance", "Other"],
                                             datasets: [
                                                 {
                                                 label: "weekly spend($)",
@@ -336,7 +351,7 @@
                                         new Chart(document.getElementById("store-percent-chart-delivery"), {
                                             type: 'pie',
                                             data: {
-                                            labels: ["starbucks", "tim hortons", "waves coffe", "shop2", "shop1"],
+                                            labels: ["Starbucks", "Tim Hortons", "Waves Coffe", "Renaissance", "Other"],
                                             datasets: [{
                                                 label: "delivery times:",
                                                 backgroundColor: ["#3e95cd", "#8e5ea2","#3cba9f","#e8c3b9","#c45850"],
@@ -383,7 +398,7 @@
                                         new Chart(document.getElementById("store-ranking-chart-earn"), {
                                             type: 'bar',
                                             data: {
-                                            labels: ["starbucks", "tim hortons", "waves coffe", "shop2", "shop1"],
+                                            labels: ["Starbucks", "Tim Hortons", "Waves Coffe", "Renaissance", "Other"],
                                             datasets: [
                                                 {
                                                 label: "weekly earn($)",
