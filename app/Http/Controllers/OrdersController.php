@@ -83,6 +83,10 @@ class OrdersController extends Controller
      */
     public function create()
     {
+        if(auth()->user() === null) {
+          // if gets in this statement meaning the user is not logged in
+          return redirect('/')->with('error', 'You need to login in order to view/create order.'); 
+        }
         return view('orders.create');
     }
 
