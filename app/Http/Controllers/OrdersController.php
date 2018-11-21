@@ -89,8 +89,9 @@ class OrdersController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse
+     * @throws \Exception
      */
     public function store(Request $request)
     {
@@ -135,7 +136,6 @@ class OrdersController extends Controller
         // for demo purpose
         $bingoNumber = 2;
         $randomNumber = random_int(1,2);
-        // $randomNumber = 2; // uncomment this to see how a pop up looks like
         // if a random free order is the order we just saved, display a pop up window to ask users to share this news with their friends to promopt our site
         if($bingoNumber == $randomNumber) {
           $user->wallet = $userWalletBefore; // if the order is free then no charge for the order
@@ -254,9 +254,11 @@ class OrdersController extends Controller
 
 
     /**
-     * 
-     * this action is for displaying orders.comment view
-     * @param  int  $id
+     * This action is for displaying orders.comment view
+     *
+     * @param Request $request
+     * @param $id
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\Http\RedirectResponse|\Illuminate\View\View
      */
     public function displayCommentForm(Request $request, $id)
     {
@@ -267,17 +269,14 @@ class OrdersController extends Controller
       $order = Order::findOrFail($id);
       $takerId = $order->taker;
       $userName = User::where('id', $takerId)->first()->name;
-      // Log::alert('message!!! '.$user);
-      // Log::alert('message2222 '.$user->name);
-      // $userName = $user->name;
       return view('orders.comment', compact('order', 'userName'));
     }
 
-
     /**
-     * 
      * this action is for handling the comment form submission
-     * @param  int  $id
+     *
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function submitCommentForm(Request $request)
     {
@@ -303,8 +302,9 @@ class OrdersController extends Controller
 
 
     /**
-     * assign the specified order to the currently logged in user.
+     * Assign the specified order to the currently logged in user.
      * this action is for responding to the ajax call from orders.index view
+     *
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
