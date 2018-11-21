@@ -48,7 +48,11 @@
                                 </tr>
                                 <tr>
                                     <td scope="row"><h5 class="card-title"><b class="mr-3">User Rating:</b> </h5></td>
-                                    <td><span class="card-text">{{$average_rating}}</span></td>      
+                                    @if ($average_rating == 0)
+                                        <td><span class="card-text">You haven't receive any rating yet.</span></td>     
+                                    @else
+                                        <td><span class="card-text">{{$average_rating}}</span></td>   
+                                    @endif   
                                 </tr>
                             </tbody>
                         </table>                         
