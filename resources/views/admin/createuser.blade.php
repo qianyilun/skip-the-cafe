@@ -9,11 +9,11 @@
             {{csrf_field()}}
             <div class="form-group">
                 <label for="title">User Name</label>
-                <input class="form-control" type="text" name="name">
+                <input class="form-control" type="text" name="name" placeholder="Enter name">
             </div>
             <div class="form-group">
                 <label for="email">User Email</label>
-                <input class="form-control" type="text" name="email">
+                <input class="form-control" type="text" name="email" placeholder="Enter email">
             </div>
 
             <div class="form-group">
@@ -31,6 +31,11 @@
                         Admin
                     </label>
                 </div>
+            </div>
+
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" class="form-control" name="password" id="password" placeholder="Password">
             </div>
 
             {{csrf_field()}}
