@@ -41,7 +41,6 @@
                 <th>user id</th>
                 <th>user name</th>
                 <th>user email</th>
-                <th>provider id</th>
                 <th>user type</th>
                 <th>Operations</th>
             </tr>
@@ -50,7 +49,6 @@
                     <td>{{$user->id}}</td>
                     <td>{{$user->name}}</td>
                     <td>{{$user->email}}</td>
-                    <td>{{$user->provider_id}}</td>
                     <td>{{$user->type}}</td>
                     <td>
                         <a href="admin/user/{{$user->id}}/orders">View Orders</a>

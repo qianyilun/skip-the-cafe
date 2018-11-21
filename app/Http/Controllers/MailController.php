@@ -83,6 +83,17 @@ class MailController extends Controller
             $message->to($sendTo, $userName)->subject("You order has been delivered by $takerName");
         });
 
+        try {
+          // add the money that taker makes from finishing this order
+          $user = User::where('id', $order->taker)->first();
+          $remainWallet = $user->wallet + $order->price;
+          
+          $user->wallet = $remainWallet;
+          $user->save();
+        } catch (\Illuminate\Database\QueryException $e) {
+          throw $e;
+        }
+
         return redirect('/orders');
     }
 
