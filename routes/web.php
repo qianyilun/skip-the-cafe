@@ -23,7 +23,10 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('auth/{provider}', 'Auth\AuthController@redirectToProvider');
 Route::get('auth/{provider}/callback', 'Auth\AuthController@handleProviderCallback');
+
+// Routes for order CRUD
 Route::resource('orders', 'OrdersController');
+
 Route::post('orders/take/{id}', 'OrdersController@takeOrder'); // this route is for receiving ajax call from orders.index view
 Route::get('comment/{id}', 'OrdersController@displayCommentForm')->name('comment'); // this route is for displaying comment form
 Route::post('comment', 'OrdersController@submitCommentForm'); // this route is for submitting comment form to an order
@@ -44,13 +47,27 @@ Route::get('/privateChatBox', 'HomeController@privateChatBox')->name('privateCha
 Route::get('/private-messages/{user}', 'MessageController@privateMessages')->name('privateMessages');
 Route::post('/private-messages/{user}', 'MessageController@sendPrivateMessage')->name('privateMessages.store');
 
-// Admin
+/****************
+ * Admin Routes *
+ ****************/
+// entry point for admin page
 Route::get('/admin', 'AdminController@admin')
     ->middleware('is_admin')
     ->name('admin');
+// entry point for admin page (for testing only)
 Route::get('/testadmin', 'AdminController@testAdmin')->name('testAdmin');
+// shows all orders of a user
 Route::get('admin/user/{id}/orders', 'OrdersController@getUserOrders');
-
+// grant a user admin privilege
+Route::get('admin/user/{id}/grantadmin', 'AdminController@grantAdmin');
+// update user info
+Route::get('admin/user/{id}/edit', 'AdminController@editUser');
+Route::post('admin/user/{id}/update', 'AdminController@updateUser');
+// delete a user
+Route::post('admin/user/{id}/delete', 'AdminController@deleteUser');
+// create a new user
+Route::get('admin/user/create', 'AdminController@createUser');
+Route::post('admin/user/store', 'AdminController@storeUser');
 
 // user profile
 Route::get('/profile', 'ProfileController@index')->name('profile');
@@ -58,10 +75,7 @@ Route::get('/profile', 'ProfileController@index')->name('profile');
 // dashboard
 Route::get('/dashboard', 'DashboardController@index')->name('dashboard');
 
-Route::get('admin/user/{id}/grantadmin', 'AdminController@grantAdmin');
-Route::get('admin/user/{id}/edit', 'AdminController@editUser');
-Route::post('admin/user/{id}/update', 'AdminController@updateUser');
-Route::post('admin/user/{id}/delete', 'AdminController@deleteUser');
+
 
 /*
 |--------------------------------------------------------------------------
