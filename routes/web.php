@@ -34,11 +34,14 @@ Route::post('comment', 'OrdersController@submitCommentForm'); // this route is f
 Route::get('showDirection/{id}', 'DirectionController@showDirection')->name('showDirection');
 Route::get('/sendTestEmails', 'MailController@sendEmailWhenCreateNewOrder');
 Route::get('notifyOwner/{id}', 'MailController@sendEmailToNotifyOwnerOrderCompleted')->name('notifyOwner');
+Route::get('sendShareEmail', 'MailController@sendEmailToShareFreeOrder')->name('sendShareEmail');
 Route::post('/autocomplete/fetch', 'AutocompleteController@fetch')->name('autocomplete.fetch');
 
 Route::get('/chat', 'GroupChatController@index')->name('chat');
 Route::get('messages', 'GroupMessageController@fetchMessages');
 Route::post('messages', 'GroupMessageController@sendMessage');
+Route::get('/findAdmin', 'HomeController@findAdmin')->name('findAdmin');
+Route::get('/chatWithAdmin', 'HomeController@chatWithAdmin')->name('chatWithAdmin');
 
 Route::get('/private/{id}', 'DirectionController@private')->name('private');
 Route::get('/users/{id}', 'HomeController@users')->name('users');

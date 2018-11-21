@@ -34,14 +34,18 @@
             </div>
 
             {{csrf_field()}}
-            <input class="btn btn-primary" type="submit" name="UPDATE">
-        </form>
-
+            <input class="btn btn-primary btn-sm" type="submit" name="UPDATE">
+            <a href="/admin">
+            <button type="button" class="btn btn-secondary btn-sm">Back</button>
+        </a>
+        </form>        
         @if ($user->id !== auth()->user()->id)
             <form method="post" action="/admin/user/{{$user->id}}/delete">
                 {{csrf_field()}}
-                <input class="btn btn-danger" type="submit" value="DELETE">
+                <input style="margin-top: 8px" class="btn btn-danger btn-sm" type="submit" value="Delete">
             </form>
         @endif
+
+        
     </div>
 @endsection

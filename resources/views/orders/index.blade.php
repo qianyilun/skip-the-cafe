@@ -32,9 +32,7 @@
   <div class="col-md-7">
     <div class="row">
       <div class="col-md-12">
-        <div id="map" style="height:300px; width:100%;"></div>
-        <br>
-        <br>
+        <div id="map" style="height:600px; width:100%;"></div>
         <br>
       </div>
     </div>
@@ -53,25 +51,20 @@
   </div>
   <div class="col-md-5">
     @if ($user !== null)
-      <h3>All available orders</h3>
-        {{-- <h6>TODO: This Page should display all orders submitted by the current user</h6> --}}
+      <h3>We Suggested Orders</h3>      
+      <div class="alert alert-primary">
+      Skip the cafe has already automatically filtered the orders that are nearby
+      </div>
         @if (count($availableOrders) > 0)
-          <ul class="list-group list-group-flush" id="listOfTakeButtons">
+          <ul class="list-group" id="listOfTakeButtons">
             @foreach($availableOrders as $availableOrder)
               <li class="list-group-item list-group-item-action">
-                {{-- <a href="{{route('orders.show', $order->id)}}">{{$order->title}}</a>
-                <span>Order owner: {{$order->owner}}</span>
-                @if ($order->owner !== $user->name)
-                <a href="" class="btn btn-default">
-                <button class="btn btn-primary" id="{{$order->id}}">Take</button>
-                </a>
-                @endif --}}
                 <span>Order title: <b>{{$availableOrder->title}}</b> </span><br>
                 <span>Order item: <b>{{$availableOrder->item}}</b> </span><br>
                 <span>Address: <b>{{$availableOrder->address}}</b> </span><br>
                 <span>Order owner: <b>{{$availableOrder->owner}}</b> </span>
                 <a class="btn btn-default">
-                  <button class="btn btn-primary" id="{{$availableOrder->id}}">Take</button>
+                  <button class="btn btn-success" id="{{$availableOrder->id}}">Take</button>
                 </a>
               </li>
             @endforeach
@@ -79,56 +72,14 @@
         @else
         <h5>You are late~ No available order.</h5>
         @endif
-          
-      <hr style="border-top: 3px solid rgba(0,0,0,.1);">
-
-
-      {{--@if (count($completedOrdersPostByUser) > 0)--}}
-        {{--<h5>Orders you have posted and is completed</h5>--}}
-        {{--<ul class="list-group list-group-flush">--}}
-          {{--@foreach($completedOrdersPostByUser as $order)--}}
-              {{--<li class="list-group-item list-group-item-action">--}}
-                {{--<a href="{{route('orders.show', $order->id)}}">{{$order->title}}</a>--}}
-                {{--<a href="" class="btn btn-primary">Leave a review</a>--}}
-              {{--</li>--}}
-          {{--@endforeach--}}
-        {{--</ul>--}}
-      {{--@endif--}}
-
-      {{--<hr style="border-top: 3px solid rgba(0,0,0,.1);">--}}
-
-      {{--<h3>Order Taken By You</h3>--}}
-
-      {{--@if (count($incompletedOrdersTakenByUser) > 0)--}}
-        {{--<h5>Order taken by you and is in progress</h5>--}}
-        {{--<ul class="list-group list-group-flush">--}}
-          {{--@foreach($incompletedOrdersTakenByUser as $order)--}}
-            {{--<li class="list-group-item list-group-item-action">--}}
-              {{--<a href="{{route('orders.show', $order->id)}}">{{$order->title}}</a>--}}
-              {{--<a href="" class="btn btn-primary">Complete</a>--}}
-            {{--</li>--}}
-          {{--@endforeach--}}
-        {{--</ul>--}}
-      {{--@endif--}}
-
-      {{--@if (count($completedOrdersTakenByUser) > 0)--}}
-        {{--<h5>Order Completed by you</h5>--}}
-        {{--<ul class="list-group list-group-flush">--}}
-          {{--@foreach($completedOrdersTakenByUser as $order)--}}
-            {{--<li class="list-group-item list-group-item-action">--}}
-              {{--<a href="{{route('orders.show', $order->id)}}">{{$order->title}}</a>--}}
-            {{--</li>--}}
-          {{--@endforeach--}}
-        {{--</ul>--}}
-      {{--@endif--}}
-
+                
       @else
         <p>You need to login to view all orders you have submitted.</p>
     </div>
     @endif
     <div class="row">
         <!-- Large modal -->
-      <button type="button" id="modalButton" style="display: none;" class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-lg">Windows 8 modal - Click to View</button>
+      <button type="button" id="modalButton" style="display: none;" class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-lg">w</button>
 
     <div id="{{Session::get('modal')}}" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
         <div class="modal-dialog modal-lg">
@@ -137,8 +88,8 @@
             <div class="modal-body">
           
             <H2>Great news!</H2>
-            <h4>Your order has been selected to be free a order. Share this news with your friends!</h4>
-          
+            <h4>Your order has been selected to be a free order. Share this news with your friends!</h4>
+              <a href="sendShareEmail"><button class="btn btn-primary">Share this news</button></a>
             </div>
           </div>
         </div>
@@ -244,7 +195,6 @@
 });
 // if this order is free order, display a pop up
 $(document).ready(function() {
-//   var freeOrNot = "{{session('modal')}}";
   var modal = $('.modal.fade.bs-example-modal-lg').attr('id');
   if(modal == 'hasModal') {
     $('#modalButton').click();

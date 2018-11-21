@@ -19,7 +19,7 @@
 @section('content')
 
 <div class="row">
-  <div class="col-sm-6 mb-3 mb-md-0">
+  <div style="padding-left: 0" class="col-sm-6 mb-3 mb-md-0">
     <div class="card">
       <div class="card-body">
         <h5 class="card-title">Routes and direction info</h5>
@@ -27,6 +27,13 @@
         <p id="arriveTime" class="card-text"></p>
       </div>
     </div>
+    <br>
+    <a href="{{route('notifyOwner', ['id' => $id])}}">
+      <button style="width: 100%; margin-bottom: 20px;" class="btn btn-success">Complete order and notify the order owner</button>
+    </a>
+    <a href="{{route('private', ['id' => $id])}}">
+      <button style="width: 100%; margin-bottom: 20px;" class="btn btn-primary">Chat</button>
+    </a>
   </div>
 
   <div class="col-sm-6">
@@ -44,19 +51,6 @@
 </div>
 
 <div class="row">
-  <div class="col-sm-12" style="width: 100%;">
-    <a href="{{route('notifyOwner', ['id' => $id])}}">
-      <button style="width: 100%; margin-bottom: 20px;" class="btn btn-primary">Complete order, notify the order owner</button>
-    </a>
-  </div>
-  <div class="col-sm-12" style="width: 100%;">
-    <a href="{{route('private', ['id' => $id])}}">
-      <button style="width: 100%; margin-bottom: 20px;" class="btn btn-primary">Chat</button>
-    </a>
-  </div>
-</div>
-
-<div class="row">
   <div class="col-md-3">
     <div id="overlay">
         <div id="overlayContent">
@@ -66,7 +60,7 @@
   </div>
 
   <div class="col-md-9">
-    <div id='map' style="height: 500px; width: 100%;"></div>
+    <div id='map' style="height: 450px; width: 100%;"></div>
   </div>
 </div>
 

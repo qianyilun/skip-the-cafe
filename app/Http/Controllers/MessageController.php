@@ -80,5 +80,4 @@ class MessageController extends Controller
         return response(['status'=>'Message private sent successfully','message'=>$message]);
 
     }
-
 }

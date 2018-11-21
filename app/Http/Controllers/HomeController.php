@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\User;
+use Illuminate\Support\Facades\DB;
 
 class HomeController extends Controller
 {
@@ -53,7 +54,34 @@ class HomeController extends Controller
         return User::all();
     }
 
+    /**
+     * Route for private chat box
+     *
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function privateChatBox() {
         return view('chats.privateChatBox');
+    }
+
+    /**
+     * Find Admin
+     *
+     * @return array
+     */
+    public function findAdmin()
+    {
+        $result = array();
+        $admin = DB::table('users')->where('type', 'admin')->where('name', 'admin')->first();
+        $result[] = $admin;
+        return $result;
+    }
+
+    /**
+     * Route for chat with admin
+     *
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function chatWithAdmin() {
+        return view('chats.chatWithAdmin');
     }
 }
