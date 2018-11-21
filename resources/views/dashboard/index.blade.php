@@ -289,7 +289,7 @@
                                                 {
                                                 label: "weekly spend($)",
                                                 backgroundColor: ["#3e95cd", "#8e5ea2","#3cba9f","#e8c3b9","#c45850"],
-                                                data: [2.2,3.4,10.33,4.11,7.33,0]
+                                                data: {{json_encode($weekly_store_cost)}}
                                                 }
                                             ]
                                             },
@@ -404,7 +404,7 @@
                                                 {
                                                 label: "weekly earn($)",
                                                 backgroundColor: ["#3e95cd", "#8e5ea2","#3cba9f","#e8c3b9","#c45850"],
-                                                data: [2.2,3.4,10.33,4.11,7.33,0]
+                                                data: {{json_encode($weekly_store_earn)}} 
                                                 }
                                             ]
                                             },
