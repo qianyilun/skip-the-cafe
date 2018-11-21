@@ -34,8 +34,13 @@ class ProfileController extends Controller
           $total_rating_count += 1;
         }
       }
-      $average_rating = $total_rating/$total_rating_count;
 
+      if ($total_rating_count == 0) {
+        $average_rating = 0;
+      } else {
+        $average_rating = $total_rating/$total_rating_count;
+      }
+      
       return view('profile.index', compact('user', 'ordersPostedByUser','completedOrdersPostByUser',
                   'OrdersTakenByUser', 'completedOrdersTakenByUser','average_rating'));
 
