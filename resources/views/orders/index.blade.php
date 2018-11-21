@@ -34,8 +34,6 @@
       <div class="col-md-12">
         <div id="map" style="height:600px; width:100%;"></div>
         <br>
-        <br>
-        <br>
       </div>
     </div>
     <div class="row">
@@ -49,9 +47,10 @@
   </div>
   <div class="col-md-5">
     @if ($user !== null)
-      <h3>We Suggested Orders</h3>
-      <h10>-- Skip the cafe has already automatically filtered the orders that are nearby</h10>
-        {{-- <h6>TODO: This Page should display all orders submitted by the current user</h6> --}}
+      <h3>We Suggested Orders</h3>      
+      <div class="alert alert-primary">
+      Skip the cafe has already automatically filtered the orders that are nearby
+      </div>
         @if (count($availableOrders) > 0)
           <ul class="list-group" id="listOfTakeButtons">
             @foreach($availableOrders as $availableOrder)

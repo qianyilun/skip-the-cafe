@@ -22,7 +22,11 @@
                     <td>{{$order->id}}</td>
                     <td>{{$order->title}}</td>
                     <td>{{$order->item}}</td>
-                    <td>{{$order->owner}}</td>
+
+                    <td>
+                    <a href="admin/user/{{$order->user->id}}/orders">{{$order->owner}}</a>
+                    </td>
+
                     <td>{{$order->taker}}</td>
                     <td>{{$order->latitude}}</td>
                     <td>{{$order->longitude}}</td>
