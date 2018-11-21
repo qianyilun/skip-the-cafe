@@ -54,6 +54,10 @@
                                         <td><span class="card-text">{{$average_rating}}</span></td>   
                                     @endif   
                                 </tr>
+                                <tr>
+                                    <td scope="row"><h5 class="card-title"><b class="mr-3">Wallet Balance:</b> </h5></td>
+                                    <td><span class="card-text">{{$user->wallet}}</span></td>
+                                </tr>
                             </tbody>
                         </table>                         
                     </div>
