@@ -274,10 +274,10 @@ class OrdersController extends Controller
       try {
         $order = Order::where('id', $request->orderId)->update(['comment'=> $request->comment, 'rating' => $request->rating]);
       } catch( \Exception $e) {
-        return redirect('/orders')->with('error', 'Fail to update comment Error: '.$e);
+        return redirect('/profile')->with('error', 'Fail to update comment Error: '.$e);
       }
       
-      return redirect('/orders')->with('success', 'Comment submitted! Thank you for taking the time, your comment is important to both the platform and the taker:)');
+      return redirect('/profile')->with('success', 'Comment submitted! Thank you for taking the time, your comment is important to both the platform and the taker:)');
     }
 
 
