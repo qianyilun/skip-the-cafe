@@ -51,8 +51,27 @@ class DashboardController extends Controller
         $weekly_delivery_earn[6-$i] = $order_earn;
       };
 
+      $stores=["Starbuck", "Tim Hortons", "Waves Coffe", "Renaissance", "Other"];
 
-
+      $weekly_store_count = [0,0,0,0,0];
+      for($i=0; $i<7; $i++){
+        $day = Carbon::now()->subDays($i);
+        $orders = Order::whereDate('created_at', $day)->where('owner', $user->name)->get();
+        
+        foreach ($orders as $key => $order) {
+          $flag=true;
+          for($j=0; $j<4; $j++){
+            if ( strpos( strtolower($order->item), strtolower($stores[$j]) ) !== false) {
+              $weekly_store_count[$j] += 1;
+              $flag=false;
+            }
+          }
+          if ($flag){
+            $weekly_store_count[4] += 1;
+            $flag=true;
+          }
+        }
+      };
 
 
       $ordersPostedByUser = Order::where('owner', $user->name)->get();
@@ -69,7 +88,8 @@ class DashboardController extends Controller
       return view('dashboard.index',
              compact('user', "ordersPostedByUser", "ordersDeliveriedByUser",
                      'weekly_order_count','weekly_order_spend',
-                     'weekly_delivery_count','weekly_delivery_earn'));
+                     'weekly_delivery_count','weekly_delivery_earn',
+                     'weekly_store_count'));
 
     }
 }
