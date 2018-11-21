@@ -115,11 +115,7 @@ class MailController extends Controller
             'orderTitle' => $orderTitle,
         ];
 
-        try {
-            DB::table('orders')->where('id', $id)->update(['completed' => true]);
-        } catch (\Illuminate\Database\QueryException $e) {
-            throw $e;
-        }
+        
 
         Mail::send('emails.chat', $data, function($message) use ($sendTo, $userName, $takerName){
             $message->to($sendTo, $userName)->subject("You order has been delivered by $takerName");
