@@ -1,10 +1,14 @@
 @extends('layouts.app')
-
+<style>
+  #admintable td, #admintable th {
+    padding: .23rem;
+  }
+</style>
 @section('content')
     <div class="container">
         <h1>Administrator's Page</h1>
         <h2>View All Orders</h2>
-        <table class="table">
+        <table class="table" id="adminTable">
             <tr>
                 <th>Order Id</th>
                 <th>Title</th>

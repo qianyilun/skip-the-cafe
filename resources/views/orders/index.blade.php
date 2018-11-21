@@ -89,7 +89,7 @@
           
             <H2>Great news!</H2>
             <h4>Your order has been selected to be a free order. Share this news with your friends!</h4>
-              <a href="sendShareEmail"><button class="btn btn-primary">Share this news</button></a>
+              <a href="sendShareEmail"><button class="btn btn-primary">Go to profile</button></a>
             </div>
           </div>
         </div>
