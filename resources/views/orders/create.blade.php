@@ -12,7 +12,8 @@
           </div>
           <div class="form-group">
             <label style="font-weight: bold;" class="control-label" for="email">Item</label>
-            <input class="form-control" type="text" name="item" placeholder="(e.g. a coffee)">
+            <input class="form-control" type="text" name="item" id="inputItem" placeholder="(e.g. a coffee)">
+            <div style="position: absolute;" id="autocompleteItem"></div>
           </div>
           <div class="form-group">
               <label style="font-weight: bold;" class="control-label" for="email">Detail description of your order</label>
@@ -52,7 +53,6 @@ $(document).ready(function(){
   var access_key = 'a7d887b9bdaae171366d6b2b284ffa4c';
   $.get("http://ipinfo.io", function(response) {
       userIp = response.ip;
-      console.log('ipinfo return s',userIp);
       $.ajax({
         url: 'http://api.ipstack.com/' + userIp + '?access_key=' + access_key,   
         dataType: 'jsonp',
@@ -66,7 +66,33 @@ $(document).ready(function(){
     }, "jsonp");
   });
 
-  // get the API result via jQuery.ajax
+  $(document).ready(function(){
+    // following code is for autocomplete in the "item" input box
+    $('#inputItem').keyup(function(){ 
+        var query = $(this).val();
+        if(query != '')
+        {
+        var _token = $('input[name="_token"]').val();
+        $.ajax({
+          url:"{{ route('autocomplete.fetch') }}",
+          method:"POST",
+          data:{query:query, _token:_token},
+          success:function(data){
+            $('#autocompleteItem').fadeIn();  
+                      $('#autocompleteItem').empty().append(data['html']);
+          }
+
+        });
+        }
+    });
+
+    $(document).on('click', 'li', function(){  
+        $('#inputItem').val($(this).text());  
+        $('#autocompleteItem').fadeOut();  
+    });  
+
+  });
+
   
 
 // stage 2: after getting the user's geo location, signal the backend to re-order the available orders list.
