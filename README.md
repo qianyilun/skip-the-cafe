@@ -34,7 +34,7 @@
 5. Open up browser, visit [skipthecafe.test](skipthecafe.test)
 
 
-##Enviroment Setup (for Mac)
+## Enviroment Setup (for Mac)
 
 1. Run `composer install` in the project root, since the master branch does not automatically include all dependencies 
 
